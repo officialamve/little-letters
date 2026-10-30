@@ -143,7 +143,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v1.1 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v1.2 · free DIY build</p>
       </div>
     </div>
     <input id="home-search" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -184,12 +184,14 @@
       <button class="mode" type="button" data-go="shapes"><div class="mode-icon">△</div><div class="mode-copy"><strong>Shapes</strong><span>Circle, square…</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="words"><div class="mode-icon" style="background:#ECFDF5;color:#047857">Aa</div><div class="mode-copy"><strong>Words</strong><span>Days, animals, fruits</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="calm"><div class="mode-icon" style="background:#CCFBF1;color:#0F766E">◯</div><div class="mode-copy"><strong>Calm</strong><span>3 soft breaths</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="sight"><div class="mode-icon" style="background:#F3E8FF;color:#7E22CE">the</div><div class="mode-copy"><strong>Sight words</strong><span>the, and, you…</span></div><span class="chev">›</span></button>
 <button class="mode write" type="button" data-go="write"><div class="mode-icon">✎</div><div class="mode-copy"><strong>Write</strong><span>Trace letters</span></div><span class="chev">›</span></button>
       <button class="mode songs" type="button" data-go="songs"><div class="mode-icon">♪</div><div class="mode-copy"><strong>Songs</strong><span>Alphabet &amp; rhymes</span></div><span class="chev">›</span></button>
             <div class="home-sec">Play</div>
       <button class="mode games" type="button" data-go="quiz"><div class="mode-icon" style="background:#DBEAFE;color:#1D4ED8">?</div><div class="mode-copy"><strong>Quiz</strong><span>What letter starts…?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="race"><div class="mode-icon" style="background:#FEE2E2;color:#B91C1C">⏱</div><div class="mode-copy"><strong>Speed ABC</strong><span>A to Z race</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="count-game"><div class="mode-icon">•••</div><div class="mode-copy"><strong>Count</strong><span>How many dots?</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="opposites"><div class="mode-icon">⇅</div><div class="mode-copy"><strong>Opposites</strong><span>Hot ↔ Cold</span></div><span class="chev">›</span></button>
 <button class="mode games" type="button" data-go="games"><div class="mode-icon">◇</div><div class="mode-copy"><strong>Games</strong><span>Tap what you hear</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="match"><div class="mode-icon" style="background:#FCE7F3;color:#BE185D">Aa</div><div class="mode-copy"><strong>Match</strong><span>Letter → word</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="memory"><div class="mode-icon">◉</div><div class="mode-copy"><strong>Memory</strong><span>Remember 3 letters</span></div><span class="chev">›</span></button>
@@ -474,6 +476,28 @@
       <p id="count-feedback" class="word"></p>
     </div>
   </section>
+
+  <section id="opposites" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Opposites</h2></div>
+    <div class="letter-stage">
+      <p class="muted">What is the opposite of…</p>
+      <p class="glyph" id="opp-word" style="font-size:2rem">Hot</p>
+      <div class="alpha" id="opp-choices" style="grid-template-columns:repeat(2,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
+      <p id="opp-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="sight" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Sight words</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="sight-word" style="font-size:2.6rem">the</p>
+      <p class="muted" id="sight-step">1 / 20</p>
+      <div class="row">
+        <button class="speak ghost" type="button" id="sight-hear">Hear</button>
+        <button class="speak" type="button" id="sight-next">Next</button>
+      </div>
+    </div>
+  </section>
   <section id="parent" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
@@ -489,7 +513,7 @@
         <input type="checkbox" id="theme-toggle" /> Dark mode
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v1.1 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v1.2 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Install:</strong> in Chrome, menu → Add to Home Screen for an app-like icon.</p>
       <div class="row" style="justify-content:flex-start">
         <button class="speak ghost" type="button" id="share-progress">Share text</button>
@@ -1379,6 +1403,37 @@
       });
     }
     document.querySelector('[data-go="count-game"]')?.addEventListener("click",()=>setTimeout(newCount,100));
+
+    const OPP=[["Hot","Cold"],["Big","Small"],["Up","Down"],["Happy","Sad"],["Day","Night"],["Fast","Slow"],["In","Out"],["Yes","No"],["Open","Close"],["Wet","Dry"]];
+    function newOpp(){
+      const [a,b]=OPP[Math.floor(Math.random()*OPP.length)];
+      const ask=Math.random()<.5; const q=ask?a:b; const ans=ask?b:a;
+      document.getElementById("opp-word").textContent=q;
+      document.getElementById("opp-feedback").textContent="";
+      const wrong=OPP[Math.floor(Math.random()*OPP.length)];
+      let w=wrong[0]===ans||wrong[1]===ans?wrong[0]:wrong[Math.random()<.5?0:1];
+      if(w===ans) w=wrong[0]===ans?wrong[1]:wrong[0];
+      const opts=[ans,w].sort(()=>Math.random()-.5);
+      const box=document.getElementById("opp-choices"); box.innerHTML="";
+      opts.forEach(o=>{
+        const btn=document.createElement("button"); btn.type="button"; btn.textContent=o;
+        btn.style.minHeight="64px"; btn.style.fontSize="1.1rem";
+        btn.addEventListener("click",()=>{
+          if(o===ans){ document.getElementById("opp-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(q+" and "+ans); setTimeout(newOpp,750); }
+          else document.getElementById("opp-feedback").textContent="Try again";
+        });
+        box.appendChild(btn);
+      });
+      speakText("Opposite of "+q);
+    }
+    document.querySelector('[data-go="opposites"]')?.addEventListener("click",()=>setTimeout(newOpp,100));
+
+    const SIGHT=["the","and","a","to","said","in","he","I","of","it","was","you","they","on","she","for","at","his","but","that"];
+    let sightI=0;
+    function showSight(){ document.getElementById("sight-word").textContent=SIGHT[sightI]; document.getElementById("sight-step").textContent=(sightI+1)+" / "+SIGHT.length; }
+    document.getElementById("sight-hear").addEventListener("click",()=>speakText(SIGHT[sightI]));
+    document.getElementById("sight-next").addEventListener("click",()=>{ sightI=(sightI+1)%SIGHT.length; showSight(); speakText(SIGHT[sightI]); });
+    document.querySelector('[data-go="sight"]')?.addEventListener("click",()=>{ sightI=0; showSight(); });
     applyTheme();
 
     const SHAPES=[
