@@ -55,6 +55,9 @@
     .hero h2 { margin: 0 0 8px; font-family: var(--display); font-size: 1.85rem; letter-spacing: -.04em; line-height: 1.15; }
     .hero p { margin: 0; color: var(--ink-soft); font-size: .95rem; line-height: 1.45; max-width: 32ch; }
     .modes { display: flex; flex-direction: column; gap: 10px; }
+    .home-sec { font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft); margin:16px 0 4px; font-weight:700; }
+    #home .modes .mode { padding:14px; }
+    #home .modes .mode .mode-icon { width:46px; height:46px; border-radius:14px; font-size:1.1rem; }
     .mode { width: 100%; border: 1px solid var(--line); background: var(--bg-elev); border-radius: var(--radius); padding: 16px; display: flex; align-items: center; gap: 14px; text-align: left; cursor: pointer; box-shadow: var(--shadow); }
     .mode:active { transform: scale(.985); }
     .mode-icon { width: 52px; height: 52px; border-radius: 16px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; font-family: var(--display); font-size: 1.25rem; flex-shrink: 0; }
@@ -139,10 +142,11 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v0.9 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v1.0 · free DIY build</p>
       </div>
     </div>
     <div class="modes">
+      <div class="home-sec">Core</div>
       <button class="mode" type="button" data-go="letters"><div class="mode-icon">Aa</div><div class="mode-copy"><strong>Letters</strong><span>English A–Z</span></div><span class="chev">›</span></button>
       <button class="mode hindi" type="button" data-go="hindi" data-lang-home="1"><div class="mode-icon">अ</div><div class="mode-copy"><strong>Hindi</strong><span>स्वर + व्यंजन</span></div><span class="chev">›</span></button>
       <button class="mode hindi" type="button" data-go="tamil" data-lang-home="1"><div class="mode-icon" style="background:#ECFDF5;color:#047857">அ</div><div class="mode-copy"><strong>Tamil</strong><span>உயிர் எழுத்துகள்</span></div><span class="chev">›</span></button>
@@ -168,8 +172,11 @@
 
       <button class="mode hindi" type="button" data-go="kannada" data-lang-home="1"><div class="mode-icon" style="background:#EEF2FF;color:#4338CA">ಅ</div><div class="mode-copy"><strong>Kannada</strong><span>ಸ್ವರಗಳು</span></div><span class="chev">›</span></button>
 
-            <button class="mode hindi" type="button" data-go="languages"><div class="mode-icon">文</div><div class="mode-copy"><strong>Languages</strong><span>Hindi · Tamil · more</span></div><span class="chev">›</span></button>
+            <div class="home-sec">Languages</div>
+      <button class="mode hindi" type="button" data-go="languages"><div class="mode-icon">文</div><div class="mode-copy"><strong>Languages</strong><span>Hindi · Tamil · more</span></div><span class="chev">›</span></button>
+      <div class="home-sec">Practice</div>
       <button class="mode" type="button" data-go="stickers"><div class="mode-icon" style="background:#FEF3C7;color:#B45309">★</div><div class="mode-copy"><strong>Stickers</strong><span>Rewards you earned</span></div><span class="chev">›</span></button>
+      <div class="home-sec">World</div>
       <button class="mode" type="button" data-go="numbers"><div class="mode-icon" style="background:#E0E7FF;color:#3730A3">123</div><div class="mode-copy"><strong>Numbers</strong><span>1 to 10</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="colours"><div class="mode-icon" style="background:#FCE7F3;color:#BE185D">●</div><div class="mode-copy"><strong>Colours</strong><span>See &amp; say</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="shapes"><div class="mode-icon">△</div><div class="mode-copy"><strong>Shapes</strong><span>Circle, square…</span></div><span class="chev">›</span></button>
@@ -177,7 +184,8 @@
       <button class="mode" type="button" data-go="calm"><div class="mode-icon" style="background:#CCFBF1;color:#0F766E">◯</div><div class="mode-copy"><strong>Calm</strong><span>3 soft breaths</span></div><span class="chev">›</span></button>
 <button class="mode write" type="button" data-go="write"><div class="mode-icon">✎</div><div class="mode-copy"><strong>Write</strong><span>Trace letters</span></div><span class="chev">›</span></button>
       <button class="mode songs" type="button" data-go="songs"><div class="mode-icon">♪</div><div class="mode-copy"><strong>Songs</strong><span>Alphabet &amp; rhymes</span></div><span class="chev">›</span></button>
-            <button class="mode games" type="button" data-go="quiz"><div class="mode-icon" style="background:#DBEAFE;color:#1D4ED8">?</div><div class="mode-copy"><strong>Quiz</strong><span>What letter starts…?</span></div><span class="chev">›</span></button>
+            <div class="home-sec">Play</div>
+      <button class="mode games" type="button" data-go="quiz"><div class="mode-icon" style="background:#DBEAFE;color:#1D4ED8">?</div><div class="mode-copy"><strong>Quiz</strong><span>What letter starts…?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="race"><div class="mode-icon" style="background:#FEE2E2;color:#B91C1C">⏱</div><div class="mode-copy"><strong>Speed ABC</strong><span>A to Z race</span></div><span class="chev">›</span></button>
 <button class="mode games" type="button" data-go="games"><div class="mode-icon">◇</div><div class="mode-copy"><strong>Games</strong><span>Tap what you hear</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="match"><div class="mode-icon" style="background:#FCE7F3;color:#BE185D">Aa</div><div class="mode-copy"><strong>Match</strong><span>Letter → word</span></div><span class="chev">›</span></button>
@@ -468,9 +476,10 @@
         <input type="checkbox" id="theme-toggle" /> Dark mode
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v0.9 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v1.0 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Install:</strong> in Chrome, menu → Add to Home Screen for an app-like icon.</p>
       <div class="row" style="justify-content:flex-start">
+        <button class="speak ghost" type="button" id="share-progress">Share text</button>
         <button class="speak ghost" type="button" id="export-progress">Export</button>
         <button class="speak ghost" type="button" id="import-progress">Import</button>
         <button class="speak ghost" type="button" id="reset-progress">Reset progress</button>
@@ -1315,6 +1324,13 @@
       document.getElementById("sanskrit-speak").addEventListener("click",()=>speakText(SANSKRIT_LETTERS[i].ch));
       if(alpha.children[0]) alpha.children[0].classList.add("active");
     })();
+
+    document.getElementById("share-progress")?.addEventListener("click", async ()=>{
+      const n=Object.keys(state.learned||{}).length;
+      const text=`Little Letters — ${(state.kidName||"Learner")} learned ${n} letters, streak ${state.streak||0}, stickers ${Object.keys(state.stickers||{}).length}.`;
+      try{ if(navigator.share) await navigator.share({text}); else { await navigator.clipboard.writeText(text); toast("Copied summary"); } }
+      catch(e){ try{ await navigator.clipboard.writeText(text); toast("Copied summary"); }catch{ toast(text); } }
+    });
     applyTheme();
 
     const SHAPES=[
