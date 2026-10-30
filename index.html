@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v2.1 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v2.2 · free DIY build</p>
       </div>
     </div>
     <input id="home-search" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -184,10 +184,14 @@
       <div class="home-sec">World</div>
       <button class="mode" type="button" data-go="worldhub"><div class="mode-icon" style="background:#ECFDF5;color:#047857">◎</div><div class="mode-copy"><strong>Explore more</strong><span>Numbers, colours, words…</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="numbers" data-world-home="1"><div class="mode-icon" style="background:#E0E7FF;color:#3730A3">123</div><div class="mode-copy"><strong>Numbers</strong><span>1 to 10</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="ordinals" data-world-home="1"><div class="mode-icon">1st</div><div class="mode-copy"><strong>Ordinals</strong><span>1st · 2nd · 3rd</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="colours" data-world-home="1"><div class="mode-icon" style="background:#FCE7F3;color:#BE185D">●</div><div class="mode-copy"><strong>Colours</strong><span>See &amp; say</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="shapes" data-world-home="1"><div class="mode-icon">△</div><div class="mode-copy"><strong>Shapes</strong><span>Circle, square…</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="words" data-world-home="1"><div class="mode-icon" style="background:#ECFDF5;color:#047857">Aa</div><div class="mode-copy"><strong>Words</strong><span>Days, animals, fruits</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="calm" data-world-home="1"><div class="mode-icon" style="background:#CCFBF1;color:#0F766E">◯</div><div class="mode-copy"><strong>Calm</strong><span>3 soft breaths</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="feelings" data-world-home="1"><div class="mode-icon">😊</div><div class="mode-copy"><strong>Feelings</strong><span>Happy · sad · calm</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="stories" data-world-home="1"><div class="mode-icon" style="background:#FFEDD5;color:#C2410C">📖</div><div class="mode-copy"><strong>Stories</strong><span>Short read-alouds</span></div><span class="chev">›</span></button>
 
       <button class="mode" type="button" data-go="sight" data-world-home="1"><div class="mode-icon" style="background:#F3E8FF;color:#7E22CE">the</div><div class="mode-copy"><strong>Sight words</strong><span>the, and, you…</span></div><span class="chev">›</span></button>
@@ -668,6 +672,26 @@
       <p id="compare-feedback" class="word"></p>
     </div>
   </section>
+
+  <section id="ordinals" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>1st 2nd 3rd</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="ord-glyph" style="font-size:3rem">1st</p>
+      <p class="word" id="ord-word">First</p>
+      <button class="speak" type="button" id="ord-speak">Hear</button>
+      <div class="alpha" id="ord-alpha" style="grid-template-columns:repeat(5,1fr)"></div>
+    </div>
+  </section>
+
+  <section id="feelings" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Feelings</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="feel-emoji" style="font-size:4rem">😊</p>
+      <p class="word" id="feel-name" style="font-size:1.4rem;color:var(--ink)">Happy</p>
+      <button class="speak" type="button" id="feel-speak">Hear</button>
+      <div id="feel-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
   <section id="parent" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
@@ -683,7 +707,7 @@
         <input type="checkbox" id="theme-toggle" /> Dark mode
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v2.1 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v2.2 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Age tip:</strong> ages 3–4 → Letters, Colours, Count. Ages 5–6 → Spell, Digraphs, Quiz, Stories.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Install:</strong> in Chrome, menu → Add to Home Screen for an app-like icon.</p>
       <div class="row" style="justify-content:flex-start">
@@ -1884,6 +1908,32 @@
       speakText("Which is bigger?");
     }
     document.querySelector('[data-go="compare"]')?.addEventListener("click",()=>setTimeout(newCompare,100));
+
+    const ORD=[["1st","First"],["2nd","Second"],["3rd","Third"],["4th","Fourth"],["5th","Fifth"],["6th","Sixth"],["7th","Seventh"],["8th","Eighth"],["9th","Ninth"],["10th","Tenth"]];
+    (function(){
+      let i=0; const g=document.getElementById("ord-glyph"), w=document.getElementById("ord-word"), a=document.getElementById("ord-alpha");
+      ORD.forEach((item,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=item[0];
+        b.addEventListener("click",()=>{ i=idx; g.textContent=item[0]; w.textContent=item[1]; [...a.children].forEach((el,j)=>el.classList.toggle("active",j===idx)); });
+        a.appendChild(b);
+      });
+      document.getElementById("ord-speak").addEventListener("click",()=>speakText(ORD[i][1]));
+      if(a.children[0]) a.children[0].classList.add("active");
+    })();
+
+    const FEELS=[["Happy","😊"],["Sad","😢"],["Angry","😠"],["Scared","😨"],["Surprised","😮"],["Sleepy","😴"],["Proud","😌"],["Love","🥰"]];
+    (function(){
+      let i=0; const em=document.getElementById("feel-emoji"), nm=document.getElementById("feel-name"), list=document.getElementById("feel-list");
+      function set(idx){ i=idx; em.textContent=FEELS[i][1]; nm.textContent=FEELS[i][0]; }
+      FEELS.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("feel-speak").addEventListener("click",()=>speakText(FEELS[i][0]));
+      set(0);
+    })();
     applyTheme();
 
     const SHAPES=[
