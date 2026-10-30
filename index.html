@@ -148,7 +148,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.6 · free DIY build · 129 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.7 · free DIY build · 131 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -300,6 +300,8 @@
       <button class="mode" type="button" data-go="india" data-world-home="1"><div class="mode-icon">🇮🇳</div><div class="mode-copy"><strong>Our India</strong><span>Flag · tiger · mango</span></div><span class="chev">›</span></button>
 
       <button class="mode" type="button" data-go="party" data-world-home="1"><div class="mode-icon">🎂</div><div class="mode-copy"><strong>Party</strong><span>Cake · gift · balloon</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="fair" data-world-home="1"><div class="mode-icon">🎡</div><div class="mode-copy"><strong>Fun fair</strong><span>Wheel · clown · ticket</span></div><span class="chev">›</span></button>
+
 
       <button class="mode" type="button" data-go="sports" data-world-home="1"><div class="mode-icon">🏏</div><div class="mode-copy"><strong>Sports</strong><span>Cricket · football · yoga</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="toys" data-world-home="1"><div class="mode-icon">🧸</div><div class="mode-copy"><strong>Toys</strong><span>Teddy · ball · blocks</span></div><span class="chev">›</span></button>
@@ -362,6 +364,8 @@
       <button class="mode games" type="button" data-go="numcmp" data-play-home="1"><div class="mode-icon">7>3</div><div class="mode-copy"><strong>Bigger number</strong><span>Compare 1–20</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="numwords" data-play-home="1"><div class="mode-icon">5→five</div><div class="mode-copy"><strong>Number words</strong><span>5 means five</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="numorder" data-play-home="1"><div class="mode-icon">1-5</div><div class="mode-copy"><strong>Put in order</strong><span>Tap 1 then 2…</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="abcorder" data-play-home="1"><div class="mode-icon">ABC</div><div class="mode-copy"><strong>ABC order</strong><span>Tap letters in order</span></div><span class="chev">›</span></button>
+
       <button class="mode games" type="button" data-go="countdown" data-play-home="1"><div class="mode-icon">10…</div><div class="mode-copy"><strong>Count down</strong><span>What comes before?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="plusone" data-play-home="1"><div class="mode-icon">+1</div><div class="mode-copy"><strong>One more</strong><span>1 more than 4?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="evenodd" data-play-home="1"><div class="mode-icon">2/3</div><div class="mode-copy"><strong>Even or odd</strong><span>6 is even</span></div><span class="chev">›</span></button>
@@ -1655,6 +1659,26 @@
       <p class="muted" id="pb-q">For school, pack…</p>
       <div class="alpha" id="pb-choices" style="grid-template-columns:repeat(2,1fr);max-width:300px;margin:16px auto 0;gap:12px"></div>
       <p id="pb-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="fair" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Fun fair</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="fair-emoji" style="font-size:4rem">🎡</p>
+      <p class="word" id="fair-name" style="font-size:1.4rem;color:var(--ink)">Wheel</p>
+      <button class="speak" type="button" id="fair-speak">Hear</button>
+      <div id="fair-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="abcorder" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>ABC order</h2></div>
+    <div class="letter-stage">
+      <p class="muted">Tap in ABC order</p>
+      <div id="ao-row" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:16px;max-width:300px;margin-left:auto;margin-right:auto"></div>
+      <p id="ao-feedback" class="word"></p>
+      <button class="speak" type="button" id="ao-again" style="margin-top:12px">Again</button>
     </div>
   </section>
   <section id="parent" class="view">
@@ -4280,6 +4304,40 @@
       speakText(g.q);
     }
     document.querySelector('[data-go="packbag"]')?.addEventListener("click",()=>setTimeout(newPB,100));
+
+    const FAIR=[["Wheel","🎡"],["Clown","🤡"],["Ticket","🎫"],["Cotton candy","🍭"],["Balloon","🎈"],["Carousel","🎠"],["Popcorn","🍿"],["Music","🎵"]];
+    (function(){
+      let i=0; const em=document.getElementById("fair-emoji"), nm=document.getElementById("fair-name"), list=document.getElementById("fair-list");
+      function set(idx){ i=idx; em.textContent=FAIR[i][1]; nm.textContent=FAIR[i][0]; }
+      FAIR.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("fair-speak").addEventListener("click",()=>speakText(FAIR[i][0]));
+      set(0);
+    })();
+
+    function newAO(){
+      const start=Math.floor(Math.random()*24);
+      const letters=[0,1,2].map(i=>String.fromCharCode(65+start+i));
+      const shuffled=[...letters].sort(()=>Math.random()-.5);
+      let expect=0;
+      document.getElementById("ao-feedback").textContent="";
+      const row=document.getElementById("ao-row"); row.innerHTML="";
+      shuffled.forEach(ch=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=ch;
+        b.style.cssText="width:64px;height:64px;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.5rem;cursor:pointer";
+        b.addEventListener("click",()=>{
+          if(ch===letters[expect]){ b.style.opacity=".35"; expect++; if(expect===3){ document.getElementById("ao-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(letters.join(" ")); setTimeout(newAO,800); } }
+          else document.getElementById("ao-feedback").textContent="Next is "+letters[expect];
+        });
+        row.appendChild(b);
+      });
+    }
+    document.getElementById("ao-again")?.addEventListener("click",newAO);
+    document.querySelector('[data-go="abcorder"]')?.addEventListener("click",()=>setTimeout(newAO,100));
     applyTheme();
 
     const SHAPES=[

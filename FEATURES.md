@@ -1,7 +1,8 @@
-# Little Letters — feature map (Beta v5.6)
+# Little Letters — feature map (Beta v5.7)
 
-**129 modes**
+**131 modes**
 
+- `abcorder`
 - `actions`
 - `assamese`
 - `beach`
@@ -26,6 +27,7 @@
 - `directions`
 - `doctor`
 - `evenodd`
+- `fair`
 - `family`
 - `farm`
 - `feelings`
