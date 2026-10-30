@@ -101,6 +101,7 @@
       <button class="mode songs" type="button" data-go="songs"><div class="mode-icon">♪</div><div class="mode-copy"><strong>Songs</strong><span>Alphabet &amp; rhymes</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="games"><div class="mode-icon">◇</div><div class="mode-copy"><strong>Games</strong><span>Tap what you hear</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="match"><div class="mode-icon" style="background:#FCE7F3;color:#BE185D">Aa</div><div class="mode-copy"><strong>Match</strong><span>Letter → word</span></div><span class="chev">›</span></button>
+      <button class="mode write" type="button" data-go="sheets"><div class="mode-icon">🖨️</div><div class="mode-copy"><strong>Print sheet</strong><span>Offline tracing paper</span></div><span class="chev">›</span></button>
     </div>
   </main>
 
@@ -177,6 +178,15 @@
         <button class="speak ghost" type="button" id="prac-hear">Hear</button>
         <button class="speak" type="button" id="prac-next">Got it · next</button>
       </div>
+    </div>
+  </section>
+
+  <section id="sheets" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Practice sheet</h2></div>
+    <div class="panel" style="text-align:left">
+      <p class="soon-title">Print A–Z traces</p>
+      <p class="muted" style="margin-bottom:14px">Opens a simple dotted sheet you can print for offline writing practice.</p>
+      <button class="speak" type="button" id="open-sheet">Open sheet</button>
     </div>
   </section>
   <section id="parent" class="view">
@@ -457,6 +467,17 @@
       pracI++;
       if (pracI>=pracList.length) { document.getElementById("prac-step").textContent="Done for today!"; speakText("Great job!"); return; }
       showPractice();
+    });
+
+    document.getElementById("open-sheet").addEventListener("click", () => {
+      const w = window.open("", "_blank");
+      const letters = Object.keys(WORDS).join("");
+      let cells = "";
+      for (const L of Object.keys(WORDS)) {
+        cells += `<div style="border:1px solid #ccc;border-radius:12px;padding:16px;text-align:center;min-height:100px"><div style="font-size:42px;color:#bbb;font-family:Georgia,serif">${L}</div><div style="margin-top:8px;border-bottom:1px dashed #999;height:36px"></div><div style="margin-top:8px;border-bottom:1px dashed #999;height:36px"></div></div>`;
+      }
+      w.document.write(`<!DOCTYPE html><html><head><title>Little Letters — Trace sheet</title><style>body{font-family:system-ui;padding:24px} h1{font-family:Georgia,serif} .g{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}@media print{.no{display:none}}</style></head><body><button class="no" onclick="print()">Print</button><h1>Trace A–Z</h1><p>Little Letters practice sheet</p><div class="g">${cells}</div></body></html>`);
+      w.document.close();
     });
     refreshStats(); touchStreak();
   </script>
