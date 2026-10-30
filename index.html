@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v3.4 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v3.5 · free DIY build</p>
       </div>
     </div>
     <input id="home-search" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -220,6 +220,8 @@
       <button class="mode" type="button" data-go="body" data-world-home="1"><div class="mode-icon">👀</div><div class="mode-copy"><strong>My body</strong><span>Eyes · nose · hands</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="clothes" data-world-home="1"><div class="mode-icon">👕</div><div class="mode-copy"><strong>Clothes</strong><span>Shirt · shoes · hat</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="food" data-world-home="1"><div class="mode-icon">🍎</div><div class="mode-copy"><strong>Food</strong><span>Apple · rice · milk</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="fruits" data-world-home="1"><div class="mode-icon">🥭</div><div class="mode-copy"><strong>Fruits</strong><span>Mango · banana · apple</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="transport" data-world-home="1"><div class="mode-icon">🚗</div><div class="mode-copy"><strong>Vehicles</strong><span>Car · bus · train</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="family" data-world-home="1"><div class="mode-icon">👨‍👩‍👧</div><div class="mode-copy"><strong>Family</strong><span>Mama · papa · baby</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="school" data-world-home="1"><div class="mode-icon">✏️</div><div class="mode-copy"><strong>School</strong><span>Pencil · bag · book</span></div><span class="chev">›</span></button>
@@ -228,6 +230,8 @@
       <button class="mode" type="button" data-go="pets" data-world-home="1"><div class="mode-icon">🐶</div><div class="mode-copy"><strong>Pets</strong><span>Dog · cat · fish</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="helpers" data-world-home="1"><div class="mode-icon">👮</div><div class="mode-copy"><strong>Helpers</strong><span>Doctor · teacher · police</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="actions" data-world-home="1"><div class="mode-icon">🏃</div><div class="mode-copy"><strong>Actions</strong><span>Run · jump · sing</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="festivals" data-world-home="1"><div class="mode-icon">🪔</div><div class="mode-copy"><strong>Festivals</strong><span>Diwali · Holi · Eid</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -248,6 +252,8 @@
       <button class="mode games" type="button" data-go="beforeafter" data-play-home="1"><div class="mode-icon">A_C</div><div class="mode-copy"><strong>Before / after</strong><span>Letter neighbours</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="samediff" data-play-home="1"><div class="mode-icon">Aa?</div><div class="mode-copy"><strong>Same start?</strong><span>Cat · Cup</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="vowels" data-play-home="1"><div class="mode-icon">AEI</div><div class="mode-copy"><strong>Vowel?</strong><span>A E I O U</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="firstsound" data-play-home="1"><div class="mode-icon">A…</div><div class="mode-copy"><strong>First sound</strong><span>Apple starts with?</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -984,6 +990,36 @@
       <p id="nc-feedback" class="word"></p>
     </div>
   </section>
+
+  <section id="fruits" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Fruits</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="fr-emoji" style="font-size:4rem">🥭</p>
+      <p class="word" id="fr-name" style="font-size:1.4rem;color:var(--ink)">Mango</p>
+      <button class="speak" type="button" id="fr-speak">Hear</button>
+      <div id="fr-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="firstsound" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>First sound</h2></div>
+    <div class="letter-stage">
+      <p class="muted">What letter starts…</p>
+      <p class="glyph" id="fs-word" style="font-size:2.2rem">🍎 Apple</p>
+      <div class="alpha" id="fs-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
+      <p id="fs-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="festivals" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Festivals</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="fest-emoji" style="font-size:4rem">🪔</p>
+      <p class="word" id="fest-name" style="font-size:1.4rem;color:var(--ink)">Diwali</p>
+      <button class="speak" type="button" id="fest-speak">Hear</button>
+      <div id="fest-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
   <section id="parent" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
@@ -999,7 +1035,7 @@
         <input type="checkbox" id="theme-toggle" /> Dark mode
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v3.4 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v3.5 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Age tip:</strong> ages 3–4 → Letters, Colours, Count. Ages 5–6 → Spell, Digraphs, Quiz, Stories.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Install:</strong> in Chrome, menu → Add to Home Screen for an app-like icon.</p>
       <div class="row" style="justify-content:flex-start">
@@ -2638,6 +2674,55 @@
     document.getElementById("nc-a")?.addEventListener("click",()=>ncPick(Number(document.getElementById("nc-a").textContent)));
     document.getElementById("nc-b")?.addEventListener("click",()=>ncPick(Number(document.getElementById("nc-b").textContent)));
     document.querySelector('[data-go="numcmp"]')?.addEventListener("click",()=>setTimeout(newNC,100));
+
+    const FRUITS=[["Mango","🥭"],["Banana","🍌"],["Apple","🍎"],["Orange","🍊"],["Grapes","🍇"],["Watermelon","🍉"],["Papaya","🧡"],["Guava","🟢"]];
+    (function(){
+      let i=0; const em=document.getElementById("fr-emoji"), nm=document.getElementById("fr-name"), list=document.getElementById("fr-list");
+      function set(idx){ i=idx; em.textContent=FRUITS[i][1]; nm.textContent=FRUITS[i][0]; }
+      FRUITS.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("fr-speak").addEventListener("click",()=>speakText(FRUITS[i][0]));
+      set(0);
+    })();
+
+    const FS=[["Apple","A","🍎"],["Ball","B","⚽"],["Cat","C","🐱"],["Dog","D","🐶"],["Egg","E","🥚"],["Fish","F","🐟"],["Goat","G","🐐"],["Hat","H","🎩"],["Ice","I","🧊"],["Jam","J","🫙"],["Kite","K","🪁"],["Lion","L","🦁"],["Moon","M","🌙"],["Nose","N","👃"],["Orange","O","🍊"],["Pen","P","🖊️"],["Queen","Q","👑"],["Rain","R","🌧️"],["Sun","S","☀️"],["Tiger","T","🐯"]];
+    function newFS(){
+      const [word,ans,em]=FS[Math.floor(Math.random()*FS.length)];
+      document.getElementById("fs-word").textContent=em+" "+word;
+      document.getElementById("fs-feedback").textContent="";
+      const opts=new Set([ans]);
+      while(opts.size<3) opts.add(String.fromCharCode(65+Math.floor(Math.random()*26)));
+      const box=document.getElementById("fs-choices"); box.innerHTML="";
+      [...opts].sort().forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=v;
+        b.style.minHeight="64px"; b.style.fontSize="1.5rem";
+        b.addEventListener("click",()=>{
+          if(v===ans){ document.getElementById("fs-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(ans+" for "+word); setTimeout(newFS,800); }
+          else document.getElementById("fs-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText(word);
+    }
+    document.querySelector('[data-go="firstsound"]')?.addEventListener("click",()=>setTimeout(newFS,100));
+
+    const FEST=[["Diwali","🪔"],["Holi","🎨"],["Eid","🌙"],["Christmas","🎄"],["Pongal","🌾"],["Onam","🌼"],["Navratri","💃"],["Republic Day","🇮🇳"]];
+    (function(){
+      let i=0; const em=document.getElementById("fest-emoji"), nm=document.getElementById("fest-name"), list=document.getElementById("fest-list");
+      function set(idx){ i=idx; em.textContent=FEST[i][1]; nm.textContent=FEST[i][0]; }
+      FEST.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("fest-speak").addEventListener("click",()=>speakText(FEST[i][0]));
+      set(0);
+    })();
     applyTheme();
 
     const SHAPES=[

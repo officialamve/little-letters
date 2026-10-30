@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v3.4)
+# Little Letters — feature map (Beta v3.5)
 
-**73 modes**
+**76 modes**
 
 - `actions`
 - `assamese`
@@ -19,8 +19,11 @@
 - `digraphs`
 - `family`
 - `feelings`
+- `festivals`
+- `firstsound`
 - `flash`
 - `food`
+- `fruits`
 - `games`
 - `gujarati`
 - `helpers`
