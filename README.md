@@ -1,4 +1,4 @@
-# Little Letters (Beta v1.3)
+# Little Letters (Beta v1.4)
 
 Calm, premium alphabet learning for kids — DIY PWA.
 
@@ -16,3 +16,5 @@ Calm, premium alphabet learning for kids — DIY PWA.
 Open `index.html` or `npx --yes serve .`
 
 MIT · no backend · Web Speech API
+
+Home now uses hubs: Languages · Play · Explore for a cleaner beta UI.
