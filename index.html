@@ -148,7 +148,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.4 · free DIY build · 145 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.5 · free DIY build · 147 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -197,6 +197,8 @@
 
 
       <button class="mode" type="button" data-go="colours" data-world-home="1"><div class="mode-icon" style="background:#FCE7F3;color:#BE185D">●</div><div class="mode-copy"><strong>Colours</strong><span>See &amp; say</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="colormix" data-play-home="1"><div class="mode-icon">🎨</div><div class="mode-copy"><strong>Mix colours</strong><span>Red + blue = ?</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="shapes" data-world-home="1"><div class="mode-icon">△</div><div class="mode-copy"><strong>Shapes</strong><span>Circle, square…</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="words" data-world-home="1"><div class="mode-icon" style="background:#ECFDF5;color:#047857">Aa</div><div class="mode-copy"><strong>Words</strong><span>Days, animals, fruits</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="calm" data-world-home="1"><div class="mode-icon" style="background:#CCFBF1;color:#0F766E">◯</div><div class="mode-copy"><strong>Calm</strong><span>3 soft breaths</span></div><span class="chev">›</span></button>
@@ -302,6 +304,8 @@
 
       <button class="mode" type="button" data-go="helpers" data-world-home="1"><div class="mode-icon">👮</div><div class="mode-copy"><strong>Helpers</strong><span>Doctor · teacher · police</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="doctor" data-world-home="1"><div class="mode-icon">🩺</div><div class="mode-copy"><strong>Doctor</strong><span>Check-up words</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="dentist" data-world-home="1"><div class="mode-icon">🦷</div><div class="mode-copy"><strong>Dentist</strong><span>Tooth · brush · smile</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="fire" data-world-home="1"><div class="mode-icon">🚒</div><div class="mode-copy"><strong>Fire station</strong><span>Truck · hose · helmet</span></div><span class="chev">›</span></button>
 
 
@@ -1853,6 +1857,25 @@
       <p class="glyph" id="mn-seq" style="font-size:2rem">3, ?, 5</p>
       <div class="alpha" id="mn-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
       <p id="mn-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="dentist" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Dentist</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="den-emoji" style="font-size:4rem">🦷</p>
+      <p class="word" id="den-name" style="font-size:1.4rem;color:var(--ink)">Tooth</p>
+      <button class="speak" type="button" id="den-speak">Hear</button>
+      <div id="den-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="colormix" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Mix colours</h2></div>
+    <div class="letter-stage">
+      <p class="muted" id="cmx-q">Red + blue = ?</p>
+      <div class="alpha" id="cmx-choices" style="grid-template-columns:repeat(2,1fr);max-width:300px;margin:16px auto 0;gap:12px"></div>
+      <p id="cmx-feedback" class="word"></p>
     </div>
   </section>
   <section id="parent" class="view">
@@ -4752,6 +4775,44 @@
       speakText("what number is missing");
     }
     document.querySelector('[data-go="missnum"]')?.addEventListener("click",()=>setTimeout(newMN,100));
+
+    const DEN=[["Tooth","🦷"],["Brush","🪥"],["Paste","🧴"],["Smile","😁"],["Dentist","👨‍⚕️"],["Floss","🧵"],["Mouth","👄"],["Clean","✨"]];
+    (function(){
+      let i=0; const em=document.getElementById("den-emoji"), nm=document.getElementById("den-name"), list=document.getElementById("den-list");
+      function set(idx){ i=idx; em.textContent=DEN[i][1]; nm.textContent=DEN[i][0]; }
+      DEN.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("den-speak").addEventListener("click",()=>speakText(DEN[i][0]));
+      set(0);
+    })();
+
+    const CMX=[
+      {q:"Red + blue = ?", ans:"Purple", opts:["Purple","Green"]},
+      {q:"Yellow + blue = ?", ans:"Green", opts:["Green","Orange"]},
+      {q:"Red + yellow = ?", ans:"Orange", opts:["Orange","Purple"]},
+      {q:"White + black = ?", ans:"Grey", opts:["Grey","Pink"]}
+    ];
+    function newCmx(){
+      const g=CMX[Math.floor(Math.random()*CMX.length)];
+      document.getElementById("cmx-q").textContent=g.q;
+      document.getElementById("cmx-feedback").textContent="";
+      const box=document.getElementById("cmx-choices"); box.innerHTML="";
+      [...g.opts].sort(()=>Math.random()-.5).forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=v;
+        b.style.minHeight="64px";
+        b.addEventListener("click",()=>{
+          if(v===g.ans){ document.getElementById("cmx-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(v); setTimeout(newCmx,800); }
+          else document.getElementById("cmx-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText(g.q);
+    }
+    document.querySelector('[data-go="colormix"]')?.addEventListener("click",()=>setTimeout(newCmx,100));
     applyTheme();
 
     const SHAPES=[

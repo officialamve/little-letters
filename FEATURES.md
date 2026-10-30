@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v6.4)
+# Little Letters — feature map (Beta v6.5)
 
-**145 modes**
+**147 modes**
 
 - `abcorder`
 - `actions`
@@ -19,12 +19,14 @@
 - `cases`
 - `clock`
 - `clothes`
+- `colormix`
 - `colours`
 - `compare`
 - `count-game`
 - `count20`
 - `countdown`
 - `days`
+- `dentist`
 - `digraphs`
 - `directions`
 - `doctor`
