@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v3.1)
+# Little Letters — feature map (Beta v3.2)
 
-**64 modes**
+**67 modes**
 
 - `assamese`
 - `beforeafter`
@@ -13,6 +13,7 @@
 - `colours`
 - `compare`
 - `count-game`
+- `count20`
 - `digraphs`
 - `family`
 - `feelings`
@@ -40,6 +41,7 @@
 - `opposites`
 - `ordinals`
 - `patterns`
+- `pets`
 - `playhub`
 - `practice`
 - `punjabi`
@@ -55,6 +57,7 @@
 - `sight`
 - `skip`
 - `songs`
+- `sortsize`
 - `spell`
 - `stickers`
 - `stories`
