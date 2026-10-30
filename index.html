@@ -95,10 +95,11 @@
     </div>
     <div class="modes">
       <button class="mode" type="button" data-go="letters"><div class="mode-icon">Aa</div><div class="mode-copy"><strong>Letters</strong><span>English A–Z</span></div><span class="chev">›</span></button>
-      <button class="mode hindi" type="button" data-go="hindi"><div class="mode-icon">अ</div><div class="mode-copy"><strong>Hindi</strong><span>स्वर · first pack</span></div><span class="chev">›</span></button>
+      <button class="mode hindi" type="button" data-go="hindi"><div class="mode-icon">अ</div><div class="mode-copy"><strong>Hindi</strong><span>स्वर + व्यंजन</span></div><span class="chev">›</span></button>
       <button class="mode write" type="button" data-go="write"><div class="mode-icon">✎</div><div class="mode-copy"><strong>Write</strong><span>Trace letters</span></div><span class="chev">›</span></button>
       <button class="mode songs" type="button" data-go="songs"><div class="mode-icon">♪</div><div class="mode-copy"><strong>Songs</strong><span>Alphabet &amp; rhymes</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="games"><div class="mode-icon">◇</div><div class="mode-copy"><strong>Games</strong><span>Tap what you hear</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="match"><div class="mode-icon" style="background:#FCE7F3;color:#BE185D">Aa</div><div class="mode-copy"><strong>Match</strong><span>Letter → word</span></div><span class="chev">›</span></button>
     </div>
   </main>
 
@@ -109,7 +110,7 @@
   </section>
 
   <section id="hindi" class="view">
-    <div class="top"><button class="back" type="button" data-home>←</button><h2>Hindi · स्वर</h2></div>
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Hindi</h2></div>
     <div class="letter-stage"><p class="glyph hi" id="hi-glyph">अ</p><p class="word" id="hi-word">a · अनार</p><button class="speak" type="button" id="hi-speak">सुनो</button></div>
     <div class="alpha hi" id="hi-alpha"></div>
   </section>
@@ -153,6 +154,16 @@
     </div>
   </section>
 
+
+  <section id="match" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Match</h2></div>
+    <div class="letter-stage">
+      <p class="muted" style="margin:0 0 8px">Match letter to word</p>
+      <p class="glyph" id="match-word" style="font-size:1.6rem">Apple</p>
+      <div class="alpha" id="match-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
+      <p id="match-feedback" class="word" style="min-height:1.4em"></p>
+    </div>
+  </section>
   <section id="parent" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
@@ -177,8 +188,18 @@
     const HINDI = [
       {ch:"अ", roman:"a", word:"अनार"}, {ch:"आ", roman:"aa", word:"आम"}, {ch:"इ", roman:"i", word:"इमली"},
       {ch:"ई", roman:"ee", word:"ईख"}, {ch:"उ", roman:"u", word:"उल्लू"}, {ch:"ऊ", roman:"oo", word:"ऊन"},
-      {ch:"ए", roman:"e", word:"एड़ियाँ"}, {ch:"ऐ", roman:"ai", word:"ऐनक"}, {ch:"ओ", roman:"o", word:"ओखली"},
-      {ch:"औ", roman:"au", word:"औरत"}, {ch:"अं", roman:"am", word:"अंगूर"}, {ch:"अः", roman:"ah", word:"अः"}
+      {ch:"ए", roman:"e", word:"एड़ी"}, {ch:"ऐ", roman:"ai", word:"ऐनक"}, {ch:"ओ", roman:"o", word:"ओखली"},
+      {ch:"औ", roman:"au", word:"और"}, {ch:"अं", roman:"am", word:"अंगूर"}, {ch:"अः", roman:"ah", word:"अः"},
+      {ch:"क", roman:"ka", word:"कमल"}, {ch:"ख", roman:"kha", word:"खरगोश"}, {ch:"ग", roman:"ga", word:"गमला"},
+      {ch:"घ", roman:"gha", word:"घर"}, {ch:"च", roman:"cha", word:"चम्मच"}, {ch:"छ", roman:"chha", word:"छतरी"},
+      {ch:"ज", roman:"ja", word:"जहाज"}, {ch:"झ", roman:"jha", word:"झंडा"}, {ch:"ट", roman:"ta", word:"टमाटर"},
+      {ch:"ठ", roman:"tha", word:"ठेला"}, {ch:"ड", roman:"da", word:"डमरू"}, {ch:"ढ", roman:"dha", word:"ढोल"},
+      {ch:"त", roman:"ta", word:"तरबूज"}, {ch:"थ", roman:"tha", word:"थाली"}, {ch:"द", roman:"da", word:"दही"},
+      {ch:"ध", roman:"dha", word:"धनिया"}, {ch:"न", roman:"na", word:"नल"}, {ch:"प", roman:"pa", word:"पतंग"},
+      {ch:"फ", roman:"pha", word:"फल"}, {ch:"ब", roman:"ba", word:"बिल्ली"}, {ch:"भ", roman:"bha", word:"भालू"},
+      {ch:"म", roman:"ma", word:"मछली"}, {ch:"य", roman:"ya", word:"यज्ञ"}, {ch:"र", roman:"ra", word:"रात"},
+      {ch:"ल", roman:"la", word:"लड्डू"}, {ch:"व", roman:"va", word:"वन"}, {ch:"श", roman:"sha", word:"शेर"},
+      {ch:"ष", roman:"sha", word:"षट्कोण"}, {ch:"स", roman:"sa", word:"सेब"}, {ch:"ह", roman:"ha", word:"हाथी"}
     ];
     const STORE = "little-letters-v1";
     const state = load();
@@ -359,6 +380,35 @@
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("sw.js").catch(()=>{});
     }
+
+    // Match letter to word
+    const matchWord = document.getElementById("match-word");
+    const matchChoices = document.getElementById("match-choices");
+    const matchFeedback = document.getElementById("match-feedback");
+    let matchAnswer = "A";
+    function newMatch() {
+      const all = Object.keys(WORDS);
+      matchAnswer = all[Math.floor(Math.random()*all.length)];
+      matchWord.textContent = WORDS[matchAnswer];
+      matchFeedback.textContent = "";
+      const opts = new Set([matchAnswer]);
+      while (opts.size < 3) opts.add(all[Math.floor(Math.random()*all.length)]);
+      matchChoices.innerHTML = "";
+      [...opts].sort(()=>Math.random()-.5).forEach((L) => {
+        const b = document.createElement("button"); b.type="button"; b.textContent=L;
+        b.style.minHeight="64px"; b.style.fontSize="1.35rem";
+        b.addEventListener("click", () => {
+          if (L===matchAnswer) {
+            matchFeedback.textContent = "Yes! " + L + " → " + WORDS[L];
+            state.games=(state.games||0)+1; state.learned[L]=true; save();
+            speakText(L + " for " + WORDS[L]);
+            setTimeout(newMatch, 900);
+          } else matchFeedback.textContent = "Try again";
+        });
+        matchChoices.appendChild(b);
+      });
+    }
+    document.querySelector('[data-go="match"]').addEventListener("click", () => setTimeout(newMatch, 100));
     refreshStats(); touchStreak();
   </script>
 </body>
