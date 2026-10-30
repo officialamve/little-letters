@@ -1,9 +1,10 @@
-# Little Letters — feature map (Beta v2.3)
+# Little Letters — feature map (Beta v2.4)
 
-**50 modes**
+**51 modes**
 
 - `assamese`
 - `bengali`
+- `body`
 - `calm`
 - `clock`
 - `colours`
