@@ -92,6 +92,7 @@
     <div class="hero">
       <h2>Today’s path</h2>
       <p>Pick a mode. Progress saves on this device — no login needed.</p>
+      <button class="speak" type="button" data-go="practice" style="margin-top:16px">Start today’s 5</button>
     </div>
     <div class="modes">
       <button class="mode" type="button" data-go="letters"><div class="mode-icon">Aa</div><div class="mode-copy"><strong>Letters</strong><span>English A–Z</span></div><span class="chev">›</span></button>
@@ -104,7 +105,7 @@
   </main>
 
   <section id="letters" class="view">
-    <div class="top"><button class="back" type="button" data-home>←</button><h2>Letters</h2><button class="chip" type="button" id="mark-learned">Got it</button></div>
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Letters</h2><button class="chip" type="button" id="case-toggle">a/A</button><button class="chip" type="button" id="mark-learned">Got it</button></div>
     <div class="letter-stage"><p class="glyph" id="glyph">A</p><p class="word" id="word">Apple</p><button class="speak" type="button" id="speak">Hear letter</button></div>
     <div class="alpha" id="alpha"></div>
   </section>
@@ -162,6 +163,20 @@
       <p class="glyph" id="match-word" style="font-size:1.6rem">Apple</p>
       <div class="alpha" id="match-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
       <p id="match-feedback" class="word" style="min-height:1.4em"></p>
+    </div>
+  </section>
+
+  <section id="practice" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Today’s 5</h2></div>
+    <div class="letter-stage">
+      <p class="muted" style="margin:0 0 8px">Quick path — hear, then mark done</p>
+      <p class="glyph" id="prac-glyph">A</p>
+      <p class="word" id="prac-word">Apple</p>
+      <p class="muted" id="prac-step">1 / 5</p>
+      <div class="row" style="margin-top:16px">
+        <button class="speak ghost" type="button" id="prac-hear">Hear</button>
+        <button class="speak" type="button" id="prac-next">Got it · next</button>
+      </div>
     </div>
   </section>
   <section id="parent" class="view">
@@ -259,8 +274,8 @@
       alpha.appendChild(b);
     });
     function select(letter) {
-      current = letter; glyph.textContent = letter; wordEl.textContent = WORDS[letter];
-      [...alpha.children].forEach((el) => el.classList.toggle("active", el.textContent === letter));
+      current = letter.toUpperCase(); glyph.textContent = lower ? current.toLowerCase() : current; wordEl.textContent = WORDS[current];
+      [...alpha.children].forEach((el) => el.classList.toggle("active", el.textContent.toUpperCase() === current));
       refreshStats();
     }
     document.getElementById("speak").addEventListener("click", () => speakText(current + ". " + WORDS[current]));
@@ -409,6 +424,40 @@
       });
     }
     document.querySelector('[data-go="match"]').addEventListener("click", () => setTimeout(newMatch, 100));
+
+    let lower = false;
+    document.getElementById("case-toggle").addEventListener("click", () => {
+      lower = !lower;
+      glyph.textContent = lower ? current.toLowerCase() : current;
+      [...alpha.children].forEach((el) => { el.textContent = lower ? el.textContent.toLowerCase() : el.textContent.toUpperCase(); });
+      document.getElementById("case-toggle").classList.toggle("on", lower);
+    });
+
+    let pracList = []; let pracI = 0;
+    function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+    function startPractice(){
+      const all=Object.keys(WORDS);
+      const unlearned=all.filter(L=>!state.learned[L]);
+      pracList=shuffle(unlearned.length?unlearned.slice():all.slice()).slice(0,5);
+      pracI=0; showPractice();
+    }
+    function showPractice(){
+      const L=pracList[pracI];
+      document.getElementById("prac-glyph").textContent=L;
+      document.getElementById("prac-word").textContent=WORDS[L];
+      document.getElementById("prac-step").textContent=(pracI+1)+" / "+pracList.length;
+      speakText(L+". "+WORDS[L]);
+    }
+    document.querySelector('[data-go="practice"]').addEventListener("click", () => setTimeout(startPractice, 50));
+    document.getElementById("prac-hear").addEventListener("click", () => {
+      const L=pracList[pracI]; speakText(L+". "+WORDS[L]);
+    });
+    document.getElementById("prac-next").addEventListener("click", () => {
+      const L=pracList[pracI]; state.learned[L]=true; save();
+      pracI++;
+      if (pracI>=pracList.length) { document.getElementById("prac-step").textContent="Done for today!"; speakText("Great job!"); return; }
+      showPractice();
+    });
     refreshStats(); touchStreak();
   </script>
 </body>
