@@ -148,7 +148,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.3 · free DIY build · 123 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.4 · free DIY build · 125 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -191,6 +191,8 @@
       <button class="mode" type="button" data-go="ordinals" data-world-home="1"><div class="mode-icon">1st</div><div class="mode-copy"><strong>Ordinals</strong><span>1st · 2nd · 3rd</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="count20" data-world-home="1"><div class="mode-icon">20</div><div class="mode-copy"><strong>1 to 20</strong><span>Count further</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="money" data-world-home="1"><div class="mode-icon">₹</div><div class="mode-copy"><strong>Money</strong><span>Rupee · coin · note</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="market" data-world-home="1"><div class="mode-icon">🛒</div><div class="mode-copy"><strong>Market</strong><span>Cart · bag · shop</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -211,6 +213,8 @@
       <button class="mode" type="button" data-go="sight" data-world-home="1"><div class="mode-icon" style="background:#F3E8FF;color:#7E22CE">the</div><div class="mode-copy"><strong>Sight words</strong><span>the, and, you…</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="digraphs" data-world-home="1"><div class="mode-icon">ch</div><div class="mode-copy"><strong>Digraphs</strong><span>ch sh th wh</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="blend" data-play-home="1"><div class="mode-icon">fr</div><div class="mode-copy"><strong>Start blend</strong><span>fr · st · bl</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="magice" data-play-home="1"><div class="mode-icon">a_e</div><div class="mode-copy"><strong>Magic e</strong><span>cake vs cat</span></div><span class="chev">›</span></button>
+
 
       <button class="mode" type="button" data-go="clock" data-world-home="1"><div class="mode-icon">🕒</div><div class="mode-copy"><strong>Clock</strong><span>Hours o'clock</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="days" data-world-home="1"><div class="mode-icon">📅</div><div class="mode-copy"><strong>Days</strong><span>Monday → Sunday</span></div><span class="chev">›</span></button>
@@ -1587,6 +1591,25 @@
       <p class="muted" id="fin-q">I see with my…</p>
       <div class="alpha" id="fin-choices" style="grid-template-columns:repeat(2,1fr);max-width:300px;margin:16px auto 0;gap:12px"></div>
       <p id="fin-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="market" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Market</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="mk-emoji" style="font-size:4rem">🛒</p>
+      <p class="word" id="mk-name" style="font-size:1.4rem;color:var(--ink)">Cart</p>
+      <button class="speak" type="button" id="mk-speak">Hear</button>
+      <div id="mk-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="magice" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Magic e</h2></div>
+    <div class="letter-stage">
+      <p class="muted">Which word has a long vowel?</p>
+      <div class="alpha" id="me-choices" style="grid-template-columns:repeat(2,1fr);max-width:300px;margin:16px auto 0;gap:12px"></div>
+      <p id="me-feedback" class="word"></p>
     </div>
   </section>
   <section id="parent" class="view">
@@ -4091,6 +4114,38 @@
       speakText(g.q);
     }
     document.querySelector('[data-go="finish"]')?.addEventListener("click",()=>setTimeout(newFin,100));
+
+    const MK=[["Cart","🛒"],["Bag","🛍️"],["Shop","🏪"],["Scale","⚖️"],["Fruit stall","🥭"],["Vegetable","🥕"],["Bill","🧾"],["Change","🪙"]];
+    (function(){
+      let i=0; const em=document.getElementById("mk-emoji"), nm=document.getElementById("mk-name"), list=document.getElementById("mk-list");
+      function set(idx){ i=idx; em.textContent=MK[i][1]; nm.textContent=MK[i][0]; }
+      MK.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("mk-speak").addEventListener("click",()=>speakText(MK[i][0]));
+      set(0);
+    })();
+
+    const ME=[["cake","cat"],["bike","bit"],["hope","hop"],["cute","cut"],["pine","pin"],["tape","tap"]];
+    function newME(){
+      const [long,short]=ME[Math.floor(Math.random()*ME.length)];
+      document.getElementById("me-feedback").textContent="";
+      const box=document.getElementById("me-choices"); box.innerHTML="";
+      [long,short].sort(()=>Math.random()-.5).forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=v;
+        b.style.minHeight="72px"; b.style.fontSize="1.25rem";
+        b.addEventListener("click",()=>{
+          if(v===long){ document.getElementById("me-feedback").textContent="Yes! "+long; state.games=(state.games||0)+1; save(); speakText(long); setTimeout(newME,900); }
+          else document.getElementById("me-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText("long vowel");
+    }
+    document.querySelector('[data-go="magice"]')?.addEventListener("click",()=>setTimeout(newME,100));
     applyTheme();
 
     const SHAPES=[

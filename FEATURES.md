@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v5.3)
+# Little Letters — feature map (Beta v5.4)
 
-**123 modes**
+**125 modes**
 
 - `actions`
 - `assamese`
@@ -53,10 +53,12 @@
 - `letterhunt`
 - `letters`
 - `letterseq`
+- `magice`
 - `makeword`
 - `malayalam`
 - `manners`
 - `marathi`
+- `market`
 - `match`
 - `math`
 - `memory`
