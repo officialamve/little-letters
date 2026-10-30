@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v6.5)
+# Little Letters — feature map (Beta v6.6)
 
-**147 modes**
+**150 modes**
 
 - `abcorder`
 - `actions`
@@ -14,6 +14,7 @@
 - `blend`
 - `body`
 - `bugs`
+- `build`
 - `calm`
 - `cardmatch`
 - `cases`
@@ -25,6 +26,7 @@
 - `count-game`
 - `count20`
 - `countdown`
+- `daynight`
 - `days`
 - `dentist`
 - `digraphs`
@@ -103,6 +105,7 @@
 - `quiz`
 - `race`
 - `rainyday`
+- `reptiles`
 - `rhyme`
 - `safety`
 - `samediff`

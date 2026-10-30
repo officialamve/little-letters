@@ -148,7 +148,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.5 · free DIY build · 147 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.6 · free DIY build · 150 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -225,6 +225,8 @@
       <button class="mode" type="button" data-go="clock" data-world-home="1"><div class="mode-icon">🕒</div><div class="mode-copy"><strong>Clock</strong><span>Hours o'clock</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="days" data-world-home="1"><div class="mode-icon">📅</div><div class="mode-copy"><strong>Days</strong><span>Monday → Sunday</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="tod" data-world-home="1"><div class="mode-icon">🌅</div><div class="mode-copy"><strong>Day parts</strong><span>Morning · night</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="daynight" data-play-home="1"><div class="mode-icon">☀️🌙</div><div class="mode-copy"><strong>Day or night</strong><span>When do we…?</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="bedtime" data-world-home="1"><div class="mode-icon">🌙</div><div class="mode-copy"><strong>Bedtime</strong><span>Brush · story · sleep</span></div><span class="chev">›</span></button>
 
 
@@ -274,6 +276,8 @@
       <button class="mode" type="button" data-go="homewords" data-world-home="1"><div class="mode-icon">🏠</div><div class="mode-copy"><strong>At home</strong><span>Bed · door · chair</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="kitchen" data-world-home="1"><div class="mode-icon">🥄</div><div class="mode-copy"><strong>Kitchen</strong><span>Spoon · plate · cup</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="tools" data-world-home="1"><div class="mode-icon">🔨</div><div class="mode-copy"><strong>Tools</strong><span>Hammer · brush · scissors</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="build" data-world-home="1"><div class="mode-icon">🧱</div><div class="mode-copy"><strong>Build</strong><span>Brick · crane · digger</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="tech" data-world-home="1"><div class="mode-icon">💻</div><div class="mode-copy"><strong>Tech</strong><span>Phone · laptop · wifi</span></div><span class="chev">›</span></button>
 
 
@@ -294,6 +298,8 @@
 
       <button class="mode" type="button" data-go="wild" data-world-home="1"><div class="mode-icon">🦁</div><div class="mode-copy"><strong>Wild</strong><span>Lion · tiger · elephant</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="zoo" data-world-home="1"><div class="mode-icon">🦒</div><div class="mode-copy"><strong>Zoo</strong><span>Giraffe · camel · deer</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="reptiles" data-world-home="1"><div class="mode-icon">🐍</div><div class="mode-copy"><strong>Reptiles</strong><span>Snake · lizard · turtle</span></div><span class="chev">›</span></button>
+
 
       <button class="mode" type="button" data-go="birds" data-world-home="1"><div class="mode-icon">🦚</div><div class="mode-copy"><strong>Birds</strong><span>Peacock · crow · owl</span></div><span class="chev">›</span></button>
 
@@ -1876,6 +1882,38 @@
       <p class="muted" id="cmx-q">Red + blue = ?</p>
       <div class="alpha" id="cmx-choices" style="grid-template-columns:repeat(2,1fr);max-width:300px;margin:16px auto 0;gap:12px"></div>
       <p id="cmx-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="build" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Build</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="bld-emoji" style="font-size:4rem">🧱</p>
+      <p class="word" id="bld-name" style="font-size:1.4rem;color:var(--ink)">Brick</p>
+      <button class="speak" type="button" id="bld-speak">Hear</button>
+      <div id="bld-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="daynight" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Day or night</h2></div>
+    <div class="letter-stage">
+      <p class="muted" id="dn-q">We see the sun in the…</p>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:16px">
+        <button class="speak" type="button" id="dn-day" style="min-width:120px">Day</button>
+        <button class="speak" type="button" id="dn-night" style="min-width:120px;background:#1e293b;color:#fff">Night</button>
+      </div>
+      <p id="dn-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="reptiles" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Reptiles</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="rep-emoji" style="font-size:4rem">🐍</p>
+      <p class="word" id="rep-name" style="font-size:1.4rem;color:var(--ink)">Snake</p>
+      <button class="speak" type="button" id="rep-speak">Hear</button>
+      <div id="rep-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
     </div>
   </section>
   <section id="parent" class="view">
@@ -4813,6 +4851,51 @@
       speakText(g.q);
     }
     document.querySelector('[data-go="colormix"]')?.addEventListener("click",()=>setTimeout(newCmx,100));
+
+    const BLD=[["Brick","🧱"],["Crane","🏗️"],["Digger","🚜"],["Hard hat","⛑️"],["Truck","🚚"],["Wood","🪵"],["Nail","📌"],["House","🏠"]];
+    (function(){
+      let i=0; const em=document.getElementById("bld-emoji"), nm=document.getElementById("bld-name"), list=document.getElementById("bld-list");
+      function set(idx){ i=idx; em.textContent=BLD[i][1]; nm.textContent=BLD[i][0]; }
+      BLD.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("bld-speak").addEventListener("click",()=>speakText(BLD[i][0]));
+      set(0);
+    })();
+
+    const DN=[["We see the sun in the…",true],["We see stars in the…",false],["We sleep at…",false],["School is usually in the…",true],["Owls fly at…",false],["Breakfast is in the…",true]];
+    let dnDay=true;
+    function newDN(){
+      const [q,day]=DN[Math.floor(Math.random()*DN.length)];
+      dnDay=day;
+      document.getElementById("dn-q").textContent=q;
+      document.getElementById("dn-feedback").textContent="";
+      speakText(q);
+    }
+    function dnCheck(day){
+      if(day===dnDay){ document.getElementById("dn-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(day?"Day":"Night"); setTimeout(newDN,700); }
+      else document.getElementById("dn-feedback").textContent="Try again";
+    }
+    document.getElementById("dn-day")?.addEventListener("click",()=>dnCheck(true));
+    document.getElementById("dn-night")?.addEventListener("click",()=>dnCheck(false));
+    document.querySelector('[data-go="daynight"]')?.addEventListener("click",()=>setTimeout(newDN,100));
+
+    const REP=[["Snake","🐍"],["Lizard","🦎"],["Turtle","🐢"],["Crocodile","🐊"],["Dinosaur","🦕"],["Chameleon","🦎"],["Alligator","🐊"],["Frog","🐸"]];
+    (function(){
+      let i=0; const em=document.getElementById("rep-emoji"), nm=document.getElementById("rep-name"), list=document.getElementById("rep-list");
+      function set(idx){ i=idx; em.textContent=REP[i][1]; nm.textContent=REP[i][0]; }
+      REP.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("rep-speak").addEventListener("click",()=>speakText(REP[i][0]));
+      set(0);
+    })();
     applyTheme();
 
     const SHAPES=[
