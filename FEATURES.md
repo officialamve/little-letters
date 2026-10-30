@@ -1,12 +1,13 @@
-# Little Letters — feature map (Beta v6.1)
+# Little Letters — feature map (Beta v6.2)
 
-**139 modes**
+**141 modes**
 
 - `abcorder`
 - `actions`
 - `assamese`
 - `bakery`
 - `beach`
+- `bedtime`
 - `beforeafter`
 - `bengali`
 - `birds`
@@ -125,6 +126,7 @@
 - `tamil`
 - `tech`
 - `telugu`
+- `tens`
 - `tod`
 - `tools`
 - `toys`

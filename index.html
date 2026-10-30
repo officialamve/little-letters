@@ -148,7 +148,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.1 · free DIY build · 139 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.2 · free DIY build · 141 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -223,6 +223,8 @@
       <button class="mode" type="button" data-go="clock" data-world-home="1"><div class="mode-icon">🕒</div><div class="mode-copy"><strong>Clock</strong><span>Hours o'clock</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="days" data-world-home="1"><div class="mode-icon">📅</div><div class="mode-copy"><strong>Days</strong><span>Monday → Sunday</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="tod" data-world-home="1"><div class="mode-icon">🌅</div><div class="mode-copy"><strong>Day parts</strong><span>Morning · night</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="bedtime" data-world-home="1"><div class="mode-icon">🌙</div><div class="mode-copy"><strong>Bedtime</strong><span>Brush · story · sleep</span></div><span class="chev">›</span></button>
+
 
       <button class="mode" type="button" data-go="months" data-world-home="1"><div class="mode-icon">🗓️</div><div class="mode-copy"><strong>Months</strong><span>January → December</span></div><span class="chev">›</span></button>
 
@@ -344,6 +346,8 @@
       <button class="mode games" type="button" data-go="math" data-play-home="1"><div class="mode-icon">1+2</div><div class="mode-copy"><strong>Add up</strong><span>Sums to 10</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="subtract" data-play-home="1"><div class="mode-icon">5−2</div><div class="mode-copy"><strong>Take away</strong><span>Subtract within 10</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="skip" data-play-home="1"><div class="mode-icon">2 4 6</div><div class="mode-copy"><strong>Skip count</strong><span>2s · 5s · 10s</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="tens" data-play-home="1"><div class="mode-icon">10s</div><div class="mode-copy"><strong>Count by 10s</strong><span>10 20 30…</span></div><span class="chev">›</span></button>
+
       <button class="mode games" type="button" data-go="letterseq" data-play-home="1"><div class="mode-icon">A B ?</div><div class="mode-copy"><strong>Letter next</strong><span>What comes after?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="beforeafter" data-play-home="1"><div class="mode-icon">A_C</div><div class="mode-copy"><strong>Before / after</strong><span>Letter neighbours</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="samediff" data-play-home="1"><div class="mode-icon">Aa?</div><div class="mode-copy"><strong>Same start?</strong><span>Cat · Cup</span></div><span class="chev">›</span></button>
@@ -1779,6 +1783,26 @@
         <button class="speak" type="button" id="hc-cold" style="min-width:120px;background:#DBEAFE;color:#1D4ED8">Cold</button>
       </div>
       <p id="hc-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="bedtime" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Bedtime</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="bt-emoji" style="font-size:4rem">🌙</p>
+      <p class="word" id="bt-name" style="font-size:1.4rem;color:var(--ink)">Moon</p>
+      <button class="speak" type="button" id="bt-speak">Hear</button>
+      <div id="bt-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;max-width:300px;margin-left:auto;margin-right:auto"></div>
+    </div>
+  </section>
+
+  <section id="tens" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Count by 10s</h2></div>
+    <div class="letter-stage">
+      <p class="muted">What comes next?</p>
+      <p class="glyph" id="tens-seq" style="font-size:1.8rem">10, 20, 30, ?</p>
+      <div class="alpha" id="tens-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
+      <p id="tens-feedback" class="word"></p>
     </div>
   </section>
   <section id="parent" class="view">
@@ -4576,6 +4600,42 @@
     document.getElementById("hc-hot")?.addEventListener("click",()=>hcCheck(true));
     document.getElementById("hc-cold")?.addEventListener("click",()=>hcCheck(false));
     document.querySelector('[data-go="hotcold"]')?.addEventListener("click",()=>setTimeout(newHC,100));
+
+    const BT=[["Moon","🌙"],["Brush teeth","🪥"],["Pajamas","👕"],["Story","📖"],["Hug","🤗"],["Lights out","💡"],["Dream","💭"],["Good night","😴"]];
+    (function(){
+      let i=0; const em=document.getElementById("bt-emoji"), nm=document.getElementById("bt-name"), list=document.getElementById("bt-list");
+      function set(idx){ i=idx; em.textContent=BT[i][1]; nm.textContent=BT[i][0]; }
+      BT.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[0];
+        b.style.cssText="min-height:52px;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:.95rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("bt-speak").addEventListener("click",()=>speakText(BT[i][0]));
+      set(0);
+    })();
+
+    function newTens(){
+      const start=10* (1+Math.floor(Math.random()*5));
+      const seq=[start,start+10,start+20];
+      const ans=start+30;
+      document.getElementById("tens-seq").textContent=seq.join(", ")+", ?";
+      document.getElementById("tens-feedback").textContent="";
+      const opts=new Set([ans]);
+      while(opts.size<3) opts.add(ans+10*(Math.random()<.5?-1:1)*(1+Math.floor(Math.random()*2)));
+      const box=document.getElementById("tens-choices"); box.innerHTML="";
+      [...opts].sort((a,b)=>a-b).forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=String(v);
+        b.style.minHeight="64px"; b.style.fontSize="1.35rem";
+        b.addEventListener("click",()=>{
+          if(v===ans){ document.getElementById("tens-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(String(ans)); setTimeout(newTens,700); }
+          else document.getElementById("tens-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText(seq.join(" ")+" what is next");
+    }
+    document.querySelector('[data-go="tens"]')?.addEventListener("click",()=>setTimeout(newTens,100));
     applyTheme();
 
     const SHAPES=[
