@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v2.6)
+# Little Letters — feature map (Beta v2.7)
 
-**54 modes**
+**56 modes**
 
 - `assamese`
 - `bengali`
@@ -14,6 +14,7 @@
 - `digraphs`
 - `feelings`
 - `flash`
+- `food`
 - `games`
 - `gujarati`
 - `hindi`
@@ -52,6 +53,7 @@
 - `subtract`
 - `tamil`
 - `telugu`
+- `transport`
 - `weather`
 - `words`
 - `worldhub`
