@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v3.9)
+# Little Letters — feature map (Beta v4.0)
 
-**86 modes**
+**89 modes** — milestone build.
 
 - `actions`
 - `assamese`
@@ -40,6 +40,7 @@
 - `letterseq`
 - `makeword`
 - `malayalam`
+- `manners`
 - `marathi`
 - `match`
 - `math`
@@ -49,6 +50,7 @@
 - `nature`
 - `numbers`
 - `numcmp`
+- `numwords`
 - `ocean`
 - `oddone`
 - `odia`
@@ -85,6 +87,7 @@
 - `veggies`
 - `vowels`
 - `weather`
+- `wild`
 - `words`
 - `worldhub`
 - `write`

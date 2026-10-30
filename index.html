@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v3.9 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.0 · free DIY build</p>
       </div>
     </div>
     <input id="home-search" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -193,6 +193,8 @@
       <button class="mode" type="button" data-go="words" data-world-home="1"><div class="mode-icon" style="background:#ECFDF5;color:#047857">Aa</div><div class="mode-copy"><strong>Words</strong><span>Days, animals, fruits</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="calm" data-world-home="1"><div class="mode-icon" style="background:#CCFBF1;color:#0F766E">◯</div><div class="mode-copy"><strong>Calm</strong><span>3 soft breaths</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="feelings" data-world-home="1"><div class="mode-icon">😊</div><div class="mode-copy"><strong>Feelings</strong><span>Happy · sad · calm</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="manners" data-world-home="1"><div class="mode-icon">🙏</div><div class="mode-copy"><strong>Manners</strong><span>Please · thank you</span></div><span class="chev">›</span></button>
+
 
       <button class="mode" type="button" data-go="stories" data-world-home="1"><div class="mode-icon" style="background:#FFEDD5;color:#C2410C">📖</div><div class="mode-copy"><strong>Stories</strong><span>Short read-alouds</span></div><span class="chev">›</span></button>
 
@@ -236,6 +238,8 @@
       <button class="mode" type="button" data-go="pets" data-world-home="1"><div class="mode-icon">🐶</div><div class="mode-copy"><strong>Pets</strong><span>Dog · cat · fish</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="farm" data-world-home="1"><div class="mode-icon">🐄</div><div class="mode-copy"><strong>Farm</strong><span>Cow · hen · goat</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="ocean" data-world-home="1"><div class="mode-icon">🐠</div><div class="mode-copy"><strong>Ocean</strong><span>Fish · crab · whale</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="wild" data-world-home="1"><div class="mode-icon">🦁</div><div class="mode-copy"><strong>Wild</strong><span>Lion · tiger · elephant</span></div><span class="chev">›</span></button>
+
 
 
       <button class="mode" type="button" data-go="bugs" data-world-home="1"><div class="mode-icon">🦋</div><div class="mode-copy"><strong>Bugs</strong><span>Butterfly · ant · bee</span></div><span class="chev">›</span></button>
@@ -286,6 +290,8 @@
       <button class="mode games" type="button" data-go="compare" data-play-home="1"><div class="mode-icon">◀▶</div><div class="mode-copy"><strong>Bigger?</strong><span>Compare sizes</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="sortsize" data-play-home="1"><div class="mode-icon">▮▮▮</div><div class="mode-copy"><strong>Sort size</strong><span>Small → big</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="numcmp" data-play-home="1"><div class="mode-icon">7>3</div><div class="mode-copy"><strong>Bigger number</strong><span>Compare 1–20</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="numwords" data-play-home="1"><div class="mode-icon">5→five</div><div class="mode-copy"><strong>Number words</strong><span>5 means five</span></div><span class="chev">›</span></button>
+
 
 
       <button class="mode games" type="button" data-go="oddone" data-play-home="1"><div class="mode-icon">❓</div><div class="mode-copy"><strong>Odd one out</strong><span>Which doesn't belong?</span></div><span class="chev">›</span></button>
@@ -1142,6 +1148,36 @@
       <div id="tod-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;max-width:280px;margin-left:auto;margin-right:auto"></div>
     </div>
   </section>
+
+  <section id="wild" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Wild</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="wild-emoji" style="font-size:4rem">🦁</p>
+      <p class="word" id="wild-name" style="font-size:1.4rem;color:var(--ink)">Lion</p>
+      <button class="speak" type="button" id="wild-speak">Hear</button>
+      <div id="wild-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="manners" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Manners</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="man-emoji" style="font-size:4rem">🙏</p>
+      <p class="word" id="man-name" style="font-size:1.4rem;color:var(--ink)">Thank you</p>
+      <button class="speak" type="button" id="man-speak">Hear</button>
+      <div id="man-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;max-width:300px;margin-left:auto;margin-right:auto"></div>
+    </div>
+  </section>
+
+  <section id="numwords" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Number words</h2></div>
+    <div class="letter-stage">
+      <p class="muted">Match the word</p>
+      <p class="glyph" id="nw-num" style="font-size:4rem">5</p>
+      <div class="alpha" id="nw-choices" style="grid-template-columns:repeat(2,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
+      <p id="nw-feedback" class="word"></p>
+    </div>
+  </section>
   <section id="parent" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
@@ -1157,7 +1193,7 @@
         <input type="checkbox" id="theme-toggle" /> Dark mode
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v3.9 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v4.0 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Age tip:</strong> ages 3–4 → Letters, Colours, Count. Ages 5–6 → Spell, Digraphs, Quiz, Stories.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Install:</strong> in Chrome, menu → Add to Home Screen for an app-like icon.</p>
       <div class="row" style="justify-content:flex-start">
@@ -3019,6 +3055,56 @@
       document.getElementById("tod-speak").addEventListener("click",()=>speakText(TOD[i][0]));
       set(0);
     })();
+
+    const WILD=[["Lion","🦁"],["Tiger","🐯"],["Elephant","🐘"],["Monkey","🐵"],["Zebra","🦓"],["Giraffe","🦒"],["Bear","🐻"],["Panda","🐼"]];
+    (function(){
+      let i=0; const em=document.getElementById("wild-emoji"), nm=document.getElementById("wild-name"), list=document.getElementById("wild-list");
+      function set(idx){ i=idx; em.textContent=WILD[i][1]; nm.textContent=WILD[i][0]; }
+      WILD.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("wild-speak").addEventListener("click",()=>speakText(WILD[i][0]));
+      set(0);
+    })();
+
+    const MAN=[["Hello","👋"],["Please","🙏"],["Thank you","🤗"],["Sorry","😔"],["Excuse me","🙋"],["Goodbye","👋"],["Welcome","😊"],["Namaste","🙏"]];
+    (function(){
+      let i=0; const em=document.getElementById("man-emoji"), nm=document.getElementById("man-name"), list=document.getElementById("man-list");
+      function set(idx){ i=idx; em.textContent=MAN[i][1]; nm.textContent=MAN[i][0]; }
+      MAN.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[0];
+        b.style.cssText="min-height:52px;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:.95rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("man-speak").addEventListener("click",()=>speakText(MAN[i][0]));
+      set(0);
+    })();
+
+    const NW=["zero","one","two","three","four","five","six","seven","eight","nine","ten"];
+    function newNW(){
+      const n=1+Math.floor(Math.random()*10);
+      document.getElementById("nw-num").textContent=String(n);
+      document.getElementById("nw-feedback").textContent="";
+      const ans=NW[n];
+      const opts=new Set([ans]);
+      while(opts.size<3) opts.add(NW[1+Math.floor(Math.random()*10)]);
+      const box=document.getElementById("nw-choices"); box.innerHTML="";
+      [...opts].sort().forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=v;
+        b.style.minHeight="56px"; b.style.fontSize="1.1rem";
+        b.addEventListener("click",()=>{
+          if(v===ans){ document.getElementById("nw-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(ans); setTimeout(newNW,700); }
+          else document.getElementById("nw-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText(String(n));
+    }
+    document.querySelector('[data-go="numwords"]')?.addEventListener("click",()=>setTimeout(newNW,100));
     applyTheme();
 
     const SHAPES=[
