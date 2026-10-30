@@ -47,6 +47,14 @@
     .mode-copy { flex: 1; } .mode-copy strong { display: block; font-size: 1.05rem; } .mode-copy span { font-size: .84rem; color: var(--ink-soft); }
     .chev { color: #A8A29E; }
     #home button.mode[data-lang-home] { display: none; }
+    .toast {
+      position: fixed; left: 50%; bottom: calc(var(--nav) + 18px); transform: translateX(-50%) translateY(20px);
+      background: var(--ink); color: #FFFDF9; padding: 12px 18px; border-radius: 999px;
+      font-weight: 600; font-size: .9rem; opacity: 0; pointer-events: none; transition: .25s ease; z-index: 40;
+      box-shadow: var(--shadow); white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .stars { color: #FBBF24; letter-spacing: 2px; }
     .top { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
     .back, .chip { border: 1px solid var(--line); background: var(--bg-elev); border-radius: 14px; cursor: pointer; color: var(--ink); font: inherit; }
     .back { width: 42px; height: 42px; font-size: 1.1rem; }
@@ -83,7 +91,7 @@
   <main id="home" class="view active">
     <div class="brand">
       <div class="mark">L</div>
-      <div><h1>Little Letters</h1><p>Learn · Write · Sing · Play</p></div>
+      <div><h1>Little Letters <span style="font-family:var(--font);font-size:.65rem;font-weight:700;vertical-align:middle;background:var(--ink);color:#FFFDF9;padding:3px 8px;border-radius:999px;letter-spacing:.04em">BETA</span></h1><p>Learn · Write · Sing · Play</p></div>
     </div>
     <div class="stats">
       <div class="stat"><b id="stat-letters">0</b><span>Letters</span></div>
@@ -101,6 +109,10 @@
       <button class="mode hindi" type="button" data-go="tamil" data-lang-home="1"><div class="mode-icon" style="background:#ECFDF5;color:#047857">அ</div><div class="mode-copy"><strong>Tamil</strong><span>உயிர் எழுத்துகள்</span></div><span class="chev">›</span></button>
       <button class="mode hindi" type="button" data-go="malayalam" data-lang-home="1"><div class="mode-icon" style="background:#FDF2F8;color:#BE185D">അ</div><div class="mode-copy"><strong>Malayalam</strong><span>സ്വരങ്ങൾ</span></div><span class="chev">›</span></button>
       <button class="mode hindi" type="button" data-go="punjabi" data-lang-home="1"><div class="mode-icon" style="background:#EFF6FF;color:#1D4ED8">ਅ</div><div class="mode-copy"><strong>Punjabi</strong><span>ਸਵਰ</span></div><span class="chev">›</span></button>
+      <button class="mode hindi" type="button" data-go="odia" data-lang-home="1"><div class="mode-icon" style="background:#ECFEFF;color:#0E7490">ଅ</div><div class="mode-copy"><strong>Odia</strong><span>ସ୍ୱର</span></div><span class="chev">›</span></button>
+
+      <button class="mode hindi" type="button" data-go="marathi" data-lang-home="1"><div class="mode-icon" style="background:#F5F3FF;color:#6D28D9">अ</div><div class="mode-copy"><strong>Marathi</strong><span>स्वर</span></div><span class="chev">›</span></button>
+
 
       <button class="mode hindi" type="button" data-go="gujarati" data-lang-home="1"><div class="mode-icon" style="background:#FFFBEB;color:#A16207">અ</div><div class="mode-copy"><strong>Gujarati</strong><span>સ્વર</span></div><span class="chev">›</span></button>
 
@@ -179,6 +191,18 @@
   <section id="languages" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Languages</h2></div>
     <div class="modes" id="lang-list"></div>
+  </section>
+
+  <section id="marathi" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Marathi · स्वर</h2></div>
+    <div class="letter-stage"><p class="glyph hi" id="marathi-glyph" style="font-family:system-ui">अ</p><p class="word" id="marathi-word">a</p><button class="speak" type="button" id="marathi-speak">Hear</button></div>
+    <div class="alpha hi" id="marathi-alpha"></div>
+  </section>
+
+  <section id="odia" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Odia · ସ୍ୱର</h2></div>
+    <div class="letter-stage"><p class="glyph hi" id="odia-glyph" style="font-family:system-ui">ଅ</p><p class="word" id="odia-word">a</p><button class="speak" type="button" id="odia-speak">Hear</button></div>
+    <div class="alpha hi" id="odia-alpha"></div>
   </section>
   <section id="write" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Write</h2></div>
@@ -267,13 +291,20 @@
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
       <p class="soon-title">On this device</p>
-      <p class="muted" style="margin-bottom:14px">Progress stays in the browser. Reset anytime. Add your own book words later.</p>
+      <p class="muted" style="margin-bottom:14px">Progress stays in the browser. Double-tap the stats on Home to open this screen.</p>
+      <label style="display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:.95rem">
+        <input type="checkbox" id="sound-toggle" /> Sound on
+      </label>
       <div class="row" style="justify-content:flex-start">
+        <button class="speak ghost" type="button" id="export-progress">Export</button>
+        <button class="speak ghost" type="button" id="import-progress">Import</button>
         <button class="speak ghost" type="button" id="reset-progress">Reset progress</button>
+        <input type="file" id="import-file" accept="application/json" hidden />
       </div>
     </div>
   </section>
 
+  <div class="toast" id="toast" role="status"></div>
   <nav class="nav" aria-label="Main">
     <button type="button" class="on" data-nav="home"><span class="n">⌂</span>Home</button>
     <button type="button" data-nav="letters"><span class="n">Aa</span>Letters</button>
@@ -302,6 +333,7 @@
     ];
     const STORE = "little-letters-v1";
     const state = load();
+    if (state.soundEnabled === undefined) state.soundEnabled = true;
     const views = [...document.querySelectorAll(".view")];
     const glyph = document.getElementById("glyph");
     const wordEl = document.getElementById("word");
@@ -344,7 +376,7 @@
     document.querySelectorAll("[data-nav]").forEach((b) => b.addEventListener("click", () => show(b.dataset.nav === "play" ? "games" : b.dataset.nav)));
 
     function speakText(text, rate=0.9) {
-      if (!window.speechSynthesis) return;
+      if (!state.soundEnabled || !window.speechSynthesis) return;
       window.speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text);
       u.rate = rate; u.pitch = 1.05;
@@ -364,7 +396,9 @@
     }
     document.getElementById("speak").addEventListener("click", () => speakText(current + ". " + WORDS[current]));
     document.getElementById("mark-learned").addEventListener("click", () => {
+      const was=!!state.learned[current];
       state.learned[current] = true; save();
+      if(!was) celebrate(current);
     });
     select("A");
 
@@ -537,9 +571,10 @@
       const L=pracList[pracI]; speakText(L+". "+WORDS[L]);
     });
     document.getElementById("prac-next").addEventListener("click", () => {
-      const L=pracList[pracI]; state.learned[L]=true; save();
+      const L=pracList[pracI]; const was=!!state.learned[L]; state.learned[L]=true; save();
+      if(!was) celebrate(L);
       pracI++;
-      if (pracI>=pracList.length) { document.getElementById("prac-step").textContent="Done for today!"; speakText("Great job!"); return; }
+      if (pracI>=pracList.length) { document.getElementById("prac-step").textContent="Done for today!"; toast('<span class="stars">★ ★ ★</span> &nbsp; Path complete!'); speakText("Great job!"); return; }
       showPractice();
     });
 
@@ -741,6 +776,68 @@
         list.appendChild(clone);
       });
     })();
+
+    function toast(msg){
+      const t=document.getElementById("toast");
+      t.innerHTML=msg; t.classList.add("show");
+      clearTimeout(toast._tm); toast._tm=setTimeout(()=>t.classList.remove("show"),1600);
+    }
+    function celebrate(letter){
+      toast('<span class="stars">★ ★ ★</span> &nbsp; Learned '+letter+'!');
+      speakText("Yay! "+letter);
+    }
+
+    const MARATHI_LETTERS = [{ch:"अ", roman:"a"},{ch:"आ", roman:"aa"},{ch:"इ", roman:"i"},{ch:"ई", roman:"ii"},{ch:"उ", roman:"u"},{ch:"ऊ", roman:"uu"},{ch:"ए", roman:"e"},{ch:"ऐ", roman:"ai"},{ch:"ओ", roman:"o"},{ch:"औ", roman:"au"},{ch:"अं", roman:"am"},{ch:"अः", roman:"ah"},];
+    (function(){
+      const glyph=document.getElementById("marathi-glyph");
+      const word=document.getElementById("marathi-word");
+      const alpha=document.getElementById("marathi-alpha");
+      let idx=0;
+      MARATHI_LETTERS.forEach((item,i)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=item.ch; b.style.fontFamily="system-ui";
+        b.addEventListener("click",()=>{
+          idx=i; glyph.textContent=item.ch; word.textContent=item.roman;
+          [...alpha.children].forEach((el,j)=>el.classList.toggle("active",j===i));
+        });
+        alpha.appendChild(b);
+      });
+      document.getElementById("marathi-speak").addEventListener("click",()=>speakText(MARATHI_LETTERS[idx].ch));
+      if(alpha.children[0]) alpha.children[0].classList.add("active");
+    })();
+
+    const ODIA_LETTERS = [{ch:"ଅ", roman:"a"},{ch:"ଆ", roman:"aa"},{ch:"ଇ", roman:"i"},{ch:"ଈ", roman:"ii"},{ch:"ଉ", roman:"u"},{ch:"ଊ", roman:"uu"},{ch:"ଏ", roman:"e"},{ch:"ଐ", roman:"ai"},{ch:"ଓ", roman:"o"},{ch:"ଔ", roman:"au"},];
+    (function(){
+      const glyph=document.getElementById("odia-glyph");
+      const word=document.getElementById("odia-word");
+      const alpha=document.getElementById("odia-alpha");
+      let idx=0;
+      ODIA_LETTERS.forEach((item,i)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=item.ch; b.style.fontFamily="system-ui";
+        b.addEventListener("click",()=>{
+          idx=i; glyph.textContent=item.ch; word.textContent=item.roman;
+          [...alpha.children].forEach((el,j)=>el.classList.toggle("active",j===i));
+        });
+        alpha.appendChild(b);
+      });
+      document.getElementById("odia-speak").addEventListener("click",()=>speakText(ODIA_LETTERS[idx].ch));
+      if(alpha.children[0]) alpha.children[0].classList.add("active");
+    })();
+
+    document.getElementById("export-progress").addEventListener("click", () => {
+      const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
+      const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="little-letters-progress.json"; a.click();
+      toast("Progress exported");
+    });
+    document.getElementById("import-progress").addEventListener("click", () => document.getElementById("import-file").click());
+    document.getElementById("import-file").addEventListener("change", (e) => {
+      const f=e.target.files&&e.target.files[0]; if(!f) return;
+      const r=new FileReader();
+      r.onload=()=>{ try{ Object.assign(state, JSON.parse(r.result)); save(); toast("Progress imported"); }catch{ toast("Invalid file"); } };
+      r.readAsText(f);
+    });
+
+    const soundToggle=document.getElementById("sound-toggle");
+    if(soundToggle){ soundToggle.checked=!!state.soundEnabled; soundToggle.addEventListener("change",()=>{ state.soundEnabled=soundToggle.checked; save(); }); }
     refreshStats(); touchStreak();
   </script>
 </body>

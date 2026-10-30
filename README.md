@@ -1,4 +1,4 @@
-# Little Letters
+# Little Letters (Beta)
 
 Calm, premium alphabet learning for kids — DIY, offline-friendly PWA.
 
@@ -7,10 +7,10 @@ Calm, premium alphabet learning for kids — DIY, offline-friendly PWA.
 - [Render](https://little-letters.onrender.com)
 
 ## Features
-- English A–Z (hear, a/A, progress, today’s 5)
-- Languages: Hindi, Tamil, Kannada, Telugu, Malayalam, Bengali, Gujarati, Punjabi (vowel starters)
+- English A–Z · today’s 5 · a/A toggle · ★ learn toasts
+- Languages hub: Hindi, Tamil, Kannada, Telugu, Malayalam, Bengali, Gujarati, Punjabi, Marathi, Odia
 - Write · print sheet · songs · hear-game · match · memory
-- Streaks · on-device save · installable PWA
+- Streaks · export/import progress · sound toggle · PWA
 
 ## Local
 Open `index.html` in Chrome, or `npx --yes serve .`
