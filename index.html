@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.3 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.4 · free DIY build</p>
       </div>
     </div>
     <input id="home-search" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -194,6 +194,8 @@
       <button class="mode" type="button" data-go="calm" data-world-home="1"><div class="mode-icon" style="background:#CCFBF1;color:#0F766E">◯</div><div class="mode-copy"><strong>Calm</strong><span>3 soft breaths</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="feelings" data-world-home="1"><div class="mode-icon">😊</div><div class="mode-copy"><strong>Feelings</strong><span>Happy · sad · calm</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="manners" data-world-home="1"><div class="mode-icon">🙏</div><div class="mode-copy"><strong>Manners</strong><span>Please · thank you</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="safety" data-world-home="1"><div class="mode-icon">🚦</div><div class="mode-copy"><strong>Stay safe</strong><span>Red light · seat belt</span></div><span class="chev">›</span></button>
+
 
 
       <button class="mode" type="button" data-go="stories" data-world-home="1"><div class="mode-icon" style="background:#FFEDD5;color:#C2410C">📖</div><div class="mode-copy"><strong>Stories</strong><span>Short read-alouds</span></div><span class="chev">›</span></button>
@@ -256,6 +258,8 @@
       <button class="mode" type="button" data-go="actions" data-world-home="1"><div class="mode-icon">🏃</div><div class="mode-copy"><strong>Actions</strong><span>Run · jump · sing</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="festivals" data-world-home="1"><div class="mode-icon">🪔</div><div class="mode-copy"><strong>Festivals</strong><span>Diwali · Holi · Eid</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="sports" data-world-home="1"><div class="mode-icon">🏏</div><div class="mode-copy"><strong>Sports</strong><span>Cricket · football · yoga</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="toys" data-world-home="1"><div class="mode-icon">🧸</div><div class="mode-copy"><strong>Toys</strong><span>Teddy · ball · blocks</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="music" data-world-home="1"><div class="mode-icon">🥁</div><div class="mode-copy"><strong>Music</strong><span>Drum · flute · guitar</span></div><span class="chev">›</span></button>
 
 
@@ -282,6 +286,8 @@
       <button class="mode games" type="button" data-go="vowels" data-play-home="1"><div class="mode-icon">AEI</div><div class="mode-copy"><strong>Vowel?</strong><span>A E I O U</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="firstsound" data-play-home="1"><div class="mode-icon">A…</div><div class="mode-copy"><strong>First sound</strong><span>Apple starts with?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="lastletter" data-play-home="1"><div class="mode-icon">…T</div><div class="mode-copy"><strong>Last letter</strong><span>Cat ends with?</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="middlesound" data-play-home="1"><div class="mode-icon">C_T</div><div class="mode-copy"><strong>Middle letter</strong><span>C_T → A</span></div><span class="chev">›</span></button>
+
       <button class="mode games" type="button" data-go="syllables" data-play-home="1"><div class="mode-icon">👏</div><div class="mode-copy"><strong>Clap parts</strong><span>Ba-na-na = 3</span></div><span class="chev">›</span></button>
 
 
@@ -1285,6 +1291,36 @@
       <p class="word" id="sn-name" style="font-size:1.4rem;color:var(--ink)">Cookie</p>
       <button class="speak" type="button" id="sn-speak">Hear</button>
       <div id="sn-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="toys" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Toys</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="toy-emoji" style="font-size:4rem">🧸</p>
+      <p class="word" id="toy-name" style="font-size:1.4rem;color:var(--ink)">Teddy</p>
+      <button class="speak" type="button" id="toy-speak">Hear</button>
+      <div id="toy-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="middlesound" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Middle letter</h2></div>
+    <div class="letter-stage">
+      <p class="muted">What is in the middle?</p>
+      <p class="glyph" id="mid-word" style="font-size:2.4rem">C_T</p>
+      <div class="alpha" id="mid-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
+      <p id="mid-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="safety" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Stay safe</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="sf-emoji" style="font-size:4rem">🚦</p>
+      <p class="word" id="sf-name" style="font-size:1.4rem;color:var(--ink)">Red light</p>
+      <button class="speak" type="button" id="sf-speak">Hear</button>
+      <div id="sf-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;max-width:300px;margin-left:auto;margin-right:auto"></div>
     </div>
   </section>
   <section id="parent" class="view">
@@ -3364,6 +3400,55 @@
         list.appendChild(b);
       });
       document.getElementById("sn-speak").addEventListener("click",()=>speakText(SNACKS[i][0]));
+      set(0);
+    })();
+
+    const TOYS=[["Teddy","🧸"],["Ball","⚽"],["Blocks","🧱"],["Doll","🪆"],["Car","🚗"],["Kite","🪁"],["Puzzle","🧩"],["Robot","🤖"]];
+    (function(){
+      let i=0; const em=document.getElementById("toy-emoji"), nm=document.getElementById("toy-name"), list=document.getElementById("toy-list");
+      function set(idx){ i=idx; em.textContent=TOYS[i][1]; nm.textContent=TOYS[i][0]; }
+      TOYS.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("toy-speak").addEventListener("click",()=>speakText(TOYS[i][0]));
+      set(0);
+    })();
+
+    const MID=[["CAT","A"],["DOG","O"],["SUN","U"],["PEN","E"],["BIG","I"],["HOT","O"],["CUP","U"],["BED","E"]];
+    function newMid(){
+      const [word,ans]=MID[Math.floor(Math.random()*MID.length)];
+      document.getElementById("mid-word").textContent=word[0]+"_"+word[2];
+      document.getElementById("mid-feedback").textContent="";
+      const opts=new Set([ans]);
+      while(opts.size<3) opts.add("AEIOU"[Math.floor(Math.random()*5)]);
+      const box=document.getElementById("mid-choices"); box.innerHTML="";
+      [...opts].sort().forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=v;
+        b.style.minHeight="64px"; b.style.fontSize="1.5rem";
+        b.addEventListener("click",()=>{
+          if(v===ans){ document.getElementById("mid-feedback").textContent="Yes! "+word; document.getElementById("mid-word").textContent=word; state.games=(state.games||0)+1; save(); speakText(word); setTimeout(newMid,900); }
+          else document.getElementById("mid-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText(word[0]+" blank "+word[2]);
+    }
+    document.querySelector('[data-go="middlesound"]')?.addEventListener("click",()=>setTimeout(newMid,100));
+
+    const SAFE=[["Red light","🚦"],["Green light","🟢"],["Seat belt","🚗"],["Hold hands","🤝"],["Stop","🛑"],["Look both ways","👀"],["Helmet","⛑️"],["Fire exit","🚪"]];
+    (function(){
+      let i=0; const em=document.getElementById("sf-emoji"), nm=document.getElementById("sf-name"), list=document.getElementById("sf-list");
+      function set(idx){ i=idx; em.textContent=SAFE[i][1]; nm.textContent=SAFE[i][0]; }
+      SAFE.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[0];
+        b.style.cssText="min-height:52px;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:.9rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("sf-speak").addEventListener("click",()=>speakText(SAFE[i][0]));
       set(0);
     })();
     applyTheme();

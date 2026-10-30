@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v4.3)
+# Little Letters — feature map (Beta v4.4)
 
-**98 modes**
+**101 modes**
 
 - `actions`
 - `assamese`
@@ -47,6 +47,7 @@
 - `match`
 - `math`
 - `memory`
+- `middlesound`
 - `missing`
 - `months`
 - `music`
@@ -69,6 +70,7 @@
 - `quiz`
 - `race`
 - `rhyme`
+- `safety`
 - `samediff`
 - `sanskrit`
 - `school`
@@ -90,6 +92,7 @@
 - `telugu`
 - `tod`
 - `tools`
+- `toys`
 - `transport`
 - `truefalse`
 - `veggies`
