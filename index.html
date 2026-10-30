@@ -4996,17 +4996,17 @@
     }
     document.querySelector('[data-go="candles"]')?.addEventListener("click",()=>setTimeout(newCan,100));
 
-    const MUS=[["Museum","🏛️"],["Art","🖼️"],["Fossil","🦴"],["Statue","🗿"],["Map","🗺️"],["Quiet","🤫"],["Guide","🧭"],["Ticket","🎫"]];
+    const MUSEUM=[["Museum","🏛️"],["Art","🖼️"],["Fossil","🦴"],["Statue","🗿"],["Map","🗺️"],["Quiet","🤫"],["Guide","🧭"],["Ticket","🎫"]];
     (function(){
       let i=0; const em=document.getElementById("mus-emoji"), nm=document.getElementById("mus-name"), list=document.getElementById("mus-list");
-      function set(idx){ i=idx; em.textContent=MUS[i][1]; nm.textContent=MUS[i][0]; }
-      MUS.forEach((f,idx)=>{
+      function set(idx){ i=idx; em.textContent=MUSEUM[i][1]; nm.textContent=MUSEUM[i][0]; }
+      MUSEUM.forEach((f,idx)=>{
         const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
         b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
         b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
         list.appendChild(b);
       });
-      document.getElementById("mus-speak").addEventListener("click",()=>speakText(MUS[i][0]));
+      document.getElementById("mus-speak").addEventListener("click",()=>speakText(MUSEUM[i][0]));
       set(0);
     })();
     applyTheme();
