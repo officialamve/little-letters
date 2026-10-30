@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.1 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.2 · free DIY build</p>
       </div>
     </div>
     <input id="home-search" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -247,6 +247,8 @@
       <button class="mode" type="button" data-go="bugs" data-world-home="1"><div class="mode-icon">🦋</div><div class="mode-copy"><strong>Bugs</strong><span>Butterfly · ant · bee</span></div><span class="chev">›</span></button>
 
       <button class="mode" type="button" data-go="helpers" data-world-home="1"><div class="mode-icon">👮</div><div class="mode-copy"><strong>Helpers</strong><span>Doctor · teacher · police</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="places" data-world-home="1"><div class="mode-icon">🏫</div><div class="mode-copy"><strong>Places</strong><span>School · park · market</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="actions" data-world-home="1"><div class="mode-icon">🏃</div><div class="mode-copy"><strong>Actions</strong><span>Run · jump · sing</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="festivals" data-world-home="1"><div class="mode-icon">🪔</div><div class="mode-copy"><strong>Festivals</strong><span>Diwali · Holi · Eid</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="sports" data-world-home="1"><div class="mode-icon">🏏</div><div class="mode-copy"><strong>Sports</strong><span>Cricket · football · yoga</span></div><span class="chev">›</span></button>
@@ -289,6 +291,8 @@
       <button class="mode games" type="button" data-go="patterns" data-play-home="1"><div class="mode-icon">🔴</div><div class="mode-copy"><strong>Patterns</strong><span>What comes next?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="spell" data-play-home="1"><div class="mode-icon">abc</div><div class="mode-copy"><strong>Spell</strong><span>Unscramble words</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="makeword" data-play-home="1"><div class="mode-icon">C_T</div><div class="mode-copy"><strong>Make a word</strong><span>Build C-A-T</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="cases" data-play-home="1"><div class="mode-icon">Aa</div><div class="mode-copy"><strong>Big & small</strong><span>A → a</span></div><span class="chev">›</span></button>
+
 
       <button class="mode games" type="button" data-go="rhyme" data-play-home="1"><div class="mode-icon">🎤</div><div class="mode-copy"><strong>Rhymes</strong><span>cat → hat</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="compare" data-play-home="1"><div class="mode-icon">◀▶</div><div class="mode-copy"><strong>Bigger?</strong><span>Compare sizes</span></div><span class="chev">›</span></button>
@@ -300,6 +304,8 @@
 
       <button class="mode games" type="button" data-go="oddone" data-play-home="1"><div class="mode-icon">❓</div><div class="mode-copy"><strong>Odd one out</strong><span>Which doesn't belong?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="truefalse" data-play-home="1"><div class="mode-icon">✓✗</div><div class="mode-copy"><strong>True or false</strong><span>Kid facts</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="wear" data-play-home="1"><div class="mode-icon">☔</div><div class="mode-copy"><strong>What to wear</strong><span>Rain → raincoat</span></div><span class="chev">›</span></button>
+
 
       <button class="mode games" type="button" data-go="cardmatch" data-play-home="1"><div class="mode-icon">🃏</div><div class="mode-copy"><strong>Pairs</strong><span>Match the cards</span></div><span class="chev">›</span></button>
 
@@ -1214,6 +1220,35 @@
         <button class="speak" type="button" id="tf-false" style="min-width:120px;background:#FEE2E2;color:#B91C1C">False</button>
       </div>
       <p id="tf-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="places" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Places</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="pl-emoji" style="font-size:4rem">🏫</p>
+      <p class="word" id="pl-name" style="font-size:1.4rem;color:var(--ink)">School</p>
+      <button class="speak" type="button" id="pl-speak">Hear</button>
+      <div id="pl-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="cases" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Big & small</h2></div>
+    <div class="letter-stage">
+      <p class="muted">Match the small letter</p>
+      <p class="glyph" id="case-big" style="font-size:4rem">A</p>
+      <div class="alpha" id="case-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
+      <p id="case-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="wear" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>What to wear</h2></div>
+    <div class="letter-stage">
+      <p class="muted" id="wear-q">It is raining. Wear…</p>
+      <div class="alpha" id="wear-choices" style="grid-template-columns:repeat(2,1fr);max-width:300px;margin:16px auto 0;gap:12px"></div>
+      <p id="wear-feedback" class="word"></p>
     </div>
   </section>
   <section id="parent" class="view">
@@ -3188,6 +3223,67 @@
     document.getElementById("tf-true")?.addEventListener("click",()=>tfCheck(true));
     document.getElementById("tf-false")?.addEventListener("click",()=>tfCheck(false));
     document.querySelector('[data-go="truefalse"]')?.addEventListener("click",()=>setTimeout(newTF,100));
+
+    const PLACES=[["School","🏫"],["Park","🏞️"],["Market","🛒"],["Hospital","🏥"],["Temple","🛕"],["Library","📚"],["Station","🚉"],["Beach","🏖️"]];
+    (function(){
+      let i=0; const em=document.getElementById("pl-emoji"), nm=document.getElementById("pl-name"), list=document.getElementById("pl-list");
+      function set(idx){ i=idx; em.textContent=PLACES[i][1]; nm.textContent=PLACES[i][0]; }
+      PLACES.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("pl-speak").addEventListener("click",()=>speakText(PLACES[i][0]));
+      set(0);
+    })();
+
+    function newCase(){
+      const code=65+Math.floor(Math.random()*26);
+      const big=String.fromCharCode(code);
+      const ans=String.fromCharCode(code+32);
+      document.getElementById("case-big").textContent=big;
+      document.getElementById("case-feedback").textContent="";
+      const opts=new Set([ans]);
+      while(opts.size<3) opts.add(String.fromCharCode(97+Math.floor(Math.random()*26)));
+      const box=document.getElementById("case-choices"); box.innerHTML="";
+      [...opts].sort().forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=v;
+        b.style.minHeight="64px"; b.style.fontSize="1.5rem";
+        b.addEventListener("click",()=>{
+          if(v===ans){ document.getElementById("case-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(big+" "+ans); setTimeout(newCase,700); }
+          else document.getElementById("case-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText(big);
+    }
+    document.querySelector('[data-go="cases"]')?.addEventListener("click",()=>setTimeout(newCase,100));
+
+    const WEAR=[
+      {q:"It is raining. Wear…", ans:"Raincoat", opts:["Raincoat","Sunglasses"]},
+      {q:"It is sunny and hot. Wear…", ans:"Cap", opts:["Cap","Jacket"]},
+      {q:"It is cold. Wear…", ans:"Sweater", opts:["Sweater","Shorts"]},
+      {q:"Going to bed. Wear…", ans:"Pajamas", opts:["Pajamas","Shoes"]},
+      {q:"Playing football. Wear…", ans:"Shoes", opts:["Shoes","Scarf"]}
+    ];
+    function newWear(){
+      const g=WEAR[Math.floor(Math.random()*WEAR.length)];
+      document.getElementById("wear-q").textContent=g.q;
+      document.getElementById("wear-feedback").textContent="";
+      const box=document.getElementById("wear-choices"); box.innerHTML="";
+      [...g.opts].sort(()=>Math.random()-.5).forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=v;
+        b.style.minHeight="64px";
+        b.addEventListener("click",()=>{
+          if(v===g.ans){ document.getElementById("wear-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(v); setTimeout(newWear,800); }
+          else document.getElementById("wear-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText(g.q);
+    }
+    document.querySelector('[data-go="wear"]')?.addEventListener("click",()=>setTimeout(newWear,100));
     applyTheme();
 
     const SHAPES=[

@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v4.1)
+# Little Letters — feature map (Beta v4.2)
 
-**92 modes**
+**95 modes**
 
 - `actions`
 - `assamese`
@@ -10,6 +10,7 @@
 - `bugs`
 - `calm`
 - `cardmatch`
+- `cases`
 - `clock`
 - `clothes`
 - `colours`
@@ -59,6 +60,7 @@
 - `ordinals`
 - `patterns`
 - `pets`
+- `places`
 - `playhub`
 - `practice`
 - `punjabi`
@@ -89,6 +91,7 @@
 - `truefalse`
 - `veggies`
 - `vowels`
+- `wear`
 - `weather`
 - `wild`
 - `words`
