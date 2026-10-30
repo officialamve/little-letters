@@ -101,6 +101,7 @@
     <div class="hero">
       <h2>Today’s path</h2>
       <p>Pick a mode. Progress saves on this device — no login needed.</p>
+      <p class="muted" style="margin-top:10px;font-size:.78rem">Beta v0.2 · free DIY build</p>
       <button class="speak" type="button" data-go="practice" style="margin-top:16px">Start today’s 5</button>
     </div>
     <div class="modes">
@@ -135,7 +136,8 @@
 
   <section id="letters" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Letters</h2><button class="chip" type="button" id="case-toggle">a/A</button><button class="chip" type="button" id="mark-learned">Got it</button></div>
-    <div class="letter-stage"><p class="glyph" id="glyph">A</p><p class="word" id="word">Apple</p><button class="speak" type="button" id="speak">Hear letter</button></div>
+    <div class="letter-stage"><p class="glyph" id="glyph">A</p><p id="emoji" style="font-size:2.4rem;margin:4px 0 0">🍎</p><p class="word" id="word">Apple</p><div class="row"><button class="speak" type="button" id="speak">Letter + word</button>
+      <button class="speak ghost" type="button" id="speak-sound">Sound only</button></div></div>
     <div class="alpha" id="alpha"></div>
   </section>
 
@@ -295,6 +297,8 @@
       <label style="display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:.95rem">
         <input type="checkbox" id="sound-toggle" /> Sound on
       </label>
+      <p class="soon-title" style="margin-top:18px">About this beta</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v0.2 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
       <div class="row" style="justify-content:flex-start">
         <button class="speak ghost" type="button" id="export-progress">Export</button>
         <button class="speak ghost" type="button" id="import-progress">Import</button>
@@ -314,6 +318,7 @@
   </nav>
 
   <script>
+    const EMOJI = {"A": "🍎", "B": "⚽", "C": "🐱", "D": "🐶", "E": "🐘", "F": "🐟", "G": "🍇", "H": "🎩", "I": "🍦", "J": "🫖", "K": "🪁", "L": "🦁", "M": "🥭", "N": "🪺", "O": "🍊", "P": "🦜", "Q": "👑", "R": "🌈", "S": "☀️", "T": "🐯", "U": "☂️", "V": "🚐", "W": "⌚", "X": "🎹", "Y": "🐃", "Z": "🦓"};
     const WORDS = {A:"Apple",B:"Ball",C:"Cat",D:"Dog",E:"Elephant",F:"Fish",G:"Grapes",H:"Hat",I:"Ice cream",J:"Jug",K:"Kite",L:"Lion",M:"Mango",N:"Nest",O:"Orange",P:"Parrot",Q:"Queen",R:"Rainbow",S:"Sun",T:"Tiger",U:"Umbrella",V:"Van",W:"Watch",X:"Xylophone",Y:"Yak",Z:"Zebra"};
     const HINDI = [
       {ch:"अ", roman:"a", word:"अनार"}, {ch:"आ", roman:"aa", word:"आम"}, {ch:"इ", roman:"i", word:"इमली"},
@@ -391,10 +396,12 @@
     });
     function select(letter) {
       current = letter.toUpperCase(); glyph.textContent = lower ? current.toLowerCase() : current; wordEl.textContent = WORDS[current];
+      const em=document.getElementById("emoji"); if(em) em.textContent=EMOJI[current]||"";
       [...alpha.children].forEach((el) => el.classList.toggle("active", el.textContent.toUpperCase() === current));
       refreshStats();
     }
     document.getElementById("speak").addEventListener("click", () => speakText(current + ". " + WORDS[current]));
+    document.getElementById("speak-sound").addEventListener("click", () => speakText(current));
     document.getElementById("mark-learned").addEventListener("click", () => {
       const was=!!state.learned[current];
       state.learned[current] = true; save();
