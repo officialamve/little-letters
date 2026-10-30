@@ -148,7 +148,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.4 · free DIY build · 125 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.5 · free DIY build · 127 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -225,6 +225,8 @@
 
       <button class="mode" type="button" data-go="seasons" data-world-home="1"><div class="mode-icon">☀️</div><div class="mode-copy"><strong>Seasons</strong><span>India weather year</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="weather" data-world-home="1"><div class="mode-icon">☀️</div><div class="mode-copy"><strong>Weather</strong><span>Sun · rain · wind</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="rainyday" data-world-home="1"><div class="mode-icon">🌧️</div><div class="mode-copy"><strong>Rainy day</strong><span>Indoor fun ideas</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -267,6 +269,8 @@
 
       <button class="mode" type="button" data-go="pets" data-world-home="1"><div class="mode-icon">🐶</div><div class="mode-copy"><strong>Pets</strong><span>Dog · cat · fish</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="farm" data-world-home="1"><div class="mode-icon">🐄</div><div class="mode-copy"><strong>Farm</strong><span>Cow · hen · goat</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="sounds" data-play-home="1"><div class="mode-icon">🔊</div><div class="mode-copy"><strong>Animal sounds</strong><span>Who says moo?</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="ocean" data-world-home="1"><div class="mode-icon">🐠</div><div class="mode-copy"><strong>Ocean</strong><span>Fish · crab · whale</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="beach" data-world-home="1"><div class="mode-icon">🏖️</div><div class="mode-copy"><strong>Beach</strong><span>Sand · shell · wave</span></div><span class="chev">›</span></button>
 
@@ -1610,6 +1614,25 @@
       <p class="muted">Which word has a long vowel?</p>
       <div class="alpha" id="me-choices" style="grid-template-columns:repeat(2,1fr);max-width:300px;margin:16px auto 0;gap:12px"></div>
       <p id="me-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="sounds" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Animal sounds</h2></div>
+    <div class="letter-stage">
+      <p class="muted" id="snd-q">Who says moo?</p>
+      <div class="alpha" id="snd-choices" style="grid-template-columns:repeat(2,1fr);max-width:300px;margin:16px auto 0;gap:12px"></div>
+      <p id="snd-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="rainyday" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Rainy day</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="rd-emoji" style="font-size:4rem">📚</p>
+      <p class="word" id="rd-name" style="font-size:1.4rem;color:var(--ink)">Read a book</p>
+      <button class="speak" type="button" id="rd-speak">Hear</button>
+      <div id="rd-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;max-width:300px;margin-left:auto;margin-right:auto"></div>
     </div>
   </section>
   <section id="parent" class="view">
@@ -4146,6 +4169,46 @@
       speakText("long vowel");
     }
     document.querySelector('[data-go="magice"]')?.addEventListener("click",()=>setTimeout(newME,100));
+
+    const SND=[
+      {q:"Who says moo?", ans:"Cow", opts:["Cow","Cat"]},
+      {q:"Who says meow?", ans:"Cat", opts:["Cat","Dog"]},
+      {q:"Who says woof?", ans:"Dog", opts:["Dog","Duck"]},
+      {q:"Who says quack?", ans:"Duck", opts:["Duck","Hen"]},
+      {q:"Who says baa?", ans:"Sheep", opts:["Sheep","Goat"]},
+      {q:"Who says roar?", ans:"Lion", opts:["Lion","Mouse"]}
+    ];
+    function newSnd(){
+      const g=SND[Math.floor(Math.random()*SND.length)];
+      document.getElementById("snd-q").textContent=g.q;
+      document.getElementById("snd-feedback").textContent="";
+      const box=document.getElementById("snd-choices"); box.innerHTML="";
+      [...g.opts].sort(()=>Math.random()-.5).forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=v;
+        b.style.minHeight="64px";
+        b.addEventListener("click",()=>{
+          if(v===g.ans){ document.getElementById("snd-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(v); setTimeout(newSnd,800); }
+          else document.getElementById("snd-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText(g.q);
+    }
+    document.querySelector('[data-go="sounds"]')?.addEventListener("click",()=>setTimeout(newSnd,100));
+
+    const RD=[["Read a book","📚"],["Draw","🎨"],["Sing","🎤"],["Build blocks","🧱"],["Dance","💃"],["Help cook","🍳"],["Puzzle","🧩"],["Nap","😴"]];
+    (function(){
+      let i=0; const em=document.getElementById("rd-emoji"), nm=document.getElementById("rd-name"), list=document.getElementById("rd-list");
+      function set(idx){ i=idx; em.textContent=RD[i][1]; nm.textContent=RD[i][0]; }
+      RD.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[0];
+        b.style.cssText="min-height:52px;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:.95rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("rd-speak").addEventListener("click",()=>speakText(RD[i][0]));
+      set(0);
+    })();
     applyTheme();
 
     const SHAPES=[
