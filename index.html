@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.8 · free DIY build · 111 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.9 · free DIY build · 114 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -227,6 +227,8 @@
       <button class="mode games" type="button" data-go="race" data-play-home="1"><div class="mode-icon" style="background:#FEE2E2;color:#B91C1C">⏱</div><div class="mode-copy"><strong>Speed ABC</strong><span>A to Z race</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="count-game" data-play-home="1"><div class="mode-icon">•••</div><div class="mode-copy"><strong>Count</strong><span>How many dots?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="opposites" data-play-home="1"><div class="mode-icon">⇅</div><div class="mode-copy"><strong>Opposites</strong><span>Hot ↔ Cold</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="directions" data-world-home="1"><div class="mode-icon">⬆️</div><div class="mode-copy"><strong>Directions</strong><span>Up · down · left · right</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="body" data-world-home="1"><div class="mode-icon">👀</div><div class="mode-copy"><strong>My body</strong><span>Eyes · nose · hands</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="clothes" data-world-home="1"><div class="mode-icon">👕</div><div class="mode-copy"><strong>Clothes</strong><span>Shirt · shoes · hat</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="food" data-world-home="1"><div class="mode-icon">🍎</div><div class="mode-copy"><strong>Food</strong><span>Apple · rice · milk</span></div><span class="chev">›</span></button>
@@ -255,6 +257,8 @@
       <button class="mode" type="button" data-go="farm" data-world-home="1"><div class="mode-icon">🐄</div><div class="mode-copy"><strong>Farm</strong><span>Cow · hen · goat</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="ocean" data-world-home="1"><div class="mode-icon">🐠</div><div class="mode-copy"><strong>Ocean</strong><span>Fish · crab · whale</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="wild" data-world-home="1"><div class="mode-icon">🦁</div><div class="mode-copy"><strong>Wild</strong><span>Lion · tiger · elephant</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="zoo" data-world-home="1"><div class="mode-icon">🦒</div><div class="mode-copy"><strong>Zoo</strong><span>Giraffe · camel · deer</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="birds" data-world-home="1"><div class="mode-icon">🦚</div><div class="mode-copy"><strong>Birds</strong><span>Peacock · crow · owl</span></div><span class="chev">›</span></button>
 
 
@@ -329,6 +333,8 @@
       <button class="mode games" type="button" data-go="numwords" data-play-home="1"><div class="mode-icon">5→five</div><div class="mode-copy"><strong>Number words</strong><span>5 means five</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="numorder" data-play-home="1"><div class="mode-icon">1-5</div><div class="mode-copy"><strong>Put in order</strong><span>Tap 1 then 2…</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="countdown" data-play-home="1"><div class="mode-icon">10…</div><div class="mode-copy"><strong>Count down</strong><span>What comes before?</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="plusone" data-play-home="1"><div class="mode-icon">+1</div><div class="mode-copy"><strong>One more</strong><span>1 more than 4?</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -1439,6 +1445,35 @@
       <p class="word" id="pty-name" style="font-size:1.4rem;color:var(--ink)">Cake</p>
       <button class="speak" type="button" id="pty-speak">Hear</button>
       <div id="pty-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="zoo" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Zoo visit</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="zoo-emoji" style="font-size:4rem">🦒</p>
+      <p class="word" id="zoo-name" style="font-size:1.4rem;color:var(--ink)">Giraffe</p>
+      <button class="speak" type="button" id="zoo-speak">Hear</button>
+      <div id="zoo-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="plusone" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>One more</h2></div>
+    <div class="letter-stage">
+      <p class="muted" id="po-q">What is 1 more than 4?</p>
+      <div class="alpha" id="po-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
+      <p id="po-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="directions" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Directions</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="dir-emoji" style="font-size:4rem">⬆️</p>
+      <p class="word" id="dir-name" style="font-size:1.4rem;color:var(--ink)">Up</p>
+      <button class="speak" type="button" id="dir-speak">Hear</button>
+      <div id="dir-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;max-width:260px;margin-left:auto;margin-right:auto"></div>
     </div>
   </section>
   <section id="parent" class="view">
@@ -3735,6 +3770,56 @@
         list.appendChild(b);
       });
       document.getElementById("pty-speak").addEventListener("click",()=>speakText(PARTY[i][0]));
+      set(0);
+    })();
+
+    const ZOO=[["Giraffe","🦒"],["Camel","🐪"],["Deer","🦌"],["Kangaroo","🦘"],["Hippo","🦛"],["Rhino","🦏"],["Crocodile","🐊"],["Penguin","🐧"]];
+    (function(){
+      let i=0; const em=document.getElementById("zoo-emoji"), nm=document.getElementById("zoo-name"), list=document.getElementById("zoo-list");
+      function set(idx){ i=idx; em.textContent=ZOO[i][1]; nm.textContent=ZOO[i][0]; }
+      ZOO.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("zoo-speak").addEventListener("click",()=>speakText(ZOO[i][0]));
+      set(0);
+    })();
+
+    function newPO(){
+      const more=Math.random()<.5;
+      const n=1+Math.floor(Math.random()*9);
+      const ans=more?n+1:Math.max(0,n-1);
+      document.getElementById("po-q").textContent="What is 1 "+(more?"more":"less")+" than "+n+"?";
+      document.getElementById("po-feedback").textContent="";
+      const opts=new Set([ans]);
+      while(opts.size<3) opts.add(Math.max(0,ans+[-2,-1,1,2][Math.floor(Math.random()*4)]));
+      const box=document.getElementById("po-choices"); box.innerHTML="";
+      [...opts].sort((a,b)=>a-b).forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=String(v);
+        b.style.minHeight="64px"; b.style.fontSize="1.5rem";
+        b.addEventListener("click",()=>{
+          if(v===ans){ document.getElementById("po-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(String(ans)); setTimeout(newPO,700); }
+          else document.getElementById("po-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText((more?"more":"less")+" than "+n);
+    }
+    document.querySelector('[data-go="plusone"]')?.addEventListener("click",()=>setTimeout(newPO,100));
+
+    const DIR=[["Up","⬆️"],["Down","⬇️"],["Left","⬅️"],["Right","➡️"],["In","📥"],["Out","📤"],["Near","📍"],["Far","🗺️"]];
+    (function(){
+      let i=0; const em=document.getElementById("dir-emoji"), nm=document.getElementById("dir-name"), list=document.getElementById("dir-list");
+      function set(idx){ i=idx; em.textContent=DIR[i][1]; nm.textContent=DIR[i][0]; }
+      DIR.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1]+" "+f[0];
+        b.style.cssText="min-height:52px;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("dir-speak").addEventListener("click",()=>speakText(DIR[i][0]));
       set(0);
     })();
     applyTheme();

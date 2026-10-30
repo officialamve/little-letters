@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v4.8)
+# Little Letters — feature map (Beta v4.9)
 
-**111 modes**
+**114 modes**
 
 - `actions`
 - `assamese`
@@ -21,6 +21,7 @@
 - `countdown`
 - `days`
 - `digraphs`
+- `directions`
 - `family`
 - `farm`
 - `feelings`
@@ -72,6 +73,7 @@
 - `pets`
 - `places`
 - `playhub`
+- `plusone`
 - `practice`
 - `punjabi`
 - `quiz`
@@ -113,6 +115,7 @@
 - `words`
 - `worldhub`
 - `write`
+- `zoo`
 
 Live:
 - https://officialamve.github.io/little-letters/
