@@ -1,9 +1,10 @@
-# Little Letters — feature map (Beta v5.2)
+# Little Letters — feature map (Beta v5.3)
 
-**121 modes**
+**123 modes**
 
 - `actions`
 - `assamese`
+- `beach`
 - `beforeafter`
 - `bengali`
 - `birds`
@@ -29,6 +30,7 @@
 - `farm`
 - `feelings`
 - `festivals`
+- `finish`
 - `firstsound`
 - `flash`
 - `food`

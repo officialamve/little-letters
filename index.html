@@ -113,6 +113,10 @@
     .nav button.on { color: var(--ink); font-weight: 700; }
     .nav button .n { font-size: 1.1rem; line-height: 1; }
     #lyrics { min-height: 3.2em; margin: 12px 0 0; font-size: 1.05rem; color: var(--ink); font-weight: 600; }
+  
+    #play-list, #world-list, #lang-list { max-height: none; }
+    #home-search:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+
   </style>
 </head>
 <body>
@@ -144,7 +148,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.2 · free DIY build · 121 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.3 · free DIY build · 123 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -260,6 +264,8 @@
       <button class="mode" type="button" data-go="pets" data-world-home="1"><div class="mode-icon">🐶</div><div class="mode-copy"><strong>Pets</strong><span>Dog · cat · fish</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="farm" data-world-home="1"><div class="mode-icon">🐄</div><div class="mode-copy"><strong>Farm</strong><span>Cow · hen · goat</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="ocean" data-world-home="1"><div class="mode-icon">🐠</div><div class="mode-copy"><strong>Ocean</strong><span>Fish · crab · whale</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="beach" data-world-home="1"><div class="mode-icon">🏖️</div><div class="mode-copy"><strong>Beach</strong><span>Sand · shell · wave</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="wild" data-world-home="1"><div class="mode-icon">🦁</div><div class="mode-copy"><strong>Wild</strong><span>Lion · tiger · elephant</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="zoo" data-world-home="1"><div class="mode-icon">🦒</div><div class="mode-copy"><strong>Zoo</strong><span>Giraffe · camel · deer</span></div><span class="chev">›</span></button>
 
@@ -356,6 +362,8 @@
 
       <button class="mode games" type="button" data-go="oddone" data-play-home="1"><div class="mode-icon">❓</div><div class="mode-copy"><strong>Odd one out</strong><span>Which doesn't belong?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="truefalse" data-play-home="1"><div class="mode-icon">✓✗</div><div class="mode-copy"><strong>True or false</strong><span>Kid facts</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="finish" data-play-home="1"><div class="mode-icon">…</div><div class="mode-copy"><strong>Finish it</strong><span>Complete the sentence</span></div><span class="chev">›</span></button>
+
       <button class="mode games" type="button" data-go="wear" data-play-home="1"><div class="mode-icon">☔</div><div class="mode-copy"><strong>What to wear</strong><span>Rain → raincoat</span></div><span class="chev">›</span></button>
 
 
@@ -1560,6 +1568,25 @@
         <button class="speak" type="button" id="eo-odd" style="min-width:120px;background:#DBEAFE;color:#1D4ED8">Odd</button>
       </div>
       <p id="eo-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="beach" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Beach</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="be-emoji" style="font-size:4rem">🏖️</p>
+      <p class="word" id="be-name" style="font-size:1.4rem;color:var(--ink)">Sand</p>
+      <button class="speak" type="button" id="be-speak">Hear</button>
+      <div id="be-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="finish" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Finish it</h2></div>
+    <div class="letter-stage">
+      <p class="muted" id="fin-q">I see with my…</p>
+      <div class="alpha" id="fin-choices" style="grid-template-columns:repeat(2,1fr);max-width:300px;margin:16px auto 0;gap:12px"></div>
+      <p id="fin-feedback" class="word"></p>
     </div>
   </section>
   <section id="parent" class="view">
@@ -4024,6 +4051,46 @@
     document.getElementById("eo-even")?.addEventListener("click",()=>eoCheck(true));
     document.getElementById("eo-odd")?.addEventListener("click",()=>eoCheck(false));
     document.querySelector('[data-go="evenodd"]')?.addEventListener("click",()=>setTimeout(newEO,100));
+
+    const BEACH=[["Sand","🏖️"],["Shell","🐚"],["Wave","🌊"],["Bucket","🪣"],["Umbrella","⛱️"],["Fish","🐠"],["Crab","🦀"],["Boat","⛵"]];
+    (function(){
+      let i=0; const em=document.getElementById("be-emoji"), nm=document.getElementById("be-name"), list=document.getElementById("be-list");
+      function set(idx){ i=idx; em.textContent=BEACH[i][1]; nm.textContent=BEACH[i][0]; }
+      BEACH.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("be-speak").addEventListener("click",()=>speakText(BEACH[i][0]));
+      set(0);
+    })();
+
+    const FIN=[
+      {q:"I see with my…", ans:"Eyes", opts:["Eyes","Ears"]},
+      {q:"I hear with my…", ans:"Ears", opts:["Ears","Nose"]},
+      {q:"A cow says…", ans:"Moo", opts:["Moo","Meow"]},
+      {q:"The sky is…", ans:"Blue", opts:["Blue","Green"]},
+      {q:"We sleep at…", ans:"Night", opts:["Night","Noon"]},
+      {q:"A baby is…", ans:"Small", opts:["Small","Tall"]}
+    ];
+    function newFin(){
+      const g=FIN[Math.floor(Math.random()*FIN.length)];
+      document.getElementById("fin-q").textContent=g.q;
+      document.getElementById("fin-feedback").textContent="";
+      const box=document.getElementById("fin-choices"); box.innerHTML="";
+      [...g.opts].sort(()=>Math.random()-.5).forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=v;
+        b.style.minHeight="64px";
+        b.addEventListener("click",()=>{
+          if(v===g.ans){ document.getElementById("fin-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(v); setTimeout(newFin,800); }
+          else document.getElementById("fin-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText(g.q);
+    }
+    document.querySelector('[data-go="finish"]')?.addEventListener("click",()=>setTimeout(newFin,100));
     applyTheme();
 
     const SHAPES=[
