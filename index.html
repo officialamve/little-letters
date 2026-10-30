@@ -148,7 +148,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.0 · free DIY build · 137 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.1 · free DIY build · 139 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -261,6 +261,8 @@
       <button class="mode" type="button" data-go="transport" data-world-home="1"><div class="mode-icon">🚗</div><div class="mode-copy"><strong>Vehicles</strong><span>Car · bus · train</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="family" data-world-home="1"><div class="mode-icon">👨‍👩‍👧</div><div class="mode-copy"><strong>Family</strong><span>Mama · papa · baby</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="school" data-world-home="1"><div class="mode-icon">✏️</div><div class="mode-copy"><strong>School</strong><span>Pencil · bag · book</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="library" data-world-home="1"><div class="mode-icon">📚</div><div class="mode-copy"><strong>Library</strong><span>Book · quiet · shelf</span></div><span class="chev">›</span></button>
+
       <button class="mode games" type="button" data-go="packbag" data-play-home="1"><div class="mode-icon">🎒</div><div class="mode-copy"><strong>Pack the bag</strong><span>What goes to school?</span></div><span class="chev">›</span></button>
 
       <button class="mode" type="button" data-go="homewords" data-world-home="1"><div class="mode-icon">🏠</div><div class="mode-copy"><strong>At home</strong><span>Bed · door · chair</span></div><span class="chev">›</span></button>
@@ -369,6 +371,8 @@
       <button class="mode games" type="button" data-go="rhyme" data-play-home="1"><div class="mode-icon">🎤</div><div class="mode-copy"><strong>Rhymes</strong><span>cat → hat</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="compare" data-play-home="1"><div class="mode-icon">◀▶</div><div class="mode-copy"><strong>Bigger?</strong><span>Compare sizes</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="fullempty" data-play-home="1"><div class="mode-icon">🥛</div><div class="mode-copy"><strong>Full or empty</strong><span>Glass of water</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="hotcold" data-play-home="1"><div class="mode-icon">🌡️</div><div class="mode-copy"><strong>Hot or cold</strong><span>Ice cream · soup</span></div><span class="chev">›</span></button>
+
 
       <button class="mode games" type="button" data-go="sortsize" data-play-home="1"><div class="mode-icon">▮▮▮</div><div class="mode-copy"><strong>Sort size</strong><span>Small → big</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="longshort" data-play-home="1"><div class="mode-icon">——</div><div class="mode-copy"><strong>Long or short</strong><span>Which is longer?</span></div><span class="chev">›</span></button>
@@ -1753,6 +1757,28 @@
       <div id="sent-words" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px"></div>
       <p id="sent-feedback" class="word"></p>
       <button class="speak" type="button" id="sent-again" style="margin-top:12px">New</button>
+    </div>
+  </section>
+
+  <section id="library" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Library</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="lib-emoji" style="font-size:4rem">📚</p>
+      <p class="word" id="lib-name" style="font-size:1.4rem;color:var(--ink)">Book</p>
+      <button class="speak" type="button" id="lib-speak">Hear</button>
+      <div id="lib-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="hotcold" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Hot or cold</h2></div>
+    <div class="letter-stage">
+      <p class="muted" id="hc-q">Ice cream is…</p>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:16px">
+        <button class="speak" type="button" id="hc-hot" style="min-width:120px;background:#FEE2E2;color:#B91C1C">Hot</button>
+        <button class="speak" type="button" id="hc-cold" style="min-width:120px;background:#DBEAFE;color:#1D4ED8">Cold</button>
+      </div>
+      <p id="hc-feedback" class="word"></p>
     </div>
   </section>
   <section id="parent" class="view">
@@ -4519,6 +4545,37 @@
     }
     document.getElementById("sent-again")?.addEventListener("click",newSent);
     document.querySelector('[data-go="sentence"]')?.addEventListener("click",()=>setTimeout(newSent,100));
+
+    const LIB=[["Book","📚"],["Shelf","🗄️"],["Quiet","🤫"],["Story","📖"],["Page","📄"],["Author","✍️"],["Library card","🪪"],["Return","↩️"]];
+    (function(){
+      let i=0; const em=document.getElementById("lib-emoji"), nm=document.getElementById("lib-name"), list=document.getElementById("lib-list");
+      function set(idx){ i=idx; em.textContent=LIB[i][1]; nm.textContent=LIB[i][0]; }
+      LIB.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("lib-speak").addEventListener("click",()=>speakText(LIB[i][0]));
+      set(0);
+    })();
+
+    const HC=[["Ice cream is…",false],["Soup is…",true],["Fire is…",true],["Snow is…",false],["Tea is…",true],["Ice is…",false],["The sun is…",true],["Fridge is…",false]];
+    let hcHot=true;
+    function newHC(){
+      const [q,hot]=HC[Math.floor(Math.random()*HC.length)];
+      hcHot=hot;
+      document.getElementById("hc-q").textContent=q;
+      document.getElementById("hc-feedback").textContent="";
+      speakText(q);
+    }
+    function hcCheck(hot){
+      if(hot===hcHot){ document.getElementById("hc-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText("Yes"); setTimeout(newHC,700); }
+      else document.getElementById("hc-feedback").textContent="Try again";
+    }
+    document.getElementById("hc-hot")?.addEventListener("click",()=>hcCheck(true));
+    document.getElementById("hc-cold")?.addEventListener("click",()=>hcCheck(false));
+    document.querySelector('[data-go="hotcold"]')?.addEventListener("click",()=>setTimeout(newHC,100));
     applyTheme();
 
     const SHAPES=[

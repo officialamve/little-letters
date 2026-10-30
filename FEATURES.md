@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v6.0)
+# Little Letters — feature map (Beta v6.1)
 
-**137 modes** — sixth major beta milestone.
+**139 modes**
 
 - `abcorder`
 - `actions`
@@ -47,6 +47,7 @@
 - `hindi`
 - `hindi-nums`
 - `homewords`
+- `hotcold`
 - `howmany`
 - `hygiene`
 - `india`
@@ -57,6 +58,7 @@
 - `letterhunt`
 - `letters`
 - `letterseq`
+- `library`
 - `longshort`
 - `magice`
 - `mail`
