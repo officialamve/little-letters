@@ -131,12 +131,15 @@
             <p style="max-width:20ch">Ready for today’s letters?</p>
           </div>
         </div>
-        <button class="speak" type="button" data-go="practice">Start today’s 5</button>
+        <div class="row" style="margin-top:4px">
+          <button class="speak" type="button" data-go="practice">Start today’s 5</button>
+          <button class="speak ghost" type="button" id="surprise-btn">Surprise</button>
+        </div>
         <div class="goal">
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v0.7 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v0.8 · free DIY build</p>
       </div>
     </div>
     <div class="modes">
@@ -172,6 +175,7 @@
 <button class="mode write" type="button" data-go="write"><div class="mode-icon">✎</div><div class="mode-copy"><strong>Write</strong><span>Trace letters</span></div><span class="chev">›</span></button>
       <button class="mode songs" type="button" data-go="songs"><div class="mode-icon">♪</div><div class="mode-copy"><strong>Songs</strong><span>Alphabet &amp; rhymes</span></div><span class="chev">›</span></button>
             <button class="mode games" type="button" data-go="quiz"><div class="mode-icon" style="background:#DBEAFE;color:#1D4ED8">?</div><div class="mode-copy"><strong>Quiz</strong><span>What letter starts…?</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="race"><div class="mode-icon" style="background:#FEE2E2;color:#B91C1C">⏱</div><div class="mode-copy"><strong>Speed ABC</strong><span>A to Z race</span></div><span class="chev">›</span></button>
 <button class="mode games" type="button" data-go="games"><div class="mode-icon">◇</div><div class="mode-copy"><strong>Games</strong><span>Tap what you hear</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="match"><div class="mode-icon" style="background:#FCE7F3;color:#BE185D">Aa</div><div class="mode-copy"><strong>Match</strong><span>Letter → word</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="memory"><div class="mode-icon">◉</div><div class="mode-copy"><strong>Memory</strong><span>Remember 3 letters</span></div><span class="chev">›</span></button>
@@ -416,6 +420,17 @@
       <p class="muted" id="quiz-score">Score 0</p>
     </div>
   </section>
+
+  <section id="race" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Speed ABC</h2></div>
+    <div class="letter-stage">
+      <p class="muted" id="race-status">Tap letters in order A→Z</p>
+      <p class="glyph" id="race-need" style="font-size:3.5rem">A</p>
+      <p class="word" id="race-time">0.0s</p>
+      <div class="alpha" id="race-board"></div>
+      <button class="speak" type="button" id="race-start" style="margin-top:14px">Start</button>
+    </div>
+  </section>
   <section id="parent" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
@@ -431,7 +446,7 @@
         <input type="checkbox" id="theme-toggle" /> Dark mode
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v0.7 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v0.8 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Install:</strong> in Chrome, menu → Add to Home Screen for an app-like icon.</p>
       <div class="row" style="justify-content:flex-start">
         <button class="speak ghost" type="button" id="export-progress">Export</button>
@@ -1201,6 +1216,53 @@
       document.getElementById("hn-speak").addEventListener("click",()=>speakText(HN[i][1].split("·")[0].trim()));
       if(a.children[0]) a.children[0].classList.add("active");
     })();
+
+    (function(){
+      let need=0, start=0, timer=null, running=false;
+      const board=document.getElementById("race-board");
+      const letters=Object.keys(WORDS);
+      letters.forEach((L,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=L;
+        b.addEventListener("click",()=>{
+          if(!running) return;
+          if(idx===need){
+            b.style.opacity=".35"; need++;
+            if(need>=26){
+              running=false; clearInterval(timer);
+              const secs=((Date.now()-start)/1000).toFixed(1);
+              document.getElementById("race-status").textContent="Finished!";
+              document.getElementById("race-time").textContent=secs+"s";
+              toast("ABC done · "+secs+"s"); state.games=(state.games||0)+1; save(); mascotWave("🏁");
+            } else {
+              document.getElementById("race-need").textContent=letters[need];
+            }
+          }
+        });
+        board.appendChild(b);
+      });
+      function tick(){ if(running) document.getElementById("race-time").textContent=((Date.now()-start)/1000).toFixed(1)+"s"; }
+      document.getElementById("race-start").addEventListener("click",()=>{
+        running=true; need=0; start=Date.now();
+        [...board.children].forEach(b=>b.style.opacity="1");
+        document.getElementById("race-need").textContent="A";
+        document.getElementById("race-status").textContent="Go!";
+        clearInterval(timer); timer=setInterval(tick,100);
+      });
+    })();
+
+    // keydown-letters
+    window.addEventListener("keydown",(e)=>{
+      if(!document.getElementById("letters").classList.contains("active")) return;
+      const k=e.key.toUpperCase();
+      if(WORDS[k]) select(k);
+      if(e.key===" "){ e.preventDefault(); speakText(current+". "+WORDS[current]); }
+    });
+
+    document.getElementById("surprise-btn")?.addEventListener("click",()=>{
+      const modes=["letters","games","quiz","colours","shapes","songs","numbers","words","memory","match"];
+      const m=modes[Math.floor(Math.random()*modes.length)];
+      show(m); toast("Surprise · "+m); mascotWave("✨");
+    });
     applyTheme();
 
     const SHAPES=[

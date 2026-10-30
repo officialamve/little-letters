@@ -1,4 +1,4 @@
-# Little Letters (Beta v0.7)
+# Little Letters (Beta v0.8)
 
 Calm, premium alphabet learning for kids — DIY PWA.
 
@@ -7,7 +7,7 @@ Calm, premium alphabet learning for kids — DIY PWA.
 - https://little-letters.onrender.com
 
 ## Features
-- English A–Z · Write · Songs · Games · Quiz · Memory · Match
+- English A–Z · Write · Songs · Games · Quiz · Memory · Match · Speed ABC
 - Numbers · Colours · Shapes · Words (days/animals/fruits/family)
 - Languages: Hindi (+numbers), Tamil, Kannada, Telugu, Malayalam, Bengali, Gujarati, Punjabi, Marathi, Odia, Assamese
 - Stickers · streaks · kid name · dark mode · export/import · PWA
