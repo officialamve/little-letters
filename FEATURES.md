@@ -1,6 +1,8 @@
-# Little Letters — feature map (Beta v3.6)
+# Little Letters — feature map (Beta v3.7)
 
-**79 modes**
+**81 modes**
+
+Home search + 81 activities.
 
 - `actions`
 - `assamese`
@@ -69,9 +71,11 @@
 - `songs`
 - `sortsize`
 - `spell`
+- `sports`
 - `stickers`
 - `stories`
 - `subtract`
+- `syllables`
 - `tamil`
 - `telugu`
 - `transport`

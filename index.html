@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v3.6 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v3.7 · free DIY build</p>
       </div>
     </div>
     <input id="home-search" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -235,6 +235,8 @@
       <button class="mode" type="button" data-go="helpers" data-world-home="1"><div class="mode-icon">👮</div><div class="mode-copy"><strong>Helpers</strong><span>Doctor · teacher · police</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="actions" data-world-home="1"><div class="mode-icon">🏃</div><div class="mode-copy"><strong>Actions</strong><span>Run · jump · sing</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="festivals" data-world-home="1"><div class="mode-icon">🪔</div><div class="mode-copy"><strong>Festivals</strong><span>Diwali · Holi · Eid</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="sports" data-world-home="1"><div class="mode-icon">🏏</div><div class="mode-copy"><strong>Sports</strong><span>Cricket · football · yoga</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -258,6 +260,8 @@
       <button class="mode games" type="button" data-go="vowels" data-play-home="1"><div class="mode-icon">AEI</div><div class="mode-copy"><strong>Vowel?</strong><span>A E I O U</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="firstsound" data-play-home="1"><div class="mode-icon">A…</div><div class="mode-copy"><strong>First sound</strong><span>Apple starts with?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="lastletter" data-play-home="1"><div class="mode-icon">…T</div><div class="mode-copy"><strong>Last letter</strong><span>Cat ends with?</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="syllables" data-play-home="1"><div class="mode-icon">👏</div><div class="mode-copy"><strong>Clap parts</strong><span>Ba-na-na = 3</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -1056,6 +1060,26 @@
       <div id="bug-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
     </div>
   </section>
+
+  <section id="sports" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Sports</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="sp-emoji" style="font-size:4rem">🏏</p>
+      <p class="word" id="sp-name" style="font-size:1.4rem;color:var(--ink)">Cricket</p>
+      <button class="speak" type="button" id="sp-speak">Hear</button>
+      <div id="sp-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="syllables" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Clap parts</h2></div>
+    <div class="letter-stage">
+      <p class="muted">How many parts?</p>
+      <p class="glyph" id="syl-word" style="font-size:2rem">Ba-na-na</p>
+      <div class="alpha" id="syl-choices" style="grid-template-columns:repeat(3,1fr);max-width:240px;margin:16px auto 0;gap:12px"></div>
+      <p id="syl-feedback" class="word"></p>
+    </div>
+  </section>
   <section id="parent" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
@@ -1071,7 +1095,7 @@
         <input type="checkbox" id="theme-toggle" /> Dark mode
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v3.6 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v3.7 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Age tip:</strong> ages 3–4 → Letters, Colours, Count. Ages 5–6 → Spell, Digraphs, Quiz, Stories.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Install:</strong> in Chrome, menu → Add to Home Screen for an app-like icon.</p>
       <div class="row" style="justify-content:flex-start">
@@ -2808,6 +2832,58 @@
       document.getElementById("bug-speak").addEventListener("click",()=>speakText(BUGS[i][0]));
       set(0);
     })();
+
+    (function(){
+      const inp=document.getElementById("home-search");
+      if(!inp) return;
+      inp.addEventListener("input",()=>{
+        const q=inp.value.trim().toLowerCase();
+        document.querySelectorAll("#home button.mode").forEach(btn=>{
+          if(btn.hasAttribute("data-lang-home")||btn.hasAttribute("data-play-home")||btn.hasAttribute("data-world-home")){
+            // hub-sourced hidden on home — leave alone
+            if(!q){ /* css hides */ return; }
+          }
+          const text=(btn.textContent||"").toLowerCase();
+          const hubHidden=btn.hasAttribute("data-lang-home")||btn.hasAttribute("data-play-home")||btn.hasAttribute("data-world-home");
+          if(hubHidden && !q){ btn.style.display=""; return; }
+          if(hubHidden){ btn.style.display=text.includes(q)?"flex":"none"; return; }
+          btn.style.display=!q||text.includes(q)?"flex":"none";
+        });
+      });
+    })();
+
+    const SPORTS=[["Cricket","🏏"],["Football","⚽"],["Hockey","🏑"],["Badminton","🏸"],["Tennis","🎾"],["Yoga","🧘"],["Running","🏃"],["Swimming","🏊"]];
+    (function(){
+      let i=0; const em=document.getElementById("sp-emoji"), nm=document.getElementById("sp-name"), list=document.getElementById("sp-list");
+      function set(idx){ i=idx; em.textContent=SPORTS[i][1]; nm.textContent=SPORTS[i][0]; }
+      SPORTS.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("sp-speak").addEventListener("click",()=>speakText(SPORTS[i][0]));
+      set(0);
+    })();
+
+    const SYL=[["Cat","Cat",1],["Apple","Ap-ple",2],["Banana","Ba-na-na",3],["Dog","Dog",1],["Tiger","Ti-ger",2],["Elephant","El-e-phant",3],["Sun","Sun",1],["Butterfly","But-ter-fly",3]];
+    function newSyl(){
+      const [speak,show,ans]=SYL[Math.floor(Math.random()*SYL.length)];
+      document.getElementById("syl-word").textContent=show;
+      document.getElementById("syl-feedback").textContent="";
+      const box=document.getElementById("syl-choices"); box.innerHTML="";
+      [1,2,3].forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=String(v);
+        b.style.minHeight="64px"; b.style.fontSize="1.5rem";
+        b.addEventListener("click",()=>{
+          if(v===ans){ document.getElementById("syl-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(speak); setTimeout(newSyl,800); }
+          else document.getElementById("syl-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText(speak);
+    }
+    document.querySelector('[data-go="syllables"]')?.addEventListener("click",()=>setTimeout(newSyl,100));
     applyTheme();
 
     const SHAPES=[
