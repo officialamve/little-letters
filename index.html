@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v3.2 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v3.3 · free DIY build</p>
       </div>
     </div>
     <input id="home-search" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -199,6 +199,8 @@
       <button class="mode" type="button" data-go="sight" data-world-home="1"><div class="mode-icon" style="background:#F3E8FF;color:#7E22CE">the</div><div class="mode-copy"><strong>Sight words</strong><span>the, and, you…</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="digraphs" data-world-home="1"><div class="mode-icon">ch</div><div class="mode-copy"><strong>Digraphs</strong><span>ch sh th wh</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="clock" data-world-home="1"><div class="mode-icon">🕒</div><div class="mode-copy"><strong>Clock</strong><span>Hours o'clock</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="days" data-world-home="1"><div class="mode-icon">📅</div><div class="mode-copy"><strong>Days</strong><span>Monday → Sunday</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="seasons" data-world-home="1"><div class="mode-icon">☀️</div><div class="mode-copy"><strong>Seasons</strong><span>India weather year</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="weather" data-world-home="1"><div class="mode-icon">☀️</div><div class="mode-copy"><strong>Weather</strong><span>Sun · rain · wind</span></div><span class="chev">›</span></button>
 
@@ -222,6 +224,8 @@
       <button class="mode" type="button" data-go="homewords" data-world-home="1"><div class="mode-icon">🏠</div><div class="mode-copy"><strong>At home</strong><span>Bed · door · chair</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="nature" data-world-home="1"><div class="mode-icon">🌳</div><div class="mode-copy"><strong>Nature</strong><span>Tree · river · flower</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="pets" data-world-home="1"><div class="mode-icon">🐶</div><div class="mode-copy"><strong>Pets</strong><span>Dog · cat · fish</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="helpers" data-world-home="1"><div class="mode-icon">👮</div><div class="mode-copy"><strong>Helpers</strong><span>Doctor · teacher · police</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -239,6 +243,8 @@
       <button class="mode games" type="button" data-go="letterseq" data-play-home="1"><div class="mode-icon">A B ?</div><div class="mode-copy"><strong>Letter next</strong><span>What comes after?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="beforeafter" data-play-home="1"><div class="mode-icon">A_C</div><div class="mode-copy"><strong>Before / after</strong><span>Letter neighbours</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="samediff" data-play-home="1"><div class="mode-icon">Aa?</div><div class="mode-copy"><strong>Same start?</strong><span>Cat · Cup</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="vowels" data-play-home="1"><div class="mode-icon">AEI</div><div class="mode-copy"><strong>Vowel?</strong><span>A E I O U</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -909,6 +915,38 @@
       <button class="speak" type="button" id="ss-again" style="margin-top:12px">Again</button>
     </div>
   </section>
+
+  <section id="helpers" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Helpers</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="help-emoji" style="font-size:4rem">👮</p>
+      <p class="word" id="help-name" style="font-size:1.4rem;color:var(--ink)">Police</p>
+      <button class="speak" type="button" id="help-speak">Hear</button>
+      <div id="help-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="vowels" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Vowel?</h2></div>
+    <div class="letter-stage">
+      <p class="muted">Is this a vowel?</p>
+      <p class="glyph" id="vow-letter" style="font-size:4rem">A</p>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:16px">
+        <button class="speak" type="button" id="vow-yes" style="min-width:120px">Vowel</button>
+        <button class="speak" type="button" id="vow-no" style="min-width:120px;background:#FEE2E2;color:#B91C1C">Consonant</button>
+      </div>
+      <p id="vow-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="days" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Days</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="day-name" style="font-size:2rem">Monday</p>
+      <button class="speak" type="button" id="day-speak">Hear</button>
+      <div class="alpha" id="day-list" style="grid-template-columns:repeat(1,1fr);max-width:260px;margin:16px auto 0;gap:8px"></div>
+    </div>
+  </section>
   <section id="parent" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
@@ -924,7 +962,7 @@
         <input type="checkbox" id="theme-toggle" /> Dark mode
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v3.2 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v3.3 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Age tip:</strong> ages 3–4 → Letters, Colours, Count. Ages 5–6 → Spell, Digraphs, Quiz, Stories.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Install:</strong> in Chrome, menu → Add to Home Screen for an app-like icon.</p>
       <div class="row" style="justify-content:flex-start">
@@ -2473,6 +2511,51 @@
     }
     document.getElementById("ss-again")?.addEventListener("click",newSortSize);
     document.querySelector('[data-go="sortsize"]')?.addEventListener("click",()=>setTimeout(newSortSize,100));
+
+    const HELPERS=[["Police","👮"],["Doctor","👨‍⚕️"],["Teacher","👩‍🏫"],["Chef","👨‍🍳"],["Farmer","👩‍🌾"],["Pilot","👨‍✈️"],["Firefighter","🧑‍🚒"],["Driver","🧑‍✈️"]];
+    (function(){
+      let i=0; const em=document.getElementById("help-emoji"), nm=document.getElementById("help-name"), list=document.getElementById("help-list");
+      function set(idx){ i=idx; em.textContent=HELPERS[i][1]; nm.textContent=HELPERS[i][0]; }
+      HELPERS.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("help-speak").addEventListener("click",()=>speakText(HELPERS[i][0]));
+      set(0);
+    })();
+
+    let vowAns=true, vowL="A";
+    function newVow(){
+      const isV=Math.random()<.45;
+      vowAns=isV;
+      if(isV) vowL="AEIOU"[Math.floor(Math.random()*5)];
+      else { do{ vowL=String.fromCharCode(65+Math.floor(Math.random()*26)); }while("AEIOU".includes(vowL)); }
+      document.getElementById("vow-letter").textContent=vowL;
+      document.getElementById("vow-feedback").textContent="";
+      speakText(vowL);
+    }
+    function vowCheck(v){
+      if(v===vowAns){ document.getElementById("vow-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText("Yes"); setTimeout(newVow,700); }
+      else document.getElementById("vow-feedback").textContent="Try again";
+    }
+    document.getElementById("vow-yes")?.addEventListener("click",()=>vowCheck(true));
+    document.getElementById("vow-no")?.addEventListener("click",()=>vowCheck(false));
+    document.querySelector('[data-go="vowels"]')?.addEventListener("click",()=>setTimeout(newVow,100));
+
+    const DAYS=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+    (function(){
+      let i=0; const nm=document.getElementById("day-name"), list=document.getElementById("day-list");
+      DAYS.forEach((d,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=d;
+        b.style.minHeight="48px";
+        b.addEventListener("click",()=>{ i=idx; nm.textContent=d; [...list.children].forEach((el,j)=>el.classList.toggle("active",j===idx)); speakText(d); });
+        list.appendChild(b);
+      });
+      document.getElementById("day-speak").addEventListener("click",()=>speakText(DAYS[i]));
+      if(list.children[0]) list.children[0].classList.add("active");
+    })();
     applyTheme();
 
     const SHAPES=[
