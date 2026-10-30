@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v4.0)
+# Little Letters — feature map (Beta v4.1)
 
-**89 modes** — milestone build.
+**92 modes**
 
 - `actions`
 - `assamese`
@@ -47,6 +47,7 @@
 - `memory`
 - `missing`
 - `months`
+- `music`
 - `nature`
 - `numbers`
 - `numcmp`
@@ -83,7 +84,9 @@
 - `tamil`
 - `telugu`
 - `tod`
+- `tools`
 - `transport`
+- `truefalse`
 - `veggies`
 - `vowels`
 - `weather`

@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.0 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.1 · free DIY build</p>
       </div>
     </div>
     <input id="home-search" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -233,6 +233,8 @@
       <button class="mode" type="button" data-go="school" data-world-home="1"><div class="mode-icon">✏️</div><div class="mode-copy"><strong>School</strong><span>Pencil · bag · book</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="homewords" data-world-home="1"><div class="mode-icon">🏠</div><div class="mode-copy"><strong>At home</strong><span>Bed · door · chair</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="kitchen" data-world-home="1"><div class="mode-icon">🥄</div><div class="mode-copy"><strong>Kitchen</strong><span>Spoon · plate · cup</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="tools" data-world-home="1"><div class="mode-icon">🔨</div><div class="mode-copy"><strong>Tools</strong><span>Hammer · brush · scissors</span></div><span class="chev">›</span></button>
+
 
       <button class="mode" type="button" data-go="nature" data-world-home="1"><div class="mode-icon">🌳</div><div class="mode-copy"><strong>Nature</strong><span>Tree · river · flower</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="pets" data-world-home="1"><div class="mode-icon">🐶</div><div class="mode-copy"><strong>Pets</strong><span>Dog · cat · fish</span></div><span class="chev">›</span></button>
@@ -248,6 +250,8 @@
       <button class="mode" type="button" data-go="actions" data-world-home="1"><div class="mode-icon">🏃</div><div class="mode-copy"><strong>Actions</strong><span>Run · jump · sing</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="festivals" data-world-home="1"><div class="mode-icon">🪔</div><div class="mode-copy"><strong>Festivals</strong><span>Diwali · Holi · Eid</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="sports" data-world-home="1"><div class="mode-icon">🏏</div><div class="mode-copy"><strong>Sports</strong><span>Cricket · football · yoga</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="music" data-world-home="1"><div class="mode-icon">🥁</div><div class="mode-copy"><strong>Music</strong><span>Drum · flute · guitar</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -295,6 +299,8 @@
 
 
       <button class="mode games" type="button" data-go="oddone" data-play-home="1"><div class="mode-icon">❓</div><div class="mode-copy"><strong>Odd one out</strong><span>Which doesn't belong?</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="truefalse" data-play-home="1"><div class="mode-icon">✓✗</div><div class="mode-copy"><strong>True or false</strong><span>Kid facts</span></div><span class="chev">›</span></button>
+
       <button class="mode games" type="button" data-go="cardmatch" data-play-home="1"><div class="mode-icon">🃏</div><div class="mode-copy"><strong>Pairs</strong><span>Match the cards</span></div><span class="chev">›</span></button>
 
 
@@ -1176,6 +1182,38 @@
       <p class="glyph" id="nw-num" style="font-size:4rem">5</p>
       <div class="alpha" id="nw-choices" style="grid-template-columns:repeat(2,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
       <p id="nw-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="tools" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Tools</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="tl-emoji" style="font-size:4rem">🔨</p>
+      <p class="word" id="tl-name" style="font-size:1.4rem;color:var(--ink)">Hammer</p>
+      <button class="speak" type="button" id="tl-speak">Hear</button>
+      <div id="tl-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="music" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Music</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="mu-emoji" style="font-size:4rem">🥁</p>
+      <p class="word" id="mu-name" style="font-size:1.4rem;color:var(--ink)">Drum</p>
+      <button class="speak" type="button" id="mu-speak">Hear</button>
+      <div id="mu-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="truefalse" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>True or false</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="tf-q" style="font-size:1.35rem;line-height:1.4;max-width:300px;margin:0 auto">A cow says moo</p>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:20px">
+        <button class="speak" type="button" id="tf-true" style="min-width:120px">True</button>
+        <button class="speak" type="button" id="tf-false" style="min-width:120px;background:#FEE2E2;color:#B91C1C">False</button>
+      </div>
+      <p id="tf-feedback" class="word"></p>
     </div>
   </section>
   <section id="parent" class="view">
@@ -3105,6 +3143,51 @@
       speakText(String(n));
     }
     document.querySelector('[data-go="numwords"]')?.addEventListener("click",()=>setTimeout(newNW,100));
+
+    const TOOLS=[["Hammer","🔨"],["Brush","🖌️"],["Scissors","✂️"],["Wrench","🔧"],["Saw","🪚"],["Screwdriver","🪛"],["Ladder","🪜"],["Bucket","🪣"]];
+    (function(){
+      let i=0; const em=document.getElementById("tl-emoji"), nm=document.getElementById("tl-name"), list=document.getElementById("tl-list");
+      function set(idx){ i=idx; em.textContent=TOOLS[i][1]; nm.textContent=TOOLS[i][0]; }
+      TOOLS.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("tl-speak").addEventListener("click",()=>speakText(TOOLS[i][0]));
+      set(0);
+    })();
+
+    const MUS=[["Drum","🥁"],["Flute","🪈"],["Guitar","🎸"],["Piano","🎹"],["Violin","🎻"],["Tabla","🪘"],["Bell","🔔"],["Trumpet","🎺"]];
+    (function(){
+      let i=0; const em=document.getElementById("mu-emoji"), nm=document.getElementById("mu-name"), list=document.getElementById("mu-list");
+      function set(idx){ i=idx; em.textContent=MUS[i][1]; nm.textContent=MUS[i][0]; }
+      MUS.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("mu-speak").addEventListener("click",()=>speakText(MUS[i][0]));
+      set(0);
+    })();
+
+    const TF=[["A cow says moo",true],["Fish live in trees",false],["The sun is hot",true],["Cats say woof",false],["We sleep at night",true],["Ice is hot",false],["Birds can fly",true],["Cars drink milk",false]];
+    let tfAns=true;
+    function newTF(){
+      const [q,a]=TF[Math.floor(Math.random()*TF.length)];
+      tfAns=a;
+      document.getElementById("tf-q").textContent=q;
+      document.getElementById("tf-feedback").textContent="";
+      speakText(q);
+    }
+    function tfCheck(v){
+      if(v===tfAns){ document.getElementById("tf-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText("Yes"); setTimeout(newTF,700); }
+      else document.getElementById("tf-feedback").textContent="Try again";
+    }
+    document.getElementById("tf-true")?.addEventListener("click",()=>tfCheck(true));
+    document.getElementById("tf-false")?.addEventListener("click",()=>tfCheck(false));
+    document.querySelector('[data-go="truefalse"]')?.addEventListener("click",()=>setTimeout(newTF,100));
     applyTheme();
 
     const SHAPES=[
