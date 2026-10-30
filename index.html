@@ -143,13 +143,15 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v1.8 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v1.9 · free DIY build</p>
       </div>
     </div>
     <input id="home-search" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
     <div class="modes">
       <div class="home-sec">Core</div>
       <button class="mode" type="button" data-go="letters"><div class="mode-icon">Aa</div><div class="mode-copy"><strong>Letters</strong><span>English A–Z</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="flash"><div class="mode-icon">⧉</div><div class="mode-copy"><strong>Flashcards</strong><span>Tap to flip</span></div><span class="chev">›</span></button>
+
       <button class="mode hindi" type="button" data-go="hindi" data-lang-home="1"><div class="mode-icon">अ</div><div class="mode-copy"><strong>Hindi</strong><span>स्वर + व्यंजन</span></div><span class="chev">›</span></button>
       <button class="mode hindi" type="button" data-go="tamil" data-lang-home="1"><div class="mode-icon" style="background:#ECFDF5;color:#047857">அ</div><div class="mode-copy"><strong>Tamil</strong><span>உயிர் எழுத்துகள்</span></div><span class="chev">›</span></button>
       <button class="mode hindi" type="button" data-go="malayalam" data-lang-home="1"><div class="mode-icon" style="background:#FDF2F8;color:#BE185D">അ</div><div class="mode-copy"><strong>Malayalam</strong><span>സ്വരങ്ങൾ</span></div><span class="chev">›</span></button>
@@ -617,6 +619,20 @@
       <p id="spell-feedback" class="word"></p>
     </div>
   </section>
+
+  <section id="flash" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Flashcards</h2></div>
+    <div class="letter-stage" id="flash-card" style="cursor:pointer;min-height:220px;display:flex;flex-direction:column;justify-content:center">
+      <p class="muted" id="flash-hint">Tap card to flip</p>
+      <p class="glyph" id="flash-front" style="font-size:4.5rem">A</p>
+      <p class="word" id="flash-back" style="display:none;font-size:1.4rem;color:var(--ink)">🍎 Apple</p>
+    </div>
+    <div class="row">
+      <button class="speak ghost" type="button" id="flash-prev">Prev</button>
+      <button class="speak" type="button" id="flash-speak">Hear</button>
+      <button class="speak" type="button" id="flash-next">Next</button>
+    </div>
+  </section>
   <section id="parent" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
@@ -632,7 +648,8 @@
         <input type="checkbox" id="theme-toggle" /> Dark mode
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v1.8 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v1.9 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px"><strong>Age tip:</strong> ages 3–4 → Letters, Colours, Count. Ages 5–6 → Spell, Digraphs, Quiz, Stories.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Install:</strong> in Chrome, menu → Add to Home Screen for an app-like icon.</p>
       <div class="row" style="justify-content:flex-start">
         <button class="speak ghost" type="button" id="share-progress">Share text</button>
@@ -1749,6 +1766,23 @@
       else document.getElementById("spell-feedback").textContent="Try again";
     });
     document.querySelector('[data-go="spell"]')?.addEventListener("click",()=>{ spellI=Math.floor(Math.random()*SPELL.length); showSpell(); });
+
+    let flashI=0, flipped=false;
+    const flashLetters=Object.keys(WORDS);
+    function showFlash(reset){
+      if(reset) flipped=false;
+      const L=flashLetters[flashI];
+      document.getElementById("flash-front").style.display=flipped?"none":"block";
+      document.getElementById("flash-back").style.display=flipped?"block":"none";
+      document.getElementById("flash-front").textContent=L;
+      document.getElementById("flash-back").textContent=(EMOJI[L]||"")+" "+WORDS[L];
+      document.getElementById("flash-hint").textContent=flipped?"Word side":"Tap card to flip";
+    }
+    document.getElementById("flash-card").addEventListener("click",()=>{ flipped=!flipped; showFlash(); if(flipped) speakText(flashLetters[flashI]+". "+WORDS[flashLetters[flashI]]); });
+    document.getElementById("flash-prev").addEventListener("click",()=>{ flashI=(flashI+25)%26; showFlash(true); });
+    document.getElementById("flash-next").addEventListener("click",()=>{ flashI=(flashI+1)%26; showFlash(true); });
+    document.getElementById("flash-speak").addEventListener("click",()=>speakText(flashLetters[flashI]+". "+WORDS[flashLetters[flashI]]));
+    document.querySelector('[data-go="flash"]')?.addEventListener("click",()=>{ flashI=0; showFlash(true); });
     applyTheme();
 
     const SHAPES=[
