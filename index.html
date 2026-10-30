@@ -148,7 +148,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.7 · free DIY build · 131 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.8 · free DIY build · 133 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -262,6 +262,8 @@
       <button class="mode" type="button" data-go="homewords" data-world-home="1"><div class="mode-icon">🏠</div><div class="mode-copy"><strong>At home</strong><span>Bed · door · chair</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="kitchen" data-world-home="1"><div class="mode-icon">🥄</div><div class="mode-copy"><strong>Kitchen</strong><span>Spoon · plate · cup</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="tools" data-world-home="1"><div class="mode-icon">🔨</div><div class="mode-copy"><strong>Tools</strong><span>Hammer · brush · scissors</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="tech" data-world-home="1"><div class="mode-icon">💻</div><div class="mode-copy"><strong>Tech</strong><span>Phone · laptop · wifi</span></div><span class="chev">›</span></button>
+
 
 
       <button class="mode" type="button" data-go="nature" data-world-home="1"><div class="mode-icon">🌳</div><div class="mode-copy"><strong>Nature</strong><span>Tree · river · flower</span></div><span class="chev">›</span></button>
@@ -360,6 +362,8 @@
 
       <button class="mode games" type="button" data-go="rhyme" data-play-home="1"><div class="mode-icon">🎤</div><div class="mode-copy"><strong>Rhymes</strong><span>cat → hat</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="compare" data-play-home="1"><div class="mode-icon">◀▶</div><div class="mode-copy"><strong>Bigger?</strong><span>Compare sizes</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="fullempty" data-play-home="1"><div class="mode-icon">🥛</div><div class="mode-copy"><strong>Full or empty</strong><span>Glass of water</span></div><span class="chev">›</span></button>
+
       <button class="mode games" type="button" data-go="sortsize" data-play-home="1"><div class="mode-icon">▮▮▮</div><div class="mode-copy"><strong>Sort size</strong><span>Small → big</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="numcmp" data-play-home="1"><div class="mode-icon">7>3</div><div class="mode-copy"><strong>Bigger number</strong><span>Compare 1–20</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="numwords" data-play-home="1"><div class="mode-icon">5→five</div><div class="mode-copy"><strong>Number words</strong><span>5 means five</span></div><span class="chev">›</span></button>
@@ -1679,6 +1683,28 @@
       <div id="ao-row" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:16px;max-width:300px;margin-left:auto;margin-right:auto"></div>
       <p id="ao-feedback" class="word"></p>
       <button class="speak" type="button" id="ao-again" style="margin-top:12px">Again</button>
+    </div>
+  </section>
+
+  <section id="tech" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Tech</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="tech-emoji" style="font-size:4rem">💻</p>
+      <p class="word" id="tech-name" style="font-size:1.4rem;color:var(--ink)">Laptop</p>
+      <button class="speak" type="button" id="tech-speak">Hear</button>
+      <div id="tech-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="fullempty" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Full or empty</h2></div>
+    <div class="letter-stage">
+      <p class="muted" id="fe-q">A glass with water is…</p>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:16px">
+        <button class="speak" type="button" id="fe-full" style="min-width:120px">Full</button>
+        <button class="speak" type="button" id="fe-empty" style="min-width:120px;background:#FEE2E2;color:#B91C1C">Empty</button>
+      </div>
+      <p id="fe-feedback" class="word"></p>
     </div>
   </section>
   <section id="parent" class="view">
@@ -4338,6 +4364,43 @@
     }
     document.getElementById("ao-again")?.addEventListener("click",newAO);
     document.querySelector('[data-go="abcorder"]')?.addEventListener("click",()=>setTimeout(newAO,100));
+
+    const TECH=[["Laptop","💻"],["Phone","📱"],["Tablet","📲"],["Camera","📷"],["Headphones","🎧"],["Wifi","📶"],["Battery","🔋"],["Robot","🤖"]];
+    (function(){
+      let i=0; const em=document.getElementById("tech-emoji"), nm=document.getElementById("tech-name"), list=document.getElementById("tech-list");
+      function set(idx){ i=idx; em.textContent=TECH[i][1]; nm.textContent=TECH[i][0]; }
+      TECH.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("tech-speak").addEventListener("click",()=>speakText(TECH[i][0]));
+      set(0);
+    })();
+
+    const FE=[
+      {q:"A glass with water is…", full:true},
+      {q:"An empty bottle is…", full:false},
+      {q:"A bag packed with books is…", full:true},
+      {q:"A plate with no food is…", full:false},
+      {q:"A cup filled to the top is…", full:true}
+    ];
+    let feFull=true;
+    function newFE(){
+      const g=FE[Math.floor(Math.random()*FE.length)];
+      feFull=g.full;
+      document.getElementById("fe-q").textContent=g.q;
+      document.getElementById("fe-feedback").textContent="";
+      speakText(g.q);
+    }
+    function feCheck(full){
+      if(full===feFull){ document.getElementById("fe-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText("Yes"); setTimeout(newFE,700); }
+      else document.getElementById("fe-feedback").textContent="Try again";
+    }
+    document.getElementById("fe-full")?.addEventListener("click",()=>feCheck(true));
+    document.getElementById("fe-empty")?.addEventListener("click",()=>feCheck(false));
+    document.querySelector('[data-go="fullempty"]')?.addEventListener("click",()=>setTimeout(newFE,100));
     applyTheme();
 
     const SHAPES=[

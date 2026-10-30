@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v5.7)
+# Little Letters — feature map (Beta v5.8)
 
-**131 modes**
+**133 modes**
 
 - `abcorder`
 - `actions`
@@ -37,6 +37,7 @@
 - `flash`
 - `food`
 - `fruits`
+- `fullempty`
 - `games`
 - `garden`
 - `gujarati`
@@ -116,6 +117,7 @@
 - `subtract`
 - `syllables`
 - `tamil`
+- `tech`
 - `telugu`
 - `tod`
 - `tools`
