@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v3.8)
+# Little Letters — feature map (Beta v3.9)
 
-**83 modes**
+**86 modes**
 
 - `actions`
 - `assamese`
@@ -19,6 +19,7 @@
 - `days`
 - `digraphs`
 - `family`
+- `farm`
 - `feelings`
 - `festivals`
 - `firstsound`
@@ -48,6 +49,7 @@
 - `nature`
 - `numbers`
 - `numcmp`
+- `ocean`
 - `oddone`
 - `odia`
 - `opposites`
@@ -78,6 +80,7 @@
 - `syllables`
 - `tamil`
 - `telugu`
+- `tod`
 - `transport`
 - `veggies`
 - `vowels`
