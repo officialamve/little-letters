@@ -1,4 +1,4 @@
-# Little Letters (Beta v0.3)
+# Little Letters (Beta v0.4)
 
 Calm, premium alphabet learning for kids — DIY, offline-friendly PWA.
 
@@ -10,7 +10,9 @@ Calm, premium alphabet learning for kids — DIY, offline-friendly PWA.
 - English A–Z · today’s 5 · a/A toggle · ★ learn toasts
 - Languages hub: Hindi, Tamil, Kannada, Telugu, Malayalam, Bengali, Gujarati, Punjabi, Marathi, Odia, Assamese
 - Write · print sheet · songs · hear-game · match · memory
-- Soft colourful home + reacting mascot
+- Soft colourful home + reacting mascot · kid name
+- Songs with soft beat + lyric highlight
+- Today’s goal progress bar
 - Write “Looks good” feedback
 - Streaks · export/import progress · sound toggle · PWA
 

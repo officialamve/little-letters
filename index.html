@@ -68,6 +68,10 @@
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     .stars { color: #FBBF24; letter-spacing: 2px; }
+    .goal { margin: 14px 0 0; }
+    .goal-top { display:flex; justify-content:space-between; font-size:.78rem; color:var(--ink-soft); margin-bottom:6px; }
+    .goal-bar { height:10px; background:rgba(28,25,23,.08); border-radius:999px; overflow:hidden; }
+    .goal-bar > i { display:block; height:100%; width:0%; background:linear-gradient(90deg,#0F766E,#2EC4B6); border-radius:999px; transition:width .35s ease; }
     .top { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
     .back, .chip { border: 1px solid var(--line); background: var(--bg-elev); border-radius: 14px; cursor: pointer; color: var(--ink); font: inherit; }
     .back { width: 42px; height: 42px; font-size: 1.1rem; }
@@ -116,12 +120,16 @@
         <div class="mascot-row">
           <div class="mascot-face" id="mascot" aria-hidden="true">🦊</div>
           <div>
-            <h2 style="font-size:1.45rem">Hi, learner!</h2>
+            <h2 style="font-size:1.45rem" id="greet-title">Hi, learner!</h2>
             <p style="max-width:20ch">Ready for today’s letters?</p>
           </div>
         </div>
         <button class="speak" type="button" data-go="practice">Start today’s 5</button>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v0.3 · free DIY build</p>
+        <div class="goal">
+          <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
+          <div class="goal-bar"><i id="goal-fill"></i></div>
+        </div>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v0.4 · free DIY build</p>
       </div>
     </div>
     <div class="modes">
@@ -262,6 +270,7 @@
       <button class="song" type="button" data-song="abc"><div class="ico">A</div><div><strong>ABC song</strong><span>A to Z, slow &amp; clear</span></div></button>
       <button class="song" type="button" data-song="vowels"><div class="ico">AE</div><div><strong>Vowels</strong><span>A E I O U</span></div></button>
       <button class="song" type="button" data-song="mango"><div class="ico">M</div><div><strong>Mango rhyme</strong><span>Simple India-friendly words</span></div></button>
+      <button class="song" type="button" data-song="twinkle"><div class="ico">✦</div><div><strong>Twinkle letters</strong><span>A B C soft rhyme</span></div></button>
     </div>
   </section>
 
@@ -322,13 +331,16 @@
   <section id="parent" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
+      <p class="soon-title">Child</p>
+      <label class="muted" style="display:block;margin-bottom:6px">Name</label>
+      <input id="kid-name" type="text" maxlength="24" placeholder="e.g. Aisha" style="width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--line);font:inherit;margin-bottom:16px;background:var(--bg)" />
       <p class="soon-title">On this device</p>
       <p class="muted" style="margin-bottom:14px">Progress stays in the browser. Double-tap the stats on Home to open this screen.</p>
       <label style="display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:.95rem">
         <input type="checkbox" id="sound-toggle" /> Sound on
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v0.3 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v0.4 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
       <div class="row" style="justify-content:flex-start">
         <button class="speak ghost" type="button" id="export-progress">Export</button>
         <button class="speak ghost" type="button" id="import-progress">Import</button>
@@ -378,7 +390,7 @@
     let songTimer = null;
 
     function load() {
-      try { return Object.assign({learned:{}, streak:0, lastDay:"", games:0}, JSON.parse(localStorage.getItem(STORE)||"{}")); }
+      try { return Object.assign({learned:{}, streak:0, lastDay:"", games:0, kidName:"", soundEnabled:true}, JSON.parse(localStorage.getItem(STORE)||"{}")); }
       catch { return {learned:{}, streak:0, lastDay:"", games:0}; }
     }
     function save() { localStorage.setItem(STORE, JSON.stringify(state)); refreshStats(); }
@@ -397,6 +409,10 @@
       document.getElementById("stat-streak").textContent = state.streak||0;
       document.getElementById("stat-games").textContent = state.games||0;
       [...alpha.children].forEach((el) => el.classList.toggle("learned", !!state.learned[el.textContent]));
+      const n=Object.keys(state.learned||{}).length; const goal=5; const v=Math.min(n,goal);
+      const fill=document.getElementById("goal-fill"); const lab=document.getElementById("goal-label");
+      if(fill) fill.style.width=(v/goal*100)+"%";
+      if(lab) lab.textContent=v+" / "+goal+" letters";
     }
 
     function show(id) {
@@ -508,7 +524,8 @@
     const SONGS = {
       abc: { title: "ABC song", lines: "A B C D E F G. H I J K L M N O P. Q R S. T U V. W X. Y and Z. Now I know my A B C." },
       vowels: { title: "Vowels", lines: "A E I O U. A E I O U. These are vowels. A E I O U." },
-      mango: { title: "Mango rhyme", lines: "M is for Mango. S is for Sun. T is for Tiger. Learning is fun." }
+      mango: { title: "Mango rhyme", lines: "M is for Mango. S is for Sun. T is for Tiger. Learning is fun." },
+      twinkle: { title: "Twinkle letters", lines: "A is for Apple shining bright. B is for Ball in the light. C is for Cat soft and white." }
     };
     let activeSong = SONGS.abc;
     document.querySelectorAll("[data-song]").forEach((btn) => {
@@ -518,10 +535,41 @@
         document.getElementById("lyrics").textContent = activeSong.lines;
       });
     });
-    document.getElementById("song-play").addEventListener("click", () => {
-      speakText(activeSong.lines, 0.85); touchStreak();
-    });
-    document.getElementById("song-stop").addEventListener("click", () => window.speechSynthesis && speechSynthesis.cancel());
+    let songAbort=false;
+    async function playBeatSong(){
+      songAbort=false; touchStreak();
+      const parts=activeSong.lines.split(/(?<=[.!?])\s+/).filter(Boolean);
+      const lyric=document.getElementById("lyrics");
+      const AudioCtx=window.AudioContext||window.webkitAudioContext;
+      let ctx=null;
+      try{ ctx=AudioCtx? new AudioCtx():null; }catch(e){}
+      function ding(){
+        if(!ctx||!state.soundEnabled) return;
+        const o=ctx.createOscillator(); const g=ctx.createGain();
+        o.type="sine"; o.frequency.value=880;
+        g.gain.value=0.0001; o.connect(g); g.connect(ctx.destination);
+        const t=ctx.currentTime;
+        g.gain.exponentialRampToValueAtTime(0.08, t+0.01);
+        g.gain.exponentialRampToValueAtTime(0.0001, t+0.18);
+        o.start(t); o.stop(t+0.2);
+      }
+      for(const line of parts){
+        if(songAbort) break;
+        ding();
+        if(lyric) lyric.textContent=line;
+        await new Promise((resolve)=>{
+          if(!state.soundEnabled||!window.speechSynthesis){ setTimeout(resolve, 700); return; }
+          speechSynthesis.cancel();
+          const u=new SpeechSynthesisUtterance(line); u.rate=0.88; u.pitch=1.08;
+          u.onend=resolve; u.onerror=resolve; speechSynthesis.speak(u);
+        });
+        await new Promise(r=>setTimeout(r, 220));
+      }
+      if(!songAbort && lyric) lyric.textContent=activeSong.lines;
+      mascotWave("🎵");
+    }
+    document.getElementById("song-play").addEventListener("click", () => { songAbort=false; playBeatSong(); });
+    document.getElementById("song-stop").addEventListener("click", () => { songAbort=true; window.speechSynthesis && speechSynthesis.cancel(); });
 
     // Game
     const gameChoices = document.getElementById("game-choices");
@@ -911,6 +959,19 @@
       document.getElementById("assamese-speak").addEventListener("click",()=>speakText(ASSAMESE_LETTERS[idx].ch));
       if(alpha.children[0]) alpha.children[0].classList.add("active");
     })();
+
+    function refreshGreeting(){
+      const n=(state.kidName||"").trim();
+      const el=document.getElementById("greet-title");
+      if(el) el.textContent = n ? ("Hi, "+n+"!") : "Hi, learner!";
+      const input=document.getElementById("kid-name");
+      if(input && document.activeElement!==input) input.value=n;
+    }
+    document.getElementById("kid-name").addEventListener("change", ()=>{
+      state.kidName=document.getElementById("kid-name").value.trim().slice(0,24); save(); refreshGreeting(); toast(state.kidName?("Saved · Hi, "+state.kidName+"!"):"Name cleared");
+    });
+    document.getElementById("kid-name").addEventListener("keydown", (e)=>{ if(e.key==="Enter"){ e.target.blur(); }});
+    refreshGreeting();
     refreshStats(); touchStreak();
   </script>
 </body>
