@@ -1,7 +1,8 @@
-# Little Letters — feature map (Beta v3.3)
+# Little Letters — feature map (Beta v3.4)
 
-**70 modes**
+**73 modes**
 
+- `actions`
 - `assamese`
 - `beforeafter`
 - `bengali`
@@ -36,8 +37,10 @@
 - `math`
 - `memory`
 - `missing`
+- `months`
 - `nature`
 - `numbers`
+- `numcmp`
 - `oddone`
 - `odia`
 - `opposites`
