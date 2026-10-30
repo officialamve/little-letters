@@ -148,7 +148,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.3 · free DIY build · 143 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.4 · free DIY build · 145 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -261,6 +261,8 @@
 
 
       <button class="mode" type="button" data-go="transport" data-world-home="1"><div class="mode-icon">🚗</div><div class="mode-copy"><strong>Vehicles</strong><span>Car · bus · train</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="travel" data-world-home="1"><div class="mode-icon">🧳</div><div class="mode-copy"><strong>Travel</strong><span>Bag · ticket · map</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="family" data-world-home="1"><div class="mode-icon">👨‍👩‍👧</div><div class="mode-copy"><strong>Family</strong><span>Mama · papa · baby</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="school" data-world-home="1"><div class="mode-icon">✏️</div><div class="mode-copy"><strong>School</strong><span>Pencil · bag · book</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="library" data-world-home="1"><div class="mode-icon">📚</div><div class="mode-copy"><strong>Library</strong><span>Book · quiet · shelf</span></div><span class="chev">›</span></button>
@@ -349,6 +351,8 @@
       <button class="mode games" type="button" data-go="subtract" data-play-home="1"><div class="mode-icon">5−2</div><div class="mode-copy"><strong>Take away</strong><span>Subtract within 10</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="skip" data-play-home="1"><div class="mode-icon">2 4 6</div><div class="mode-copy"><strong>Skip count</strong><span>2s · 5s · 10s</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="tens" data-play-home="1"><div class="mode-icon">10s</div><div class="mode-copy"><strong>Count by 10s</strong><span>10 20 30…</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="missnum" data-play-home="1"><div class="mode-icon">3?5</div><div class="mode-copy"><strong>Missing number</strong><span>3, ?, 5</span></div><span class="chev">›</span></button>
+
 
       <button class="mode games" type="button" data-go="letterseq" data-play-home="1"><div class="mode-icon">A B ?</div><div class="mode-copy"><strong>Letter next</strong><span>What comes after?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="beforeafter" data-play-home="1"><div class="mode-icon">A_C</div><div class="mode-copy"><strong>Before / after</strong><span>Letter neighbours</span></div><span class="chev">›</span></button>
@@ -1829,6 +1833,26 @@
         <button class="speak" type="button" id="yn-no" style="min-width:120px;background:#FEE2E2;color:#B91C1C">No</button>
       </div>
       <p id="yn-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="travel" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Travel</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="tv-emoji" style="font-size:4rem">🧳</p>
+      <p class="word" id="tv-name" style="font-size:1.4rem;color:var(--ink)">Suitcase</p>
+      <button class="speak" type="button" id="tv-speak">Hear</button>
+      <div id="tv-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="missnum" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Missing number</h2></div>
+    <div class="letter-stage">
+      <p class="muted">What is missing?</p>
+      <p class="glyph" id="mn-seq" style="font-size:2rem">3, ?, 5</p>
+      <div class="alpha" id="mn-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
+      <p id="mn-feedback" class="word"></p>
     </div>
   </section>
   <section id="parent" class="view">
@@ -4693,6 +4717,41 @@
     document.getElementById("yn-yes")?.addEventListener("click",()=>ynCheck(true));
     document.getElementById("yn-no")?.addEventListener("click",()=>ynCheck(false));
     document.querySelector('[data-go="yesno"]')?.addEventListener("click",()=>setTimeout(newYN,100));
+
+    const TVL=[["Suitcase","🧳"],["Ticket","🎫"],["Map","🗺️"],["Passport","🛂"],["Hotel","🏨"],["Airport","✈️"],["Train","🚂"],["Camera","📷"]];
+    (function(){
+      let i=0; const em=document.getElementById("tv-emoji"), nm=document.getElementById("tv-name"), list=document.getElementById("tv-list");
+      function set(idx){ i=idx; em.textContent=TVL[i][1]; nm.textContent=TVL[i][0]; }
+      TVL.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("tv-speak").addEventListener("click",()=>speakText(TVL[i][0]));
+      set(0);
+    })();
+
+    function newMN(){
+      const mid=2+Math.floor(Math.random()*8);
+      const ans=mid;
+      document.getElementById("mn-seq").textContent=(mid-1)+", ?, "+(mid+1);
+      document.getElementById("mn-feedback").textContent="";
+      const opts=new Set([ans]);
+      while(opts.size<3) opts.add(1+Math.floor(Math.random()*10));
+      const box=document.getElementById("mn-choices"); box.innerHTML="";
+      [...opts].sort((a,b)=>a-b).forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=String(v);
+        b.style.minHeight="64px"; b.style.fontSize="1.5rem";
+        b.addEventListener("click",()=>{
+          if(v===ans){ document.getElementById("mn-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(String(ans)); setTimeout(newMN,700); }
+          else document.getElementById("mn-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText("what number is missing");
+    }
+    document.querySelector('[data-go="missnum"]')?.addEventListener("click",()=>setTimeout(newMN,100));
     applyTheme();
 
     const SHAPES=[

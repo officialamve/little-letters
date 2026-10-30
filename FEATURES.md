@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v6.3)
+# Little Letters — feature map (Beta v6.4)
 
-**143 modes**
+**145 modes**
 
 - `abcorder`
 - `actions`
@@ -74,6 +74,7 @@
 - `memory`
 - `middlesound`
 - `missing`
+- `missnum`
 - `money`
 - `months`
 - `music`
@@ -133,6 +134,7 @@
 - `toys`
 - `traffic`
 - `transport`
+- `travel`
 - `truefalse`
 - `veggies`
 - `vowels`
