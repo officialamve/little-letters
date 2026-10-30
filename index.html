@@ -148,7 +148,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.9 · free DIY build · 135 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.0 · free DIY build · 137 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -213,6 +213,8 @@
       <button class="mode" type="button" data-go="stories" data-world-home="1"><div class="mode-icon" style="background:#FFEDD5;color:#C2410C">📖</div><div class="mode-copy"><strong>Stories</strong><span>Short read-alouds</span></div><span class="chev">›</span></button>
 
       <button class="mode" type="button" data-go="sight" data-world-home="1"><div class="mode-icon" style="background:#F3E8FF;color:#7E22CE">the</div><div class="mode-copy"><strong>Sight words</strong><span>the, and, you…</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="sentence" data-play-home="1"><div class="mode-icon">I…</div><div class="mode-copy"><strong>Make a sentence</strong><span>Tap words in order</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="digraphs" data-world-home="1"><div class="mode-icon">ch</div><div class="mode-copy"><strong>Digraphs</strong><span>ch sh th wh</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="blend" data-play-home="1"><div class="mode-icon">fr</div><div class="mode-copy"><strong>Start blend</strong><span>fr · st · bl</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="magice" data-play-home="1"><div class="mode-icon">a_e</div><div class="mode-copy"><strong>Magic e</strong><span>cake vs cat</span></div><span class="chev">›</span></button>
@@ -251,6 +253,8 @@
       <button class="mode" type="button" data-go="fruits" data-world-home="1"><div class="mode-icon">🥭</div><div class="mode-copy"><strong>Fruits</strong><span>Mango · banana · apple</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="veggies" data-world-home="1"><div class="mode-icon">🥕</div><div class="mode-copy"><strong>Veggies</strong><span>Carrot · potato · pea</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="snacks" data-world-home="1"><div class="mode-icon">🍪</div><div class="mode-copy"><strong>Snacks</strong><span>Idli · dosa · cookie</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="bakery" data-world-home="1"><div class="mode-icon">🍞</div><div class="mode-copy"><strong>Bakery</strong><span>Bread · cake · bun</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -1728,6 +1732,27 @@
       <p class="muted">Tap the longer one</p>
       <div id="ls-row" style="display:flex;flex-direction:column;gap:12px;align-items:center;margin-top:16px"></div>
       <p id="ls-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="bakery" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Bakery</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="bk-emoji" style="font-size:4rem">🍞</p>
+      <p class="word" id="bk-name" style="font-size:1.4rem;color:var(--ink)">Bread</p>
+      <button class="speak" type="button" id="bk-speak">Hear</button>
+      <div id="bk-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="sentence" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Make a sentence</h2></div>
+    <div class="letter-stage">
+      <p class="muted">Tap words in order</p>
+      <p class="word" id="sent-built" style="min-height:2em;color:var(--ink);font-size:1.2rem"></p>
+      <div id="sent-words" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px"></div>
+      <p id="sent-feedback" class="word"></p>
+      <button class="speak" type="button" id="sent-again" style="margin-top:12px">New</button>
     </div>
   </section>
   <section id="parent" class="view">
@@ -4456,6 +4481,44 @@
       });
     }
     document.querySelector('[data-go="longshort"]')?.addEventListener("click",()=>setTimeout(newLS,100));
+
+    const BK=[["Bread","🍞"],["Cake","🎂"],["Bun","🥯"],["Cookie","🍪"],["Pie","🥧"],["Donut","🍩"],["Flour","🌾"],["Oven","🔥"]];
+    (function(){
+      let i=0; const em=document.getElementById("bk-emoji"), nm=document.getElementById("bk-name"), list=document.getElementById("bk-list");
+      function set(idx){ i=idx; em.textContent=BK[i][1]; nm.textContent=BK[i][0]; }
+      BK.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("bk-speak").addEventListener("click",()=>speakText(BK[i][0]));
+      set(0);
+    })();
+
+    const SENTS=[["I","see","a","cat"],["We","like","the","sun"],["She","has","a","ball"],["The","dog","can","run"],["I","am","happy"]];
+    let sentTarget=[], sentBuilt=[];
+    function newSent(){
+      sentTarget=SENTS[Math.floor(Math.random()*SENTS.length)];
+      sentBuilt=[];
+      document.getElementById("sent-built").textContent="";
+      document.getElementById("sent-feedback").textContent="";
+      const box=document.getElementById("sent-words"); box.innerHTML="";
+      [...sentTarget].sort(()=>Math.random()-.5).forEach(w=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=w;
+        b.style.cssText="padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg-elev);font-size:1rem;cursor:pointer";
+        b.addEventListener("click",()=>{
+          if(b.disabled) return;
+          const need=sentTarget[sentBuilt.length];
+          if(w===need){ b.disabled=true; b.style.opacity=".35"; sentBuilt.push(w); document.getElementById("sent-built").textContent=sentBuilt.join(" ");
+            if(sentBuilt.length===sentTarget.length){ document.getElementById("sent-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(sentTarget.join(" ")); setTimeout(newSent,1000); }
+          } else document.getElementById("sent-feedback").textContent="Next: "+need;
+        });
+        box.appendChild(b);
+      });
+    }
+    document.getElementById("sent-again")?.addEventListener("click",newSent);
+    document.querySelector('[data-go="sentence"]')?.addEventListener("click",()=>setTimeout(newSent,100));
     applyTheme();
 
     const SHAPES=[

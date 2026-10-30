@@ -1,10 +1,11 @@
-# Little Letters — feature map (Beta v5.9)
+# Little Letters — feature map (Beta v6.0)
 
-**135 modes**
+**137 modes** — sixth major beta milestone.
 
 - `abcorder`
 - `actions`
 - `assamese`
+- `bakery`
 - `beach`
 - `beforeafter`
 - `bengali`
@@ -103,6 +104,7 @@
 - `school`
 - `seasons`
 - `senses`
+- `sentence`
 - `shapes`
 - `sheets`
 - `sight`
