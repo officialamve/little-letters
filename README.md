@@ -1,25 +1,20 @@
 # Little Letters
 
-Calm, premium alphabet learning for kids — DIY, offline-friendly.
+Calm, premium alphabet learning for kids — DIY, offline-friendly PWA.
+
+**Live:** https://officialamve.github.io/little-letters/
 
 ## Features
-- **Letters** — English A–Z with hear + “Got it” progress
-- **Hindi** — स्वर starter pack with speech
-- **Write** — finger tracing with guide letter
-- **Songs** — ABC / vowels / mango rhyme via device speech (free)
-- **Games** — tap what you hear
-- **Streak & stats** — saved on device
-- **PWA** — installable; works offline after first open
+- English A–Z (hear, lowercase toggle, “Got it”)
+- Hindi स्वर + व्यंजन
+- Tamil உயிர் starter
+- Finger tracing + printable A–Z sheet
+- Songs (device speech) · tap-what-you-hear · letter→word match
+- Today’s 5 practice path · streaks · on-device progress
+- Bottom nav · installable PWA
 
-## Open
-Open `index.html` in Chrome, or:
-
-```bash
-npx --yes serve .
-```
+## Open locally
+Open `index.html` in Chrome, or `npx --yes serve .`
 
 ## Stack
-Static HTML/CSS/JS. Web Speech API. localStorage. No backend.
-
-## License
-MIT
+Static HTML/CSS/JS · Web Speech API · localStorage · service worker. No backend. MIT.
