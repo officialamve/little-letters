@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v3.0)
+# Little Letters — feature map (Beta v3.1)
 
-**61 modes**
+**64 modes**
 
 - `assamese`
 - `beforeafter`
@@ -22,6 +22,7 @@
 - `gujarati`
 - `hindi`
 - `hindi-nums`
+- `homewords`
 - `kannada`
 - `languages`
 - `letters`
@@ -32,6 +33,7 @@
 - `math`
 - `memory`
 - `missing`
+- `nature`
 - `numbers`
 - `oddone`
 - `odia`
@@ -44,6 +46,7 @@
 - `quiz`
 - `race`
 - `rhyme`
+- `samediff`
 - `sanskrit`
 - `school`
 - `seasons`

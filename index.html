@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v3.0 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v3.1 · free DIY build</p>
       </div>
     </div>
     <input id="home-search" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -217,6 +217,10 @@
       <button class="mode" type="button" data-go="transport" data-world-home="1"><div class="mode-icon">🚗</div><div class="mode-copy"><strong>Vehicles</strong><span>Car · bus · train</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="family" data-world-home="1"><div class="mode-icon">👨‍👩‍👧</div><div class="mode-copy"><strong>Family</strong><span>Mama · papa · baby</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="school" data-world-home="1"><div class="mode-icon">✏️</div><div class="mode-copy"><strong>School</strong><span>Pencil · bag · book</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="homewords" data-world-home="1"><div class="mode-icon">🏠</div><div class="mode-copy"><strong>At home</strong><span>Bed · door · chair</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="nature" data-world-home="1"><div class="mode-icon">🌳</div><div class="mode-copy"><strong>Nature</strong><span>Tree · river · flower</span></div><span class="chev">›</span></button>
+
+
 
 
 
@@ -230,6 +234,8 @@
       <button class="mode games" type="button" data-go="skip" data-play-home="1"><div class="mode-icon">2 4 6</div><div class="mode-copy"><strong>Skip count</strong><span>2s · 5s · 10s</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="letterseq" data-play-home="1"><div class="mode-icon">A B ?</div><div class="mode-copy"><strong>Letter next</strong><span>What comes after?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="beforeafter" data-play-home="1"><div class="mode-icon">A_C</div><div class="mode-copy"><strong>Before / after</strong><span>Letter neighbours</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="samediff" data-play-home="1"><div class="mode-icon">Aa?</div><div class="mode-copy"><strong>Same start?</strong><span>Cat · Cup</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -834,6 +840,39 @@
       <p id="ba-feedback" class="word"></p>
     </div>
   </section>
+
+  <section id="homewords" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>At home</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="hw-emoji" style="font-size:4rem">🛏️</p>
+      <p class="word" id="hw-name" style="font-size:1.4rem;color:var(--ink)">Bed</p>
+      <button class="speak" type="button" id="hw-speak">Hear</button>
+      <div id="hw-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="samediff" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Same start?</h2></div>
+    <div class="letter-stage">
+      <p class="muted">Do these start the same?</p>
+      <p class="glyph" id="sd-pair" style="font-size:2rem">Cat · Cup</p>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:16px">
+        <button class="speak" type="button" id="sd-same" style="min-width:120px">Same</button>
+        <button class="speak" type="button" id="sd-diff" style="min-width:120px;background:#FEE2E2;color:#B91C1C">Different</button>
+      </div>
+      <p id="sd-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="nature" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Nature</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="nat-emoji" style="font-size:4rem">🌳</p>
+      <p class="word" id="nat-name" style="font-size:1.4rem;color:var(--ink)">Tree</p>
+      <button class="speak" type="button" id="nat-speak">Hear</button>
+      <div id="nat-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
   <section id="parent" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
@@ -849,7 +888,7 @@
         <input type="checkbox" id="theme-toggle" /> Dark mode
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v3.0 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v3.1 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Age tip:</strong> ages 3–4 → Letters, Colours, Count. Ages 5–6 → Spell, Digraphs, Quiz, Stories.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Install:</strong> in Chrome, menu → Add to Home Screen for an app-like icon.</p>
       <div class="row" style="justify-content:flex-start">
@@ -2308,6 +2347,51 @@
       speakText((before?"before":"after")+" "+letter);
     }
     document.querySelector('[data-go="beforeafter"]')?.addEventListener("click",()=>setTimeout(newBA,100));
+
+    const HOMEW=[["Bed","🛏️"],["Chair","🪑"],["Door","🚪"],["Window","🪟"],["Table","🪵"],["Lamp","💡"],["TV","📺"],["Key","🔑"]];
+    (function(){
+      let i=0; const em=document.getElementById("hw-emoji"), nm=document.getElementById("hw-name"), list=document.getElementById("hw-list");
+      function set(idx){ i=idx; em.textContent=HOMEW[i][1]; nm.textContent=HOMEW[i][0]; }
+      HOMEW.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("hw-speak").addEventListener("click",()=>speakText(HOMEW[i][0]));
+      set(0);
+    })();
+
+    const SDPAIRS=[["Cat","Cup",true],["Dog","Sun",false],["Ball","Book",true],["Fish","Moon",false],["Pen","Pig",true],["Hat","Car",false],["Milk","Map",true],["Red","Blue",false]];
+    let sdAns=true;
+    function newSD(){
+      const [a,b,same]=SDPAIRS[Math.floor(Math.random()*SDPAIRS.length)];
+      sdAns=same;
+      document.getElementById("sd-pair").textContent=a+" · "+b;
+      document.getElementById("sd-feedback").textContent="";
+      speakText(a+" "+b);
+    }
+    function sdCheck(same){
+      if(same===sdAns){ document.getElementById("sd-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText("Yes"); setTimeout(newSD,700); }
+      else document.getElementById("sd-feedback").textContent="Try again";
+    }
+    document.getElementById("sd-same")?.addEventListener("click",()=>sdCheck(true));
+    document.getElementById("sd-diff")?.addEventListener("click",()=>sdCheck(false));
+    document.querySelector('[data-go="samediff"]')?.addEventListener("click",()=>setTimeout(newSD,100));
+
+    const NAT=[["Tree","🌳"],["Flower","🌸"],["River","🏞️"],["Mountain","⛰️"],["Leaf","🍃"],["Rock","🪨"],["Cloud","☁️"],["Star","⭐"]];
+    (function(){
+      let i=0; const em=document.getElementById("nat-emoji"), nm=document.getElementById("nat-name"), list=document.getElementById("nat-list");
+      function set(idx){ i=idx; em.textContent=NAT[i][1]; nm.textContent=NAT[i][0]; }
+      NAT.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("nat-speak").addEventListener("click",()=>speakText(NAT[i][0]));
+      set(0);
+    })();
     applyTheme();
 
     const SHAPES=[
