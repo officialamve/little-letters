@@ -148,7 +148,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.8 · free DIY build · 133 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.9 · free DIY build · 135 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -294,6 +294,8 @@
       <button class="mode" type="button" data-go="doctor" data-world-home="1"><div class="mode-icon">🩺</div><div class="mode-copy"><strong>Doctor</strong><span>Check-up words</span></div><span class="chev">›</span></button>
 
       <button class="mode" type="button" data-go="places" data-world-home="1"><div class="mode-icon">🏫</div><div class="mode-copy"><strong>Places</strong><span>School · park · market</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="mail" data-world-home="1"><div class="mode-icon">✉️</div><div class="mode-copy"><strong>Mail</strong><span>Letter · stamp · box</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="outdoor" data-world-home="1"><div class="mode-icon">⛺</div><div class="mode-copy"><strong>Outdoor</strong><span>Tent · slide · swing</span></div><span class="chev">›</span></button>
 
 
@@ -365,6 +367,8 @@
       <button class="mode games" type="button" data-go="fullempty" data-play-home="1"><div class="mode-icon">🥛</div><div class="mode-copy"><strong>Full or empty</strong><span>Glass of water</span></div><span class="chev">›</span></button>
 
       <button class="mode games" type="button" data-go="sortsize" data-play-home="1"><div class="mode-icon">▮▮▮</div><div class="mode-copy"><strong>Sort size</strong><span>Small → big</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="longshort" data-play-home="1"><div class="mode-icon">——</div><div class="mode-copy"><strong>Long or short</strong><span>Which is longer?</span></div><span class="chev">›</span></button>
+
       <button class="mode games" type="button" data-go="numcmp" data-play-home="1"><div class="mode-icon">7>3</div><div class="mode-copy"><strong>Bigger number</strong><span>Compare 1–20</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="numwords" data-play-home="1"><div class="mode-icon">5→five</div><div class="mode-copy"><strong>Number words</strong><span>5 means five</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="numorder" data-play-home="1"><div class="mode-icon">1-5</div><div class="mode-copy"><strong>Put in order</strong><span>Tap 1 then 2…</span></div><span class="chev">›</span></button>
@@ -1705,6 +1709,25 @@
         <button class="speak" type="button" id="fe-empty" style="min-width:120px;background:#FEE2E2;color:#B91C1C">Empty</button>
       </div>
       <p id="fe-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="mail" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Mail</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="mail-emoji" style="font-size:4rem">✉️</p>
+      <p class="word" id="mail-name" style="font-size:1.4rem;color:var(--ink)">Letter</p>
+      <button class="speak" type="button" id="mail-speak">Hear</button>
+      <div id="mail-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="longshort" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Long or short</h2></div>
+    <div class="letter-stage">
+      <p class="muted">Tap the longer one</p>
+      <div id="ls-row" style="display:flex;flex-direction:column;gap:12px;align-items:center;margin-top:16px"></div>
+      <p id="ls-feedback" class="word"></p>
     </div>
   </section>
   <section id="parent" class="view">
@@ -4401,6 +4424,38 @@
     document.getElementById("fe-full")?.addEventListener("click",()=>feCheck(true));
     document.getElementById("fe-empty")?.addEventListener("click",()=>feCheck(false));
     document.querySelector('[data-go="fullempty"]')?.addEventListener("click",()=>setTimeout(newFE,100));
+
+    const MAIL=[["Letter","✉️"],["Stamp","🏷️"],["Postbox","📮"],["Parcel","📦"],["Postcard","🎴"],["Address","🏠"],["Postman","🧑‍✈️"],["Glue","🧴"]];
+    (function(){
+      let i=0; const em=document.getElementById("mail-emoji"), nm=document.getElementById("mail-name"), list=document.getElementById("mail-list");
+      function set(idx){ i=idx; em.textContent=MAIL[i][1]; nm.textContent=MAIL[i][0]; }
+      MAIL.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("mail-speak").addEventListener("click",()=>speakText(MAIL[i][0]));
+      set(0);
+    })();
+
+    function newLS(){
+      const a=40+Math.floor(Math.random()*40), b=40+Math.floor(Math.random()*40);
+      if(a===b) return newLS();
+      const longer=Math.max(a,b);
+      document.getElementById("ls-feedback").textContent="";
+      const row=document.getElementById("ls-row"); row.innerHTML="";
+      [a,b].sort(()=>Math.random()-.5).forEach(w=>{
+        const btn=document.createElement("button"); btn.type="button";
+        btn.style.cssText="height:28px;width:"+w*2+"px;max-width:90%;border-radius:8px;border:none;background:var(--accent);cursor:pointer";
+        btn.addEventListener("click",()=>{
+          if(w===longer){ document.getElementById("ls-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText("Yes"); setTimeout(newLS,700); }
+          else document.getElementById("ls-feedback").textContent="Try again";
+        });
+        row.appendChild(btn);
+      });
+    }
+    document.querySelector('[data-go="longshort"]')?.addEventListener("click",()=>setTimeout(newLS,100));
     applyTheme();
 
     const SHAPES=[
