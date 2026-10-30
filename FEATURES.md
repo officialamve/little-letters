@@ -1,8 +1,6 @@
-# Little Letters — feature map (Beta v3.7)
+# Little Letters — feature map (Beta v3.8)
 
-**81 modes**
-
-Home search + 81 activities.
+**83 modes**
 
 - `actions`
 - `assamese`
@@ -34,10 +32,12 @@ Home search + 81 activities.
 - `hindi-nums`
 - `homewords`
 - `kannada`
+- `kitchen`
 - `languages`
 - `lastletter`
 - `letters`
 - `letterseq`
+- `makeword`
 - `malayalam`
 - `marathi`
 - `match`
