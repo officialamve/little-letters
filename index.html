@@ -139,11 +139,12 @@
           <button class="speak" type="button" data-go="practice">Start today’s 5</button>
           <button class="speak ghost" type="button" id="surprise-btn">Surprise</button>
         </div>
+        <p class="muted" style="margin:10px 0 0">Letter of the day · <strong id="letter-day">A</strong></p>
         <div class="goal">
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v1.9 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v2.0 · free DIY build</p>
       </div>
     </div>
     <input id="home-search" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -207,6 +208,8 @@
       <button class="mode games" type="button" data-go="missing" data-play-home="1"><div class="mode-icon">_</div><div class="mode-copy"><strong>Missing letter</strong><span>_pple → Apple</span></div><span class="chev">›</span></button>
 <button class="mode games" type="button" data-go="games" data-play-home="1"><div class="mode-icon">◇</div><div class="mode-copy"><strong>Games</strong><span>Tap what you hear</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="math" data-play-home="1"><div class="mode-icon">1+2</div><div class="mode-copy"><strong>Add up</strong><span>Sums to 10</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="subtract" data-play-home="1"><div class="mode-icon">5−2</div><div class="mode-copy"><strong>Take away</strong><span>Subtract within 10</span></div><span class="chev">›</span></button>
+
       <button class="mode games" type="button" data-go="patterns" data-play-home="1"><div class="mode-icon">🔴</div><div class="mode-copy"><strong>Patterns</strong><span>What comes next?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="spell" data-play-home="1"><div class="mode-icon">abc</div><div class="mode-copy"><strong>Spell</strong><span>Unscramble words</span></div><span class="chev">›</span></button>
 
@@ -633,6 +636,15 @@
       <button class="speak" type="button" id="flash-next">Next</button>
     </div>
   </section>
+
+  <section id="subtract" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Take away</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="sub-q" style="font-size:2.4rem">5 − 2</p>
+      <div class="alpha" id="sub-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
+      <p id="sub-feedback" class="word"></p>
+    </div>
+  </section>
   <section id="parent" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
@@ -648,7 +660,7 @@
         <input type="checkbox" id="theme-toggle" /> Dark mode
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v1.9 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v2.0 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Age tip:</strong> ages 3–4 → Letters, Colours, Count. Ages 5–6 → Spell, Digraphs, Quiz, Stories.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Install:</strong> in Chrome, menu → Add to Home Screen for an app-like icon.</p>
       <div class="row" style="justify-content:flex-start">
@@ -1783,6 +1795,34 @@
     document.getElementById("flash-next").addEventListener("click",()=>{ flashI=(flashI+1)%26; showFlash(true); });
     document.getElementById("flash-speak").addEventListener("click",()=>speakText(flashLetters[flashI]+". "+WORDS[flashLetters[flashI]]));
     document.querySelector('[data-go="flash"]')?.addEventListener("click",()=>{ flashI=0; showFlash(true); });
+
+    function newSub(){
+      const a=3+Math.floor(Math.random()*7); const b=1+Math.floor(Math.random()*(a-1));
+      const ans=a-b;
+      document.getElementById("sub-q").textContent=a+" − "+b;
+      document.getElementById("sub-feedback").textContent="";
+      const opts=new Set([ans]);
+      while(opts.size<3){ let x=Math.floor(Math.random()*10); opts.add(x); }
+      const box=document.getElementById("sub-choices"); box.innerHTML="";
+      [...opts].sort(()=>Math.random()-.5).forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=String(v);
+        b.style.minHeight="64px"; b.style.fontSize="1.35rem";
+        b.addEventListener("click",()=>{
+          if(v===ans){ document.getElementById("sub-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(String(ans)); setTimeout(newSub,700); }
+          else document.getElementById("sub-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText(a+" take away "+b);
+    }
+    document.querySelector('[data-go="subtract"]')?.addEventListener("click",()=>setTimeout(newSub,100));
+
+    (function(){
+      const day=Math.floor(Date.now()/86400000)%26;
+      const L=Object.keys(WORDS)[day];
+      const el=document.getElementById("letter-day");
+      if(el){ el.textContent=L+" · "+WORDS[L]; el.style.cursor="pointer"; el.addEventListener("click",()=>{ select(L); show("letters"); }); }
+    })();
     applyTheme();
 
     const SHAPES=[

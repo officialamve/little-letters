@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v1.9)
+# Little Letters — feature map (Beta v2.0)
 
-Modes (`data-go`):
+**45 modes**
 
 - `assamese`
 - `bengali`
@@ -41,6 +41,7 @@ Modes (`data-go`):
 - `spell`
 - `stickers`
 - `stories`
+- `subtract`
 - `tamil`
 - `telugu`
 - `words`
@@ -50,3 +51,5 @@ Modes (`data-go`):
 Live:
 - https://officialamve.github.io/little-letters/
 - https://little-letters.onrender.com
+
+Repo: https://github.com/officialamve/little-letters
