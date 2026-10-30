@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v6.6)
+# Little Letters — feature map (Beta v6.7)
 
-**150 modes**
+**152 modes**
 
 - `abcorder`
 - `actions`
@@ -32,6 +32,7 @@
 - `digraphs`
 - `directions`
 - `doctor`
+- `double`
 - `evenodd`
 - `fair`
 - `family`
@@ -100,6 +101,7 @@
 - `places`
 - `playhub`
 - `plusone`
+- `police`
 - `practice`
 - `punjabi`
 - `quiz`

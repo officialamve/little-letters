@@ -148,7 +148,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.6 · free DIY build · 150 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.7 · free DIY build · 152 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -220,6 +220,8 @@
       <button class="mode" type="button" data-go="digraphs" data-world-home="1"><div class="mode-icon">ch</div><div class="mode-copy"><strong>Digraphs</strong><span>ch sh th wh</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="blend" data-play-home="1"><div class="mode-icon">fr</div><div class="mode-copy"><strong>Start blend</strong><span>fr · st · bl</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="magice" data-play-home="1"><div class="mode-icon">a_e</div><div class="mode-copy"><strong>Magic e</strong><span>cake vs cat</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="double" data-play-home="1"><div class="mode-icon">ll</div><div class="mode-copy"><strong>Double letters</strong><span>ball vs bat</span></div><span class="chev">›</span></button>
+
 
 
       <button class="mode" type="button" data-go="clock" data-world-home="1"><div class="mode-icon">🕒</div><div class="mode-copy"><strong>Clock</strong><span>Hours o'clock</span></div><span class="chev">›</span></button>
@@ -313,6 +315,8 @@
       <button class="mode" type="button" data-go="dentist" data-world-home="1"><div class="mode-icon">🦷</div><div class="mode-copy"><strong>Dentist</strong><span>Tooth · brush · smile</span></div><span class="chev">›</span></button>
 
       <button class="mode" type="button" data-go="fire" data-world-home="1"><div class="mode-icon">🚒</div><div class="mode-copy"><strong>Fire station</strong><span>Truck · hose · helmet</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="police" data-world-home="1"><div class="mode-icon">🚓</div><div class="mode-copy"><strong>Police</strong><span>Car · badge · help</span></div><span class="chev">›</span></button>
+
 
 
       <button class="mode" type="button" data-go="places" data-world-home="1"><div class="mode-icon">🏫</div><div class="mode-copy"><strong>Places</strong><span>School · park · market</span></div><span class="chev">›</span></button>
@@ -1914,6 +1918,25 @@
       <p class="word" id="rep-name" style="font-size:1.4rem;color:var(--ink)">Snake</p>
       <button class="speak" type="button" id="rep-speak">Hear</button>
       <div id="rep-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="police" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Police</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="pol-emoji" style="font-size:4rem">🚓</p>
+      <p class="word" id="pol-name" style="font-size:1.4rem;color:var(--ink)">Police car</p>
+      <button class="speak" type="button" id="pol-speak">Hear</button>
+      <div id="pol-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="double" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Double letters</h2></div>
+    <div class="letter-stage">
+      <p class="muted">Which word has double letters?</p>
+      <div class="alpha" id="dbl-choices" style="grid-template-columns:repeat(2,1fr);max-width:300px;margin:16px auto 0;gap:12px"></div>
+      <p id="dbl-feedback" class="word"></p>
     </div>
   </section>
   <section id="parent" class="view">
@@ -4896,6 +4919,38 @@
       document.getElementById("rep-speak").addEventListener("click",()=>speakText(REP[i][0]));
       set(0);
     })();
+
+    const POL=[["Police car","🚓"],["Badge","🎖️"],["Whistle","😗"],["Helmet","⛑️"],["Help","🆘"],["Station","🏢"],["Radio","📻"],["Safe","✅"]];
+    (function(){
+      let i=0; const em=document.getElementById("pol-emoji"), nm=document.getElementById("pol-name"), list=document.getElementById("pol-list");
+      function set(idx){ i=idx; em.textContent=POL[i][1]; nm.textContent=POL[i][0]; }
+      POL.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("pol-speak").addEventListener("click",()=>speakText(POL[i][0]));
+      set(0);
+    })();
+
+    const DBL=[["ball","bat"],["moon","sun"],["book","pen"],["egg","cup"],["happy","sad"],["apple","pear"]];
+    function newDbl(){
+      const [yes,no]=DBL[Math.floor(Math.random()*DBL.length)];
+      document.getElementById("dbl-feedback").textContent="";
+      const box=document.getElementById("dbl-choices"); box.innerHTML="";
+      [yes,no].sort(()=>Math.random()-.5).forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=v;
+        b.style.minHeight="72px"; b.style.fontSize="1.25rem";
+        b.addEventListener("click",()=>{
+          if(v===yes){ document.getElementById("dbl-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(v); setTimeout(newDbl,800); }
+          else document.getElementById("dbl-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText("double letters");
+    }
+    document.querySelector('[data-go="double"]')?.addEventListener("click",()=>setTimeout(newDbl,100));
     applyTheme();
 
     const SHAPES=[
