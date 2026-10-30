@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v4.9)
+# Little Letters — feature map (Beta v5.0)
 
-**114 modes**
+**117 modes** — fifth major beta milestone.
 
 - `actions`
 - `assamese`
@@ -38,7 +38,9 @@
 - `hindi`
 - `hindi-nums`
 - `homewords`
+- `howmany`
 - `hygiene`
+- `india`
 - `kannada`
 - `kitchen`
 - `languages`
@@ -85,6 +87,7 @@
 - `sanskrit`
 - `school`
 - `seasons`
+- `senses`
 - `shapes`
 - `sheets`
 - `sight`

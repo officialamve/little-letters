@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.9 · free DIY build · 114 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.0 · free DIY build · 117 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -230,6 +230,8 @@
       <button class="mode" type="button" data-go="directions" data-world-home="1"><div class="mode-icon">⬆️</div><div class="mode-copy"><strong>Directions</strong><span>Up · down · left · right</span></div><span class="chev">›</span></button>
 
       <button class="mode" type="button" data-go="body" data-world-home="1"><div class="mode-icon">👀</div><div class="mode-copy"><strong>My body</strong><span>Eyes · nose · hands</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="senses" data-world-home="1"><div class="mode-icon">👀</div><div class="mode-copy"><strong>Five senses</strong><span>See · hear · smell</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="clothes" data-world-home="1"><div class="mode-icon">👕</div><div class="mode-copy"><strong>Clothes</strong><span>Shirt · shoes · hat</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="food" data-world-home="1"><div class="mode-icon">🍎</div><div class="mode-copy"><strong>Food</strong><span>Apple · rice · milk</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="fruits" data-world-home="1"><div class="mode-icon">🥭</div><div class="mode-copy"><strong>Fruits</strong><span>Mango · banana · apple</span></div><span class="chev">›</span></button>
@@ -271,6 +273,8 @@
 
       <button class="mode" type="button" data-go="actions" data-world-home="1"><div class="mode-icon">🏃</div><div class="mode-copy"><strong>Actions</strong><span>Run · jump · sing</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="festivals" data-world-home="1"><div class="mode-icon">🪔</div><div class="mode-copy"><strong>Festivals</strong><span>Diwali · Holi · Eid</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="india" data-world-home="1"><div class="mode-icon">🇮🇳</div><div class="mode-copy"><strong>Our India</strong><span>Flag · tiger · mango</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="party" data-world-home="1"><div class="mode-icon">🎂</div><div class="mode-copy"><strong>Party</strong><span>Cake · gift · balloon</span></div><span class="chev">›</span></button>
 
       <button class="mode" type="button" data-go="sports" data-world-home="1"><div class="mode-icon">🏏</div><div class="mode-copy"><strong>Sports</strong><span>Cricket · football · yoga</span></div><span class="chev">›</span></button>
@@ -296,6 +300,8 @@
       <button class="mode games" type="button" data-go="hearpick" data-play-home="1"><div class="mode-icon">👂</div><div class="mode-copy"><strong>Hear & pick</strong><span>Listen, then tap</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="samepic" data-play-home="1"><div class="mode-icon">🔍</div><div class="mode-copy"><strong>Find the same</strong><span>Match the picture</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="letterhunt" data-play-home="1"><div class="mode-icon">🔎A</div><div class="mode-copy"><strong>Letter hunt</strong><span>Find A in the word</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="howmany" data-play-home="1"><div class="mode-icon">3?</div><div class="mode-copy"><strong>How many letters?</strong><span>Count in the word</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -1474,6 +1480,35 @@
       <p class="word" id="dir-name" style="font-size:1.4rem;color:var(--ink)">Up</p>
       <button class="speak" type="button" id="dir-speak">Hear</button>
       <div id="dir-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;max-width:260px;margin-left:auto;margin-right:auto"></div>
+    </div>
+  </section>
+
+  <section id="senses" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Five senses</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="sen-emoji" style="font-size:4rem">👀</p>
+      <p class="word" id="sen-name" style="font-size:1.4rem;color:var(--ink)">See</p>
+      <button class="speak" type="button" id="sen-speak">Hear</button>
+      <div id="sen-list" style="display:grid;grid-template-columns:repeat(1,1fr);gap:8px;margin-top:16px;max-width:260px;margin-left:auto;margin-right:auto"></div>
+    </div>
+  </section>
+
+  <section id="howmany" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>How many letters?</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="hm-word" style="font-size:2.2rem">CAT</p>
+      <div class="alpha" id="hm-choices" style="grid-template-columns:repeat(3,1fr);max-width:240px;margin:16px auto 0;gap:12px"></div>
+      <p id="hm-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="india" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Our India</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="in-emoji" style="font-size:4rem">🇮🇳</p>
+      <p class="word" id="in-name" style="font-size:1.4rem;color:var(--ink)">India</p>
+      <button class="speak" type="button" id="in-speak">Hear</button>
+      <div id="in-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;max-width:300px;margin-left:auto;margin-right:auto"></div>
     </div>
   </section>
   <section id="parent" class="view">
@@ -3820,6 +3855,56 @@
         list.appendChild(b);
       });
       document.getElementById("dir-speak").addEventListener("click",()=>speakText(DIR[i][0]));
+      set(0);
+    })();
+
+    const SEN=[["See","👀"],["Hear","👂"],["Smell","👃"],["Taste","👅"],["Touch","✋"]];
+    (function(){
+      let i=0; const em=document.getElementById("sen-emoji"), nm=document.getElementById("sen-name"), list=document.getElementById("sen-list");
+      function set(idx){ i=idx; em.textContent=SEN[i][1]; nm.textContent=SEN[i][0]; }
+      SEN.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1]+"  "+f[0];
+        b.style.cssText="min-height:48px;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.05rem;cursor:pointer;text-align:left;padding:0 16px";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("sen-speak").addEventListener("click",()=>speakText(SEN[i][0]));
+      set(0);
+    })();
+
+    const HM=["CAT","DOG","BALL","FISH","SUN","APPLE","BOOK","TREE","MOON","STAR"];
+    function newHM(){
+      const word=HM[Math.floor(Math.random()*HM.length)];
+      const ans=word.length;
+      document.getElementById("hm-word").textContent=word;
+      document.getElementById("hm-feedback").textContent="";
+      const opts=new Set([ans]);
+      while(opts.size<3) opts.add(Math.max(1,ans+[-1,1,2][Math.floor(Math.random()*3)]));
+      const box=document.getElementById("hm-choices"); box.innerHTML="";
+      [...opts].sort((a,b)=>a-b).forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=String(v);
+        b.style.minHeight="64px"; b.style.fontSize="1.5rem";
+        b.addEventListener("click",()=>{
+          if(v===ans){ document.getElementById("hm-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(String(ans)); setTimeout(newHM,700); }
+          else document.getElementById("hm-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText(word);
+    }
+    document.querySelector('[data-go="howmany"]')?.addEventListener("click",()=>setTimeout(newHM,100));
+
+    const IND=[["India","🇮🇳"],["Flag","🚩"],["Tiger","🐯"],["Peacock","🦚"],["Mango","🥭"],["Lotus","🪷"],["River Ganga","🏞️"],["Himalaya","⛰️"]];
+    (function(){
+      let i=0; const em=document.getElementById("in-emoji"), nm=document.getElementById("in-name"), list=document.getElementById("in-list");
+      function set(idx){ i=idx; em.textContent=IND[i][1]; nm.textContent=IND[i][0]; }
+      IND.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[0];
+        b.style.cssText="min-height:52px;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:.95rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("in-speak").addEventListener("click",()=>speakText(IND[i][0]));
       set(0);
     })();
     applyTheme();
