@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.0 · free DIY build · 117 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.1 · free DIY build · 119 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -206,6 +206,8 @@
 
       <button class="mode" type="button" data-go="sight" data-world-home="1"><div class="mode-icon" style="background:#F3E8FF;color:#7E22CE">the</div><div class="mode-copy"><strong>Sight words</strong><span>the, and, you…</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="digraphs" data-world-home="1"><div class="mode-icon">ch</div><div class="mode-copy"><strong>Digraphs</strong><span>ch sh th wh</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="blend" data-play-home="1"><div class="mode-icon">fr</div><div class="mode-copy"><strong>Start blend</strong><span>fr · st · bl</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="clock" data-world-home="1"><div class="mode-icon">🕒</div><div class="mode-copy"><strong>Clock</strong><span>Hours o'clock</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="days" data-world-home="1"><div class="mode-icon">📅</div><div class="mode-copy"><strong>Days</strong><span>Monday → Sunday</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="tod" data-world-home="1"><div class="mode-icon">🌅</div><div class="mode-copy"><strong>Day parts</strong><span>Morning · night</span></div><span class="chev">›</span></button>
@@ -270,6 +272,8 @@
 
       <button class="mode" type="button" data-go="helpers" data-world-home="1"><div class="mode-icon">👮</div><div class="mode-copy"><strong>Helpers</strong><span>Doctor · teacher · police</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="places" data-world-home="1"><div class="mode-icon">🏫</div><div class="mode-copy"><strong>Places</strong><span>School · park · market</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="outdoor" data-world-home="1"><div class="mode-icon">⛺</div><div class="mode-copy"><strong>Outdoor</strong><span>Tent · slide · swing</span></div><span class="chev">›</span></button>
+
 
       <button class="mode" type="button" data-go="actions" data-world-home="1"><div class="mode-icon">🏃</div><div class="mode-copy"><strong>Actions</strong><span>Run · jump · sing</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="festivals" data-world-home="1"><div class="mode-icon">🪔</div><div class="mode-copy"><strong>Festivals</strong><span>Diwali · Holi · Eid</span></div><span class="chev">›</span></button>
@@ -1509,6 +1513,26 @@
       <p class="word" id="in-name" style="font-size:1.4rem;color:var(--ink)">India</p>
       <button class="speak" type="button" id="in-speak">Hear</button>
       <div id="in-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;max-width:300px;margin-left:auto;margin-right:auto"></div>
+    </div>
+  </section>
+
+  <section id="outdoor" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Outdoor</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="out-emoji" style="font-size:4rem">⛺</p>
+      <p class="word" id="out-name" style="font-size:1.4rem;color:var(--ink)">Tent</p>
+      <button class="speak" type="button" id="out-speak">Hear</button>
+      <div id="out-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="blend" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Start blend</h2></div>
+    <div class="letter-stage">
+      <p class="muted">Which blend starts…</p>
+      <p class="glyph" id="bl-word" style="font-size:2.2rem">🐸 Frog</p>
+      <div class="alpha" id="bl-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
+      <p id="bl-feedback" class="word"></p>
     </div>
   </section>
   <section id="parent" class="view">
@@ -3907,6 +3931,42 @@
       document.getElementById("in-speak").addEventListener("click",()=>speakText(IND[i][0]));
       set(0);
     })();
+
+    const OUT=[["Tent","⛺"],["Slide","🛝"],["Swing","🪑"],["Sandbox","🏖️"],["Ball","⚽"],["Bike","🚲"],["Picnic","🧺"],["Campfire","🔥"]];
+    (function(){
+      let i=0; const em=document.getElementById("out-emoji"), nm=document.getElementById("out-name"), list=document.getElementById("out-list");
+      function set(idx){ i=idx; em.textContent=OUT[i][1]; nm.textContent=OUT[i][0]; }
+      OUT.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("out-speak").addEventListener("click",()=>speakText(OUT[i][0]));
+      set(0);
+    })();
+
+    const BL=[["Frog","fr","🐸"],["Star","st","⭐"],["Blue","bl","🔵"],["Green","gr","🟢"],["Tree","tr","🌳"],["Clock","cl","🕒"],["Smile","sm","😊"],["Snake","sn","🐍"]];
+    function newBL(){
+      const [word,ans,em]=BL[Math.floor(Math.random()*BL.length)];
+      document.getElementById("bl-word").textContent=em+" "+word;
+      document.getElementById("bl-feedback").textContent="";
+      const all=["fr","st","bl","gr","tr","cl","sm","sn"];
+      const opts=new Set([ans]);
+      while(opts.size<3) opts.add(all[Math.floor(Math.random()*all.length)]);
+      const box=document.getElementById("bl-choices"); box.innerHTML="";
+      [...opts].sort().forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=v;
+        b.style.minHeight="64px"; b.style.fontSize="1.35rem";
+        b.addEventListener("click",()=>{
+          if(v===ans){ document.getElementById("bl-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(ans); setTimeout(newBL,800); }
+          else document.getElementById("bl-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText(word);
+    }
+    document.querySelector('[data-go="blend"]')?.addEventListener("click",()=>setTimeout(newBL,100));
     applyTheme();
 
     const SHAPES=[

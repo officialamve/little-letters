@@ -1,12 +1,13 @@
-# Little Letters — feature map (Beta v5.0)
+# Little Letters — feature map (Beta v5.1)
 
-**117 modes** — fifth major beta milestone.
+**119 modes**
 
 - `actions`
 - `assamese`
 - `beforeafter`
 - `bengali`
 - `birds`
+- `blend`
 - `body`
 - `bugs`
 - `calm`
@@ -70,6 +71,7 @@
 - `odia`
 - `opposites`
 - `ordinals`
+- `outdoor`
 - `party`
 - `patterns`
 - `pets`
