@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v4.6)
+# Little Letters — feature map (Beta v4.7)
 
-**105 modes**
+**108 modes**
 
 - `actions`
 - `assamese`
@@ -18,6 +18,7 @@
 - `compare`
 - `count-game`
 - `count20`
+- `countdown`
 - `days`
 - `digraphs`
 - `family`
@@ -36,6 +37,7 @@
 - `hindi`
 - `hindi-nums`
 - `homewords`
+- `hygiene`
 - `kannada`
 - `kitchen`
 - `languages`
@@ -101,6 +103,7 @@
 - `truefalse`
 - `veggies`
 - `vowels`
+- `watercycle`
 - `wear`
 - `weather`
 - `wild`

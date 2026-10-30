@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.6 · free DIY build · 105 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.7 · free DIY build · 108 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -195,6 +195,8 @@
       <button class="mode" type="button" data-go="feelings" data-world-home="1"><div class="mode-icon">😊</div><div class="mode-copy"><strong>Feelings</strong><span>Happy · sad · calm</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="manners" data-world-home="1"><div class="mode-icon">🙏</div><div class="mode-copy"><strong>Manners</strong><span>Please · thank you</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="safety" data-world-home="1"><div class="mode-icon">🚦</div><div class="mode-copy"><strong>Stay safe</strong><span>Red light · seat belt</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="hygiene" data-world-home="1"><div class="mode-icon">🧼</div><div class="mode-copy"><strong>Clean habits</strong><span>Wash · brush · bathe</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -243,6 +245,8 @@
       <button class="mode" type="button" data-go="nature" data-world-home="1"><div class="mode-icon">🌳</div><div class="mode-copy"><strong>Nature</strong><span>Tree · river · flower</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="space" data-world-home="1"><div class="mode-icon">🚀</div><div class="mode-copy"><strong>Sky & space</strong><span>Rocket · moon · star</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="garden" data-world-home="1"><div class="mode-icon">🌱</div><div class="mode-copy"><strong>Garden</strong><span>Seed · flower · water</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="watercycle" data-world-home="1"><div class="mode-icon">💧</div><div class="mode-copy"><strong>Water cycle</strong><span>Sun · cloud · rain</span></div><span class="chev">›</span></button>
+
 
 
       <button class="mode" type="button" data-go="pets" data-world-home="1"><div class="mode-icon">🐶</div><div class="mode-copy"><strong>Pets</strong><span>Dog · cat · fish</span></div><span class="chev">›</span></button>
@@ -318,6 +322,8 @@
       <button class="mode games" type="button" data-go="numcmp" data-play-home="1"><div class="mode-icon">7>3</div><div class="mode-copy"><strong>Bigger number</strong><span>Compare 1–20</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="numwords" data-play-home="1"><div class="mode-icon">5→five</div><div class="mode-copy"><strong>Number words</strong><span>5 means five</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="numorder" data-play-home="1"><div class="mode-icon">1-5</div><div class="mode-copy"><strong>Put in order</strong><span>Tap 1 then 2…</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="countdown" data-play-home="1"><div class="mode-icon">10…</div><div class="mode-copy"><strong>Count down</strong><span>What comes before?</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -1368,6 +1374,36 @@
       <p class="glyph" id="spic-show" style="font-size:4rem">🐶</p>
       <div id="spic-choices" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:280px;margin:16px auto 0"></div>
       <p id="spic-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="watercycle" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Water cycle</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="wc-emoji" style="font-size:4rem">☀️</p>
+      <p class="word" id="wc-name" style="font-size:1.3rem;color:var(--ink)">Sun heats water</p>
+      <button class="speak" type="button" id="wc-speak">Hear</button>
+      <div id="wc-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;max-width:300px;margin-left:auto;margin-right:auto"></div>
+    </div>
+  </section>
+
+  <section id="countdown" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Count down</h2></div>
+    <div class="letter-stage">
+      <p class="muted">What comes before?</p>
+      <p class="glyph" id="cd-num" style="font-size:4rem">7</p>
+      <div class="alpha" id="cd-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
+      <p id="cd-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="hygiene" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Clean habits</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="hy-emoji" style="font-size:4rem">🧼</p>
+      <p class="word" id="hy-name" style="font-size:1.4rem;color:var(--ink)">Wash hands</p>
+      <button class="speak" type="button" id="hy-speak">Hear</button>
+      <div id="hy-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;max-width:300px;margin-left:auto;margin-right:auto"></div>
     </div>
   </section>
   <section id="parent" class="view">
@@ -3569,6 +3605,55 @@
       });
     }
     document.querySelector('[data-go="samepic"]')?.addEventListener("click",()=>setTimeout(newSPic,100));
+
+    const WC=[["Sun heats water","☀️"],["Water goes up","⬆️"],["Clouds form","☁️"],["Rain falls","🌧️"]];
+    (function(){
+      let i=0; const em=document.getElementById("wc-emoji"), nm=document.getElementById("wc-name"), list=document.getElementById("wc-list");
+      function set(idx){ i=idx; em.textContent=WC[i][1]; nm.textContent=WC[i][0]; }
+      WC.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=(idx+1)+". "+f[1];
+        b.style.cssText="min-height:56px;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.1rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("wc-speak").addEventListener("click",()=>speakText(WC[i][0]));
+      set(0);
+    })();
+
+    function newCD(){
+      const n=2+Math.floor(Math.random()*9);
+      const ans=n-1;
+      document.getElementById("cd-num").textContent=String(n);
+      document.getElementById("cd-feedback").textContent="";
+      const opts=new Set([ans]);
+      while(opts.size<3){ const r=1+Math.floor(Math.random()*10); if(r!==n) opts.add(r); }
+      const box=document.getElementById("cd-choices"); box.innerHTML="";
+      [...opts].sort((a,b)=>a-b).forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=String(v);
+        b.style.minHeight="64px"; b.style.fontSize="1.5rem";
+        b.addEventListener("click",()=>{
+          if(v===ans){ document.getElementById("cd-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(String(ans)); setTimeout(newCD,700); }
+          else document.getElementById("cd-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText("before "+n);
+    }
+    document.querySelector('[data-go="countdown"]')?.addEventListener("click",()=>setTimeout(newCD,100));
+
+    const HY=[["Wash hands","🧼"],["Brush teeth","🪥"],["Bathe","🛁"],["Comb hair","💇"],["Trim nails","💅"],["Cover sneeze","🤧"],["Drink water","💧"],["Sleep well","😴"]];
+    (function(){
+      let i=0; const em=document.getElementById("hy-emoji"), nm=document.getElementById("hy-name"), list=document.getElementById("hy-list");
+      function set(idx){ i=idx; em.textContent=HY[i][1]; nm.textContent=HY[i][0]; }
+      HY.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[0];
+        b.style.cssText="min-height:52px;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:.9rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("hy-speak").addEventListener("click",()=>speakText(HY[i][0]));
+      set(0);
+    })();
     applyTheme();
 
     const SHAPES=[
