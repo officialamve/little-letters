@@ -1,4 +1,4 @@
-# Little Letters (Beta v0.8)
+# Little Letters (Beta v0.9)
 
 Calm, premium alphabet learning for kids — DIY PWA.
 
