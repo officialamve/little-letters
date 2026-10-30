@@ -98,10 +98,17 @@
       <button class="mode" type="button" data-go="letters"><div class="mode-icon">Aa</div><div class="mode-copy"><strong>Letters</strong><span>English A–Z</span></div><span class="chev">›</span></button>
       <button class="mode hindi" type="button" data-go="hindi"><div class="mode-icon">अ</div><div class="mode-copy"><strong>Hindi</strong><span>स्वर + व्यंजन</span></div><span class="chev">›</span></button>
       <button class="mode hindi" type="button" data-go="tamil"><div class="mode-icon" style="background:#ECFDF5;color:#047857">அ</div><div class="mode-copy"><strong>Tamil</strong><span>உயிர் எழுத்துகள்</span></div><span class="chev">›</span></button>
+      <button class="mode hindi" type="button" data-go="malayalam"><div class="mode-icon" style="background:#FDF2F8;color:#BE185D">അ</div><div class="mode-copy"><strong>Malayalam</strong><span>സ്വരങ്ങൾ</span></div><span class="chev">›</span></button>
+
+      <button class="mode hindi" type="button" data-go="telugu"><div class="mode-icon" style="background:#FFF7ED;color:#C2410C">అ</div><div class="mode-copy"><strong>Telugu</strong><span>అచ్చులు</span></div><span class="chev">›</span></button>
+
+      <button class="mode hindi" type="button" data-go="kannada"><div class="mode-icon" style="background:#EEF2FF;color:#4338CA">ಅ</div><div class="mode-copy"><strong>Kannada</strong><span>ಸ್ವರಗಳು</span></div><span class="chev">›</span></button>
+
       <button class="mode write" type="button" data-go="write"><div class="mode-icon">✎</div><div class="mode-copy"><strong>Write</strong><span>Trace letters</span></div><span class="chev">›</span></button>
       <button class="mode songs" type="button" data-go="songs"><div class="mode-icon">♪</div><div class="mode-copy"><strong>Songs</strong><span>Alphabet &amp; rhymes</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="games"><div class="mode-icon">◇</div><div class="mode-copy"><strong>Games</strong><span>Tap what you hear</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="match"><div class="mode-icon" style="background:#FCE7F3;color:#BE185D">Aa</div><div class="mode-copy"><strong>Match</strong><span>Letter → word</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="memory"><div class="mode-icon">◉</div><div class="mode-copy"><strong>Memory</strong><span>Remember 3 letters</span></div><span class="chev">›</span></button>
       <button class="mode write" type="button" data-go="sheets"><div class="mode-icon">🖨️</div><div class="mode-copy"><strong>Print sheet</strong><span>Offline tracing paper</span></div><span class="chev">›</span></button>
     </div>
   </main>
@@ -123,6 +130,24 @@
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Tamil · உயிர்</h2></div>
     <div class="letter-stage"><p class="glyph hi" id="ta-glyph" style="font-family:system-ui">அ</p><p class="word" id="ta-word">a</p><button class="speak" type="button" id="ta-speak">Hear</button></div>
     <div class="alpha hi" id="ta-alpha"></div>
+  </section>
+
+  <section id="kannada" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Kannada · ಸ್ವರ</h2></div>
+    <div class="letter-stage"><p class="glyph hi" id="kannada-glyph" style="font-family:system-ui">ಅ</p><p class="word" id="kannada-word">a</p><button class="speak" type="button" id="kannada-speak">Hear</button></div>
+    <div class="alpha hi" id="kannada-alpha"></div>
+  </section>
+
+  <section id="telugu" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Telugu · అచ్చులు</h2></div>
+    <div class="letter-stage"><p class="glyph hi" id="telugu-glyph" style="font-family:system-ui">అ</p><p class="word" id="telugu-word">a</p><button class="speak" type="button" id="telugu-speak">Hear</button></div>
+    <div class="alpha hi" id="telugu-alpha"></div>
+  </section>
+
+  <section id="malayalam" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Malayalam · സ്വരം</h2></div>
+    <div class="letter-stage"><p class="glyph hi" id="malayalam-glyph" style="font-family:system-ui">അ</p><p class="word" id="malayalam-word">a</p><button class="speak" type="button" id="malayalam-speak">Hear</button></div>
+    <div class="alpha hi" id="malayalam-alpha"></div>
   </section>
   <section id="write" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Write</h2></div>
@@ -194,6 +219,17 @@
       <p class="soon-title">Print A–Z traces</p>
       <p class="muted" style="margin-bottom:14px">Opens a simple dotted sheet you can print for offline writing practice.</p>
       <button class="speak" type="button" id="open-sheet">Open sheet</button>
+    </div>
+  </section>
+
+  <section id="memory" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Memory</h2></div>
+    <div class="letter-stage">
+      <p class="muted" id="mem-prompt" style="margin:0 0 12px">Watch the letters…</p>
+      <p class="glyph" id="mem-glyph" style="font-size:4rem;min-height:4.5rem">?</p>
+      <div class="alpha" id="mem-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
+      <button class="speak" type="button" id="mem-start" style="margin-top:16px">Start</button>
+      <p id="mem-feedback" class="word" style="min-height:1.4em"></p>
     </div>
   </section>
   <section id="parent" class="view">
@@ -508,6 +544,106 @@
     }
     document.getElementById("ta-speak").addEventListener("click",()=>speakText(TAMIL[taIdx].ch));
     selectTa(0);
+
+    const KANNADA_LETTERS = [{ch:"ಅ", roman:"a"},{ch:"ಆ", roman:"aa"},{ch:"ಇ", roman:"i"},{ch:"ಈ", roman:"ii"},{ch:"ಉ", roman:"u"},{ch:"ಊ", roman:"uu"},{ch:"ಋ", roman:"ru"},{ch:"ಎ", roman:"e"},{ch:"ಏ", roman:"ee"},{ch:"ಐ", roman:"ai"},{ch:"ಒ", roman:"o"},{ch:"ಓ", roman:"oo"},{ch:"ಔ", roman:"au"},];
+    (function(){
+      const glyph=document.getElementById("kannada-glyph");
+      const word=document.getElementById("kannada-word");
+      const alpha=document.getElementById("kannada-alpha");
+      let idx=0;
+      KANNADA_LETTERS.forEach((item,i)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=item.ch; b.style.fontFamily="system-ui";
+        b.addEventListener("click",()=>{
+          idx=i; glyph.textContent=item.ch; word.textContent=item.roman;
+          [...alpha.children].forEach((el,j)=>el.classList.toggle("active",j===i));
+        });
+        alpha.appendChild(b);
+      });
+      document.getElementById("kannada-speak").addEventListener("click",()=>speakText(KANNADA_LETTERS[idx].ch));
+      if(alpha.children[0]) alpha.children[0].classList.add("active");
+    })();
+
+    const TELUGU_LETTERS = [{ch:"అ", roman:"a"},{ch:"ఆ", roman:"aa"},{ch:"ఇ", roman:"i"},{ch:"ఈ", roman:"ii"},{ch:"ఉ", roman:"u"},{ch:"ఊ", roman:"uu"},{ch:"ఎ", roman:"e"},{ch:"ఏ", roman:"ee"},{ch:"ఐ", roman:"ai"},{ch:"ఒ", roman:"o"},{ch:"ఓ", roman:"oo"},{ch:"ఔ", roman:"au"},];
+    (function(){
+      const glyph=document.getElementById("telugu-glyph");
+      const word=document.getElementById("telugu-word");
+      const alpha=document.getElementById("telugu-alpha");
+      let idx=0;
+      TELUGU_LETTERS.forEach((item,i)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=item.ch; b.style.fontFamily="system-ui";
+        b.addEventListener("click",()=>{
+          idx=i; glyph.textContent=item.ch; word.textContent=item.roman;
+          [...alpha.children].forEach((el,j)=>el.classList.toggle("active",j===i));
+        });
+        alpha.appendChild(b);
+      });
+      document.getElementById("telugu-speak").addEventListener("click",()=>speakText(TELUGU_LETTERS[idx].ch));
+      if(alpha.children[0]) alpha.children[0].classList.add("active");
+    })();
+
+    const MALAYALAM_LETTERS = [{ch:"അ", roman:"a"},{ch:"ആ", roman:"aa"},{ch:"ഇ", roman:"i"},{ch:"ഈ", roman:"ii"},{ch:"ഉ", roman:"u"},{ch:"ഊ", roman:"uu"},{ch:"എ", roman:"e"},{ch:"ഏ", roman:"ee"},{ch:"ഐ", roman:"ai"},{ch:"ഒ", roman:"o"},{ch:"ഓ", roman:"oo"},{ch:"ഔ", roman:"au"},];
+    (function(){
+      const glyph=document.getElementById("malayalam-glyph");
+      const word=document.getElementById("malayalam-word");
+      const alpha=document.getElementById("malayalam-alpha");
+      let idx=0;
+      MALAYALAM_LETTERS.forEach((item,i)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=item.ch; b.style.fontFamily="system-ui";
+        b.addEventListener("click",()=>{
+          idx=i; glyph.textContent=item.ch; word.textContent=item.roman;
+          [...alpha.children].forEach((el,j)=>el.classList.toggle("active",j===i));
+        });
+        alpha.appendChild(b);
+      });
+      document.getElementById("malayalam-speak").addEventListener("click",()=>speakText(MALAYALAM_LETTERS[idx].ch));
+      if(alpha.children[0]) alpha.children[0].classList.add("active");
+    })();
+
+    let memSeq=[], memStep=0, memListening=false;
+    function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
+    async function runMemory(){
+      const all=Object.keys(WORDS);
+      memSeq=[];
+      while(memSeq.length<3){ const L=all[Math.floor(Math.random()*all.length)]; if(!memSeq.includes(L)) memSeq.push(L); }
+      memListening=false; memStep=0;
+      document.getElementById("mem-feedback").textContent="";
+      document.getElementById("mem-prompt").textContent="Watch the letters…";
+      document.getElementById("mem-choices").innerHTML="";
+      const g=document.getElementById("mem-glyph");
+      for(const L of memSeq){
+        g.textContent=L; speakText(L,0.9); await sleep(900);
+      }
+      g.textContent="?";
+      document.getElementById("mem-prompt").textContent="Tap them in order";
+      memListening=true;
+      const opts=new Set(memSeq);
+      while(opts.size<3) opts.add(all[Math.floor(Math.random()*all.length)]);
+      // always show the 3 seq letters as choices
+      const choices=[...memSeq].sort(()=>Math.random()-0.5);
+      const box=document.getElementById("mem-choices"); box.innerHTML="";
+      choices.forEach((L)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=L;
+        b.style.minHeight="64px"; b.style.fontSize="1.35rem";
+        b.addEventListener("click",()=>{
+          if(!memListening) return;
+          if(L===memSeq[memStep]){
+            memStep++;
+            if(memStep>=memSeq.length){
+              memListening=false;
+              document.getElementById("mem-feedback").textContent="Great memory!";
+              state.games=(state.games||0)+1; save();
+              speakText("Great job");
+            }
+          } else {
+            document.getElementById("mem-feedback").textContent="Try again — Start over";
+            memListening=false;
+          }
+        });
+        box.appendChild(b);
+      });
+    }
+    document.getElementById("mem-start").addEventListener("click", runMemory);
+    document.querySelector('[data-go="memory"]').addEventListener("click", ()=>setTimeout(()=>{ document.getElementById("mem-glyph").textContent="?"; },100));
     refreshStats(); touchStreak();
   </script>
 </body>
