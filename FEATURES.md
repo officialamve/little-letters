@@ -1,11 +1,12 @@
-# Little Letters — feature map (Beta v4.2)
+# Little Letters — feature map (Beta v4.3)
 
-**95 modes**
+**98 modes**
 
 - `actions`
 - `assamese`
 - `beforeafter`
 - `bengali`
+- `birds`
 - `body`
 - `bugs`
 - `calm`
@@ -52,6 +53,7 @@
 - `nature`
 - `numbers`
 - `numcmp`
+- `numorder`
 - `numwords`
 - `ocean`
 - `oddone`
@@ -75,6 +77,7 @@
 - `sheets`
 - `sight`
 - `skip`
+- `snacks`
 - `songs`
 - `sortsize`
 - `spell`

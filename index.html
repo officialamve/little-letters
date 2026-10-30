@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.2 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.3 · free DIY build</p>
       </div>
     </div>
     <input id="home-search" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -226,6 +226,8 @@
       <button class="mode" type="button" data-go="food" data-world-home="1"><div class="mode-icon">🍎</div><div class="mode-copy"><strong>Food</strong><span>Apple · rice · milk</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="fruits" data-world-home="1"><div class="mode-icon">🥭</div><div class="mode-copy"><strong>Fruits</strong><span>Mango · banana · apple</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="veggies" data-world-home="1"><div class="mode-icon">🥕</div><div class="mode-copy"><strong>Veggies</strong><span>Carrot · potato · pea</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="snacks" data-world-home="1"><div class="mode-icon">🍪</div><div class="mode-copy"><strong>Snacks</strong><span>Idli · dosa · cookie</span></div><span class="chev">›</span></button>
+
 
 
       <button class="mode" type="button" data-go="transport" data-world-home="1"><div class="mode-icon">🚗</div><div class="mode-copy"><strong>Vehicles</strong><span>Car · bus · train</span></div><span class="chev">›</span></button>
@@ -241,6 +243,8 @@
       <button class="mode" type="button" data-go="farm" data-world-home="1"><div class="mode-icon">🐄</div><div class="mode-copy"><strong>Farm</strong><span>Cow · hen · goat</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="ocean" data-world-home="1"><div class="mode-icon">🐠</div><div class="mode-copy"><strong>Ocean</strong><span>Fish · crab · whale</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="wild" data-world-home="1"><div class="mode-icon">🦁</div><div class="mode-copy"><strong>Wild</strong><span>Lion · tiger · elephant</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="birds" data-world-home="1"><div class="mode-icon">🦚</div><div class="mode-copy"><strong>Birds</strong><span>Peacock · crow · owl</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -299,6 +303,8 @@
       <button class="mode games" type="button" data-go="sortsize" data-play-home="1"><div class="mode-icon">▮▮▮</div><div class="mode-copy"><strong>Sort size</strong><span>Small → big</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="numcmp" data-play-home="1"><div class="mode-icon">7>3</div><div class="mode-copy"><strong>Bigger number</strong><span>Compare 1–20</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="numwords" data-play-home="1"><div class="mode-icon">5→five</div><div class="mode-copy"><strong>Number words</strong><span>5 means five</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="numorder" data-play-home="1"><div class="mode-icon">1-5</div><div class="mode-copy"><strong>Put in order</strong><span>Tap 1 then 2…</span></div><span class="chev">›</span></button>
+
 
 
 
@@ -1249,6 +1255,36 @@
       <p class="muted" id="wear-q">It is raining. Wear…</p>
       <div class="alpha" id="wear-choices" style="grid-template-columns:repeat(2,1fr);max-width:300px;margin:16px auto 0;gap:12px"></div>
       <p id="wear-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="birds" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Birds</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="bi-emoji" style="font-size:4rem">🦚</p>
+      <p class="word" id="bi-name" style="font-size:1.4rem;color:var(--ink)">Peacock</p>
+      <button class="speak" type="button" id="bi-speak">Hear</button>
+      <div id="bi-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="numorder" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Put in order</h2></div>
+    <div class="letter-stage">
+      <p class="muted">Tap 1 → 5</p>
+      <div id="no-row" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:16px;max-width:300px;margin-left:auto;margin-right:auto"></div>
+      <p id="no-feedback" class="word"></p>
+      <button class="speak" type="button" id="no-again" style="margin-top:12px">Again</button>
+    </div>
+  </section>
+
+  <section id="snacks" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Snacks</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="sn-emoji" style="font-size:4rem">🍪</p>
+      <p class="word" id="sn-name" style="font-size:1.4rem;color:var(--ink)">Cookie</p>
+      <button class="speak" type="button" id="sn-speak">Hear</button>
+      <div id="sn-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
     </div>
   </section>
   <section id="parent" class="view">
@@ -3284,6 +3320,52 @@
       speakText(g.q);
     }
     document.querySelector('[data-go="wear"]')?.addEventListener("click",()=>setTimeout(newWear,100));
+
+    const BIRDS=[["Peacock","🦚"],["Crow","🐦‍⬛"],["Owl","🦉"],["Parrot","🦜"],["Duck","🦆"],["Hen","🐔"],["Eagle","🦅"],["Sparrow","🐦"]];
+    (function(){
+      let i=0; const em=document.getElementById("bi-emoji"), nm=document.getElementById("bi-name"), list=document.getElementById("bi-list");
+      function set(idx){ i=idx; em.textContent=BIRDS[i][1]; nm.textContent=BIRDS[i][0]; }
+      BIRDS.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("bi-speak").addEventListener("click",()=>speakText(BIRDS[i][0]));
+      set(0);
+    })();
+
+    function newNumOrder(){
+      const nums=[1,2,3,4,5].sort(()=>Math.random()-.5);
+      let expect=1;
+      document.getElementById("no-feedback").textContent="";
+      const row=document.getElementById("no-row"); row.innerHTML="";
+      nums.forEach(n=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=String(n);
+        b.style.cssText="width:56px;height:56px;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.35rem;cursor:pointer";
+        b.addEventListener("click",()=>{
+          if(n===expect){ b.style.opacity=".35"; expect++; if(expect===6){ document.getElementById("no-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText("Great"); setTimeout(newNumOrder,800); } }
+          else document.getElementById("no-feedback").textContent="Next is "+expect;
+        });
+        row.appendChild(b);
+      });
+    }
+    document.getElementById("no-again")?.addEventListener("click",newNumOrder);
+    document.querySelector('[data-go="numorder"]')?.addEventListener("click",()=>setTimeout(newNumOrder,100));
+
+    const SNACKS=[["Idli","⚪"],["Dosa","🟤"],["Cookie","🍪"],["Ladoo","🟡"],["Samosa","🔺"],["Poha","🥣"],["Juice","🧃"],["Ice cream","🍦"]];
+    (function(){
+      let i=0; const em=document.getElementById("sn-emoji"), nm=document.getElementById("sn-name"), list=document.getElementById("sn-list");
+      function set(idx){ i=idx; em.textContent=SNACKS[i][1]; nm.textContent=SNACKS[i][0]; }
+      SNACKS.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("sn-speak").addEventListener("click",()=>speakText(SNACKS[i][0]));
+      set(0);
+    })();
     applyTheme();
 
     const SHAPES=[
