@@ -46,6 +46,7 @@
     .mode.hindi .mode-icon { background: #FEF3C7; color: #B45309; font-family: "Noto Sans Devanagari", sans-serif; }
     .mode-copy { flex: 1; } .mode-copy strong { display: block; font-size: 1.05rem; } .mode-copy span { font-size: .84rem; color: var(--ink-soft); }
     .chev { color: #A8A29E; }
+    #home button.mode[data-lang-home] { display: none; }
     .top { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
     .back, .chip { border: 1px solid var(--line); background: var(--bg-elev); border-radius: 14px; cursor: pointer; color: var(--ink); font: inherit; }
     .back { width: 42px; height: 42px; font-size: 1.1rem; }
@@ -96,21 +97,22 @@
     </div>
     <div class="modes">
       <button class="mode" type="button" data-go="letters"><div class="mode-icon">Aa</div><div class="mode-copy"><strong>Letters</strong><span>English A–Z</span></div><span class="chev">›</span></button>
-      <button class="mode hindi" type="button" data-go="hindi"><div class="mode-icon">अ</div><div class="mode-copy"><strong>Hindi</strong><span>स्वर + व्यंजन</span></div><span class="chev">›</span></button>
-      <button class="mode hindi" type="button" data-go="tamil"><div class="mode-icon" style="background:#ECFDF5;color:#047857">அ</div><div class="mode-copy"><strong>Tamil</strong><span>உயிர் எழுத்துகள்</span></div><span class="chev">›</span></button>
-      <button class="mode hindi" type="button" data-go="malayalam"><div class="mode-icon" style="background:#FDF2F8;color:#BE185D">അ</div><div class="mode-copy"><strong>Malayalam</strong><span>സ്വരങ്ങൾ</span></div><span class="chev">›</span></button>
-      <button class="mode hindi" type="button" data-go="punjabi"><div class="mode-icon" style="background:#EFF6FF;color:#1D4ED8">ਅ</div><div class="mode-copy"><strong>Punjabi</strong><span>ਸਵਰ</span></div><span class="chev">›</span></button>
+      <button class="mode hindi" type="button" data-go="hindi" data-lang-home="1"><div class="mode-icon">अ</div><div class="mode-copy"><strong>Hindi</strong><span>स्वर + व्यंजन</span></div><span class="chev">›</span></button>
+      <button class="mode hindi" type="button" data-go="tamil" data-lang-home="1"><div class="mode-icon" style="background:#ECFDF5;color:#047857">அ</div><div class="mode-copy"><strong>Tamil</strong><span>உயிர் எழுத்துகள்</span></div><span class="chev">›</span></button>
+      <button class="mode hindi" type="button" data-go="malayalam" data-lang-home="1"><div class="mode-icon" style="background:#FDF2F8;color:#BE185D">അ</div><div class="mode-copy"><strong>Malayalam</strong><span>സ്വരങ്ങൾ</span></div><span class="chev">›</span></button>
+      <button class="mode hindi" type="button" data-go="punjabi" data-lang-home="1"><div class="mode-icon" style="background:#EFF6FF;color:#1D4ED8">ਅ</div><div class="mode-copy"><strong>Punjabi</strong><span>ਸਵਰ</span></div><span class="chev">›</span></button>
 
-      <button class="mode hindi" type="button" data-go="gujarati"><div class="mode-icon" style="background:#FFFBEB;color:#A16207">અ</div><div class="mode-copy"><strong>Gujarati</strong><span>સ્વર</span></div><span class="chev">›</span></button>
+      <button class="mode hindi" type="button" data-go="gujarati" data-lang-home="1"><div class="mode-icon" style="background:#FFFBEB;color:#A16207">અ</div><div class="mode-copy"><strong>Gujarati</strong><span>સ્વર</span></div><span class="chev">›</span></button>
 
-      <button class="mode hindi" type="button" data-go="bengali"><div class="mode-icon" style="background:#F0FDF4;color:#15803D">অ</div><div class="mode-copy"><strong>Bengali</strong><span>স্বরবর্ণ</span></div><span class="chev">›</span></button>
+      <button class="mode hindi" type="button" data-go="bengali" data-lang-home="1"><div class="mode-icon" style="background:#F0FDF4;color:#15803D">অ</div><div class="mode-copy"><strong>Bengali</strong><span>স্বরবর্ণ</span></div><span class="chev">›</span></button>
 
 
-      <button class="mode hindi" type="button" data-go="telugu"><div class="mode-icon" style="background:#FFF7ED;color:#C2410C">అ</div><div class="mode-copy"><strong>Telugu</strong><span>అచ్చులు</span></div><span class="chev">›</span></button>
+      <button class="mode hindi" type="button" data-go="telugu" data-lang-home="1"><div class="mode-icon" style="background:#FFF7ED;color:#C2410C">అ</div><div class="mode-copy"><strong>Telugu</strong><span>అచ్చులు</span></div><span class="chev">›</span></button>
 
-      <button class="mode hindi" type="button" data-go="kannada"><div class="mode-icon" style="background:#EEF2FF;color:#4338CA">ಅ</div><div class="mode-copy"><strong>Kannada</strong><span>ಸ್ವರಗಳು</span></div><span class="chev">›</span></button>
+      <button class="mode hindi" type="button" data-go="kannada" data-lang-home="1"><div class="mode-icon" style="background:#EEF2FF;color:#4338CA">ಅ</div><div class="mode-copy"><strong>Kannada</strong><span>ಸ್ವರಗಳು</span></div><span class="chev">›</span></button>
 
-      <button class="mode write" type="button" data-go="write"><div class="mode-icon">✎</div><div class="mode-copy"><strong>Write</strong><span>Trace letters</span></div><span class="chev">›</span></button>
+            <button class="mode hindi" type="button" data-go="languages"><div class="mode-icon">文</div><div class="mode-copy"><strong>Languages</strong><span>Hindi · Tamil · more</span></div><span class="chev">›</span></button>
+<button class="mode write" type="button" data-go="write"><div class="mode-icon">✎</div><div class="mode-copy"><strong>Write</strong><span>Trace letters</span></div><span class="chev">›</span></button>
       <button class="mode songs" type="button" data-go="songs"><div class="mode-icon">♪</div><div class="mode-copy"><strong>Songs</strong><span>Alphabet &amp; rhymes</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="games"><div class="mode-icon">◇</div><div class="mode-copy"><strong>Games</strong><span>Tap what you hear</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="match"><div class="mode-icon" style="background:#FCE7F3;color:#BE185D">Aa</div><div class="mode-copy"><strong>Match</strong><span>Letter → word</span></div><span class="chev">›</span></button>
@@ -172,6 +174,11 @@
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Punjabi · ਸਵਰ</h2></div>
     <div class="letter-stage"><p class="glyph hi" id="punjabi-glyph" style="font-family:system-ui">ਅ</p><p class="word" id="punjabi-word">a</p><button class="speak" type="button" id="punjabi-speak">Hear</button></div>
     <div class="alpha hi" id="punjabi-alpha"></div>
+  </section>
+
+  <section id="languages" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Languages</h2></div>
+    <div class="modes" id="lang-list"></div>
   </section>
   <section id="write" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Write</h2></div>
@@ -721,6 +728,18 @@
       });
       document.getElementById("punjabi-speak").addEventListener("click",()=>speakText(PUNJABI_LETTERS[idx].ch));
       if(alpha.children[0]) alpha.children[0].classList.add("active");
+    })();
+
+    (function(){
+      const list=document.getElementById("lang-list");
+      if(!list) return;
+      document.querySelectorAll("#home button.mode[data-lang-home]").forEach((btn)=>{
+        const clone=btn.cloneNode(true);
+        clone.removeAttribute("data-lang-home");
+        clone.style.display="flex";
+        clone.addEventListener("click",()=>show(clone.dataset.go));
+        list.appendChild(clone);
+      });
     })();
     refreshStats(); touchStreak();
   </script>
