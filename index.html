@@ -143,7 +143,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v1.5 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v1.6 · free DIY build</p>
       </div>
     </div>
     <input id="home-search" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -188,6 +188,8 @@
       <button class="mode" type="button" data-go="stories" data-world-home="1"><div class="mode-icon" style="background:#FFEDD5;color:#C2410C">📖</div><div class="mode-copy"><strong>Stories</strong><span>Short read-alouds</span></div><span class="chev">›</span></button>
 
       <button class="mode" type="button" data-go="sight" data-world-home="1"><div class="mode-icon" style="background:#F3E8FF;color:#7E22CE">the</div><div class="mode-copy"><strong>Sight words</strong><span>the, and, you…</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="digraphs" data-world-home="1"><div class="mode-icon">ch</div><div class="mode-copy"><strong>Digraphs</strong><span>ch sh th wh</span></div><span class="chev">›</span></button>
+
 <button class="mode write" type="button" data-go="write"><div class="mode-icon">✎</div><div class="mode-copy"><strong>Write</strong><span>Trace letters</span></div><span class="chev">›</span></button>
       <button class="mode songs" type="button" data-go="songs"><div class="mode-icon">♪</div><div class="mode-copy"><strong>Songs</strong><span>Alphabet &amp; rhymes</span></div><span class="chev">›</span></button>
             <div class="home-sec">Play</div>
@@ -536,6 +538,16 @@
       </div>
     </div>
   </section>
+
+  <section id="digraphs" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Digraphs</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="di-glyph" style="font-size:3.2rem">ch</p>
+      <p class="word" id="di-word">chair · cheese · chick</p>
+      <button class="speak" type="button" id="di-speak">Hear</button>
+      <div class="alpha" id="di-alpha" style="grid-template-columns:repeat(3,1fr);margin-top:16px"></div>
+    </div>
+  </section>
   <section id="parent" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
@@ -551,7 +563,7 @@
         <input type="checkbox" id="theme-toggle" /> Dark mode
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v1.5 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v1.6 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Install:</strong> in Chrome, menu → Add to Home Screen for an app-like icon.</p>
       <div class="row" style="justify-content:flex-start">
         <button class="speak ghost" type="button" id="share-progress">Share text</button>
@@ -563,6 +575,7 @@
     </div>
   </section>
 
+  <div id="net" style="display:none;text-align:center;font-size:.75rem;color:var(--ink-soft);margin-bottom:8px">Offline · saved lessons still work</div>
   <div class="toast" id="toast" role="status"></div>
   <nav class="nav" aria-label="Main">
     <button type="button" class="on" data-nav="home"><span class="n">⌂</span>Home</button>
@@ -1557,6 +1570,21 @@
         list.appendChild(clone);
       });
     }
+
+    const DI=[["ch","chair · cheese · chick"],["sh","ship · shoe · fish"],["th","thumb · this · path"],["wh","whale · when · wheel"],["ph","phone · photo"],["ck","duck · sock · back"]];
+    (function(){
+      let i=0; const g=document.getElementById("di-glyph"), w=document.getElementById("di-word"), a=document.getElementById("di-alpha");
+      DI.forEach((item,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=item[0];
+        b.addEventListener("click",()=>{ i=idx; g.textContent=item[0]; w.textContent=item[1]; [...a.children].forEach((el,j)=>el.classList.toggle("active",j===idx)); });
+        a.appendChild(b);
+      });
+      document.getElementById("di-speak").addEventListener("click",()=>speakText(DI[i][0]+". "+DI[i][1]));
+      if(a.children[0]) a.children[0].classList.add("active");
+    })();
+
+    function net(){ const el=document.getElementById("net"); if(el) el.style.display=navigator.onLine?"none":"block"; }
+    window.addEventListener("online",net); window.addEventListener("offline",net); net();
     applyTheme();
 
     const SHAPES=[
