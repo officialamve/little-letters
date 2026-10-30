@@ -99,6 +99,12 @@
       <button class="mode hindi" type="button" data-go="hindi"><div class="mode-icon">अ</div><div class="mode-copy"><strong>Hindi</strong><span>स्वर + व्यंजन</span></div><span class="chev">›</span></button>
       <button class="mode hindi" type="button" data-go="tamil"><div class="mode-icon" style="background:#ECFDF5;color:#047857">அ</div><div class="mode-copy"><strong>Tamil</strong><span>உயிர் எழுத்துகள்</span></div><span class="chev">›</span></button>
       <button class="mode hindi" type="button" data-go="malayalam"><div class="mode-icon" style="background:#FDF2F8;color:#BE185D">അ</div><div class="mode-copy"><strong>Malayalam</strong><span>സ്വരങ്ങൾ</span></div><span class="chev">›</span></button>
+      <button class="mode hindi" type="button" data-go="punjabi"><div class="mode-icon" style="background:#EFF6FF;color:#1D4ED8">ਅ</div><div class="mode-copy"><strong>Punjabi</strong><span>ਸਵਰ</span></div><span class="chev">›</span></button>
+
+      <button class="mode hindi" type="button" data-go="gujarati"><div class="mode-icon" style="background:#FFFBEB;color:#A16207">અ</div><div class="mode-copy"><strong>Gujarati</strong><span>સ્વર</span></div><span class="chev">›</span></button>
+
+      <button class="mode hindi" type="button" data-go="bengali"><div class="mode-icon" style="background:#F0FDF4;color:#15803D">অ</div><div class="mode-copy"><strong>Bengali</strong><span>স্বরবর্ণ</span></div><span class="chev">›</span></button>
+
 
       <button class="mode hindi" type="button" data-go="telugu"><div class="mode-icon" style="background:#FFF7ED;color:#C2410C">అ</div><div class="mode-copy"><strong>Telugu</strong><span>అచ్చులు</span></div><span class="chev">›</span></button>
 
@@ -148,6 +154,24 @@
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Malayalam · സ്വരം</h2></div>
     <div class="letter-stage"><p class="glyph hi" id="malayalam-glyph" style="font-family:system-ui">അ</p><p class="word" id="malayalam-word">a</p><button class="speak" type="button" id="malayalam-speak">Hear</button></div>
     <div class="alpha hi" id="malayalam-alpha"></div>
+  </section>
+
+  <section id="bengali" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Bengali · স্বরবর্ণ</h2></div>
+    <div class="letter-stage"><p class="glyph hi" id="bengali-glyph" style="font-family:system-ui">অ</p><p class="word" id="bengali-word">a</p><button class="speak" type="button" id="bengali-speak">Hear</button></div>
+    <div class="alpha hi" id="bengali-alpha"></div>
+  </section>
+
+  <section id="gujarati" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Gujarati · સ્વર</h2></div>
+    <div class="letter-stage"><p class="glyph hi" id="gujarati-glyph" style="font-family:system-ui">અ</p><p class="word" id="gujarati-word">a</p><button class="speak" type="button" id="gujarati-speak">Hear</button></div>
+    <div class="alpha hi" id="gujarati-alpha"></div>
+  </section>
+
+  <section id="punjabi" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Punjabi · ਸਵਰ</h2></div>
+    <div class="letter-stage"><p class="glyph hi" id="punjabi-glyph" style="font-family:system-ui">ਅ</p><p class="word" id="punjabi-word">a</p><button class="speak" type="button" id="punjabi-speak">Hear</button></div>
+    <div class="alpha hi" id="punjabi-alpha"></div>
   </section>
   <section id="write" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Write</h2></div>
@@ -644,6 +668,60 @@
     }
     document.getElementById("mem-start").addEventListener("click", runMemory);
     document.querySelector('[data-go="memory"]').addEventListener("click", ()=>setTimeout(()=>{ document.getElementById("mem-glyph").textContent="?"; },100));
+
+    const BENGALI_LETTERS = [{ch:"অ", roman:"a"},{ch:"আ", roman:"aa"},{ch:"ই", roman:"i"},{ch:"ঈ", roman:"ii"},{ch:"উ", roman:"u"},{ch:"ঊ", roman:"uu"},{ch:"ঋ", roman:"ri"},{ch:"এ", roman:"e"},{ch:"ঐ", roman:"oi"},{ch:"ও", roman:"o"},{ch:"ঔ", roman:"ou"},];
+    (function(){
+      const glyph=document.getElementById("bengali-glyph");
+      const word=document.getElementById("bengali-word");
+      const alpha=document.getElementById("bengali-alpha");
+      let idx=0;
+      BENGALI_LETTERS.forEach((item,i)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=item.ch; b.style.fontFamily="system-ui";
+        b.addEventListener("click",()=>{
+          idx=i; glyph.textContent=item.ch; word.textContent=item.roman;
+          [...alpha.children].forEach((el,j)=>el.classList.toggle("active",j===i));
+        });
+        alpha.appendChild(b);
+      });
+      document.getElementById("bengali-speak").addEventListener("click",()=>speakText(BENGALI_LETTERS[idx].ch));
+      if(alpha.children[0]) alpha.children[0].classList.add("active");
+    })();
+
+    const GUJARATI_LETTERS = [{ch:"અ", roman:"a"},{ch:"આ", roman:"aa"},{ch:"ઇ", roman:"i"},{ch:"ઈ", roman:"ii"},{ch:"ઉ", roman:"u"},{ch:"ઊ", roman:"uu"},{ch:"એ", roman:"e"},{ch:"ઐ", roman:"ai"},{ch:"ઓ", roman:"o"},{ch:"ઔ", roman:"au"},];
+    (function(){
+      const glyph=document.getElementById("gujarati-glyph");
+      const word=document.getElementById("gujarati-word");
+      const alpha=document.getElementById("gujarati-alpha");
+      let idx=0;
+      GUJARATI_LETTERS.forEach((item,i)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=item.ch; b.style.fontFamily="system-ui";
+        b.addEventListener("click",()=>{
+          idx=i; glyph.textContent=item.ch; word.textContent=item.roman;
+          [...alpha.children].forEach((el,j)=>el.classList.toggle("active",j===i));
+        });
+        alpha.appendChild(b);
+      });
+      document.getElementById("gujarati-speak").addEventListener("click",()=>speakText(GUJARATI_LETTERS[idx].ch));
+      if(alpha.children[0]) alpha.children[0].classList.add("active");
+    })();
+
+    const PUNJABI_LETTERS = [{ch:"ਅ", roman:"a"},{ch:"ਆ", roman:"aa"},{ch:"ਇ", roman:"i"},{ch:"ਈ", roman:"ii"},{ch:"ਉ", roman:"u"},{ch:"ਊ", roman:"uu"},{ch:"ਏ", roman:"e"},{ch:"ਐ", roman:"ai"},{ch:"ਓ", roman:"o"},{ch:"ਔ", roman:"au"},];
+    (function(){
+      const glyph=document.getElementById("punjabi-glyph");
+      const word=document.getElementById("punjabi-word");
+      const alpha=document.getElementById("punjabi-alpha");
+      let idx=0;
+      PUNJABI_LETTERS.forEach((item,i)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=item.ch; b.style.fontFamily="system-ui";
+        b.addEventListener("click",()=>{
+          idx=i; glyph.textContent=item.ch; word.textContent=item.roman;
+          [...alpha.children].forEach((el,j)=>el.classList.toggle("active",j===i));
+        });
+        alpha.appendChild(b);
+      });
+      document.getElementById("punjabi-speak").addEventListener("click",()=>speakText(PUNJABI_LETTERS[idx].ch));
+      if(alpha.children[0]) alpha.children[0].classList.add("active");
+    })();
     refreshStats(); touchStreak();
   </script>
 </body>
