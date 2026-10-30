@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v6.2)
+# Little Letters — feature map (Beta v6.3)
 
-**141 modes**
+**143 modes**
 
 - `abcorder`
 - `actions`
@@ -35,6 +35,7 @@
 - `feelings`
 - `festivals`
 - `finish`
+- `fire`
 - `firstsound`
 - `flash`
 - `food`
@@ -142,6 +143,7 @@
 - `words`
 - `worldhub`
 - `write`
+- `yesno`
 - `zoo`
 
 Live:

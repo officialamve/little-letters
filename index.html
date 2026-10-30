@@ -148,7 +148,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.2 · free DIY build · 141 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.3 · free DIY build · 143 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -300,6 +300,8 @@
 
       <button class="mode" type="button" data-go="helpers" data-world-home="1"><div class="mode-icon">👮</div><div class="mode-copy"><strong>Helpers</strong><span>Doctor · teacher · police</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="doctor" data-world-home="1"><div class="mode-icon">🩺</div><div class="mode-copy"><strong>Doctor</strong><span>Check-up words</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="fire" data-world-home="1"><div class="mode-icon">🚒</div><div class="mode-copy"><strong>Fire station</strong><span>Truck · hose · helmet</span></div><span class="chev">›</span></button>
+
 
       <button class="mode" type="button" data-go="places" data-world-home="1"><div class="mode-icon">🏫</div><div class="mode-copy"><strong>Places</strong><span>School · park · market</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="mail" data-world-home="1"><div class="mode-icon">✉️</div><div class="mode-copy"><strong>Mail</strong><span>Letter · stamp · box</span></div><span class="chev">›</span></button>
@@ -398,6 +400,8 @@
 
       <button class="mode games" type="button" data-go="oddone" data-play-home="1"><div class="mode-icon">❓</div><div class="mode-copy"><strong>Odd one out</strong><span>Which doesn't belong?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="truefalse" data-play-home="1"><div class="mode-icon">✓✗</div><div class="mode-copy"><strong>True or false</strong><span>Kid facts</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="yesno" data-play-home="1"><div class="mode-icon">Y/N</div><div class="mode-copy"><strong>Yes or no</strong><span>Simple questions</span></div><span class="chev">›</span></button>
+
       <button class="mode games" type="button" data-go="finish" data-play-home="1"><div class="mode-icon">…</div><div class="mode-copy"><strong>Finish it</strong><span>Complete the sentence</span></div><span class="chev">›</span></button>
 
       <button class="mode games" type="button" data-go="wear" data-play-home="1"><div class="mode-icon">☔</div><div class="mode-copy"><strong>What to wear</strong><span>Rain → raincoat</span></div><span class="chev">›</span></button>
@@ -1803,6 +1807,28 @@
       <p class="glyph" id="tens-seq" style="font-size:1.8rem">10, 20, 30, ?</p>
       <div class="alpha" id="tens-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
       <p id="tens-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="fire" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Fire station</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="fire-emoji" style="font-size:4rem">🚒</p>
+      <p class="word" id="fire-name" style="font-size:1.4rem;color:var(--ink)">Fire truck</p>
+      <button class="speak" type="button" id="fire-speak">Hear</button>
+      <div id="fire-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="yesno" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Yes or no</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="yn-q" style="font-size:1.3rem;line-height:1.4;max-width:300px;margin:0 auto">Do fish live in water?</p>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:20px">
+        <button class="speak" type="button" id="yn-yes" style="min-width:120px">Yes</button>
+        <button class="speak" type="button" id="yn-no" style="min-width:120px;background:#FEE2E2;color:#B91C1C">No</button>
+      </div>
+      <p id="yn-feedback" class="word"></p>
     </div>
   </section>
   <section id="parent" class="view">
@@ -4636,6 +4662,37 @@
       speakText(seq.join(" ")+" what is next");
     }
     document.querySelector('[data-go="tens"]')?.addEventListener("click",()=>setTimeout(newTens,100));
+
+    const FIRE=[["Fire truck","🚒"],["Hose","💧"],["Helmet","⛑️"],["Ladder","🪜"],["Firefighter","🧑‍🚒"],["Alarm","🚨"],["Smoke","💨"],["Safe","✅"]];
+    (function(){
+      let i=0; const em=document.getElementById("fire-emoji"), nm=document.getElementById("fire-name"), list=document.getElementById("fire-list");
+      function set(idx){ i=idx; em.textContent=FIRE[i][1]; nm.textContent=FIRE[i][0]; }
+      FIRE.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("fire-speak").addEventListener("click",()=>speakText(FIRE[i][0]));
+      set(0);
+    })();
+
+    const YN=[["Do fish live in water?",true],["Can cats fly?",false],["Is the sun hot?",true],["Do we eat books?",false],["Is milk a drink?",true],["Is ice hot?",false],["Do birds have wings?",true],["Is a car an animal?",false]];
+    let ynAns=true;
+    function newYN(){
+      const [q,a]=YN[Math.floor(Math.random()*YN.length)];
+      ynAns=a;
+      document.getElementById("yn-q").textContent=q;
+      document.getElementById("yn-feedback").textContent="";
+      speakText(q);
+    }
+    function ynCheck(v){
+      if(v===ynAns){ document.getElementById("yn-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(v?"Yes":"No"); setTimeout(newYN,700); }
+      else document.getElementById("yn-feedback").textContent="Try again";
+    }
+    document.getElementById("yn-yes")?.addEventListener("click",()=>ynCheck(true));
+    document.getElementById("yn-no")?.addEventListener("click",()=>ynCheck(false));
+    document.querySelector('[data-go="yesno"]')?.addEventListener("click",()=>setTimeout(newYN,100));
     applyTheme();
 
     const SHAPES=[
