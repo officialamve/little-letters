@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.5 · free DIY build · 101 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.6 · free DIY build · 105 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -242,6 +242,8 @@
 
       <button class="mode" type="button" data-go="nature" data-world-home="1"><div class="mode-icon">🌳</div><div class="mode-copy"><strong>Nature</strong><span>Tree · river · flower</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="space" data-world-home="1"><div class="mode-icon">🚀</div><div class="mode-copy"><strong>Sky & space</strong><span>Rocket · moon · star</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="garden" data-world-home="1"><div class="mode-icon">🌱</div><div class="mode-copy"><strong>Garden</strong><span>Seed · flower · water</span></div><span class="chev">›</span></button>
+
 
       <button class="mode" type="button" data-go="pets" data-world-home="1"><div class="mode-icon">🐶</div><div class="mode-copy"><strong>Pets</strong><span>Dog · cat · fish</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="farm" data-world-home="1"><div class="mode-icon">🐄</div><div class="mode-copy"><strong>Farm</strong><span>Cow · hen · goat</span></div><span class="chev">›</span></button>
@@ -280,6 +282,8 @@
       <button class="mode games" type="button" data-go="missing" data-play-home="1"><div class="mode-icon">_</div><div class="mode-copy"><strong>Missing letter</strong><span>_pple → Apple</span></div><span class="chev">›</span></button>
 <button class="mode games" type="button" data-go="games" data-play-home="1"><div class="mode-icon">◇</div><div class="mode-copy"><strong>Games</strong><span>Tap what you hear</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="hearpick" data-play-home="1"><div class="mode-icon">👂</div><div class="mode-copy"><strong>Hear & pick</strong><span>Listen, then tap</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="samepic" data-play-home="1"><div class="mode-icon">🔍</div><div class="mode-copy"><strong>Find the same</strong><span>Match the picture</span></div><span class="chev">›</span></button>
+
 
       <button class="mode games" type="button" data-go="math" data-play-home="1"><div class="mode-icon">1+2</div><div class="mode-copy"><strong>Add up</strong><span>Sums to 10</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="subtract" data-play-home="1"><div class="mode-icon">5−2</div><div class="mode-copy"><strong>Take away</strong><span>Subtract within 10</span></div><span class="chev">›</span></button>
@@ -1344,6 +1348,26 @@
       <button class="speak" type="button" id="hp-replay">Hear again</button>
       <div id="hp-choices" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:280px;margin:16px auto 0"></div>
       <p id="hp-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="garden" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Garden</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="gd-emoji" style="font-size:4rem">🌱</p>
+      <p class="word" id="gd-name" style="font-size:1.4rem;color:var(--ink)">Seed</p>
+      <button class="speak" type="button" id="gd-speak">Hear</button>
+      <div id="gd-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="samepic" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Find the same</h2></div>
+    <div class="letter-stage">
+      <p class="muted">Tap the matching one</p>
+      <p class="glyph" id="spic-show" style="font-size:4rem">🐶</p>
+      <div id="spic-choices" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:280px;margin:16px auto 0"></div>
+      <p id="spic-feedback" class="word"></p>
     </div>
   </section>
   <section id="parent" class="view">
@@ -3511,6 +3535,40 @@
     }
     document.getElementById("hp-replay")?.addEventListener("click",()=>speakText(hpAns));
     document.querySelector('[data-go="hearpick"]')?.addEventListener("click",()=>setTimeout(newHP,100));
+
+    const GARDEN=[["Seed","🌱"],["Flower","🌸"],["Water","💧"],["Soil","🟤"],["Leaf","🍃"],["Bee","🐝"],["Butterfly","🦋"],["Tree","🌳"]];
+    (function(){
+      let i=0; const em=document.getElementById("gd-emoji"), nm=document.getElementById("gd-name"), list=document.getElementById("gd-list");
+      function set(idx){ i=idx; em.textContent=GARDEN[i][1]; nm.textContent=GARDEN[i][0]; }
+      GARDEN.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("gd-speak").addEventListener("click",()=>speakText(GARDEN[i][0]));
+      set(0);
+    })();
+
+    const SPIC=["🐶","🐱","🦁","🐸","🐰","🐻","🐷","🐵"];
+    function newSPic(){
+      const ans=SPIC[Math.floor(Math.random()*SPIC.length)];
+      document.getElementById("spic-show").textContent=ans;
+      document.getElementById("spic-feedback").textContent="";
+      const opts=new Set([ans]);
+      while(opts.size<4) opts.add(SPIC[Math.floor(Math.random()*SPIC.length)]);
+      const box=document.getElementById("spic-choices"); box.innerHTML="";
+      [...opts].sort(()=>Math.random()-.5).forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=v;
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:2.2rem;cursor:pointer";
+        b.addEventListener("click",()=>{
+          if(v===ans){ document.getElementById("spic-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText("Yes"); setTimeout(newSPic,700); }
+          else document.getElementById("spic-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+    }
+    document.querySelector('[data-go="samepic"]')?.addEventListener("click",()=>setTimeout(newSPic,100));
     applyTheme();
 
     const SHAPES=[

@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v4.5)
+# Little Letters — feature map (Beta v4.6)
 
-**103 modes**
+**105 modes**
 
 - `actions`
 - `assamese`
@@ -29,6 +29,7 @@
 - `food`
 - `fruits`
 - `games`
+- `garden`
 - `gujarati`
 - `hearpick`
 - `helpers`
@@ -73,6 +74,7 @@
 - `rhyme`
 - `safety`
 - `samediff`
+- `samepic`
 - `sanskrit`
 - `school`
 - `seasons`
