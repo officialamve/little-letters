@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v2.5 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v2.6 · free DIY build</p>
       </div>
     </div>
     <input id="home-search" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -212,6 +212,8 @@
       <button class="mode games" type="button" data-go="count-game" data-play-home="1"><div class="mode-icon">•••</div><div class="mode-copy"><strong>Count</strong><span>How many dots?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="opposites" data-play-home="1"><div class="mode-icon">⇅</div><div class="mode-copy"><strong>Opposites</strong><span>Hot ↔ Cold</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="body" data-world-home="1"><div class="mode-icon">👀</div><div class="mode-copy"><strong>My body</strong><span>Eyes · nose · hands</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="clothes" data-world-home="1"><div class="mode-icon">👕</div><div class="mode-copy"><strong>Clothes</strong><span>Shirt · shoes · hat</span></div><span class="chev">›</span></button>
+
 
       <button class="mode games" type="button" data-go="missing" data-play-home="1"><div class="mode-icon">_</div><div class="mode-copy"><strong>Missing letter</strong><span>_pple → Apple</span></div><span class="chev">›</span></button>
 <button class="mode games" type="button" data-go="games" data-play-home="1"><div class="mode-icon">◇</div><div class="mode-copy"><strong>Games</strong><span>Tap what you hear</span></div><span class="chev">›</span></button>
@@ -740,6 +742,16 @@
       <p id="lseq-feedback" class="word"></p>
     </div>
   </section>
+
+  <section id="clothes" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Clothes</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="cl-emoji" style="font-size:4rem">👕</p>
+      <p class="word" id="cl-name" style="font-size:1.4rem;color:var(--ink)">Shirt</p>
+      <button class="speak" type="button" id="cl-speak">Hear</button>
+      <div id="cl-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
+    </div>
+  </section>
   <section id="parent" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
@@ -755,7 +767,7 @@
         <input type="checkbox" id="theme-toggle" /> Dark mode
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v2.5 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v2.6 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Age tip:</strong> ages 3–4 → Letters, Colours, Count. Ages 5–6 → Spell, Digraphs, Quiz, Stories.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Install:</strong> in Chrome, menu → Add to Home Screen for an app-like icon.</p>
       <div class="row" style="justify-content:flex-start">
@@ -2055,6 +2067,20 @@
       speakText(seq.join(" ")+" what is next");
     }
     document.querySelector('[data-go="letterseq"]')?.addEventListener("click",()=>setTimeout(newLSeq,100));
+
+    const CLOTHES=[["Shirt","👕"],["Pants","👖"],["Dress","👗"],["Hat","🧢"],["Shoes","👟"],["Socks","🧦"],["Jacket","🧥"],["Scarf","🧣"]];
+    (function(){
+      let i=0; const em=document.getElementById("cl-emoji"), nm=document.getElementById("cl-name"), list=document.getElementById("cl-list");
+      function set(idx){ i=idx; em.textContent=CLOTHES[i][1]; nm.textContent=CLOTHES[i][0]; }
+      CLOTHES.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("cl-speak").addEventListener("click",()=>speakText(CLOTHES[i][0]));
+      set(0);
+    })();
     applyTheme();
 
     const SHAPES=[
