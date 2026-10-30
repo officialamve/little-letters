@@ -136,7 +136,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v0.6 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v0.7 · free DIY build</p>
       </div>
     </div>
     <div class="modes">
@@ -147,6 +147,8 @@
       <button class="mode hindi" type="button" data-go="punjabi" data-lang-home="1"><div class="mode-icon" style="background:#EFF6FF;color:#1D4ED8">ਅ</div><div class="mode-copy"><strong>Punjabi</strong><span>ਸਵਰ</span></div><span class="chev">›</span></button>
       <button class="mode hindi" type="button" data-go="odia" data-lang-home="1"><div class="mode-icon" style="background:#ECFEFF;color:#0E7490">ଅ</div><div class="mode-copy"><strong>Odia</strong><span>ସ୍ୱର</span></div><span class="chev">›</span></button>
       <button class="mode hindi" type="button" data-go="assamese" data-lang-home="1"><div class="mode-icon" style="background:#FEF2F2;color:#B91C1C">অ</div><div class="mode-copy"><strong>Assamese</strong><span>স্বৰবৰ্ণ</span></div><span class="chev">›</span></button>
+      <button class="mode hindi" type="button" data-go="hindi-nums" data-lang-home="1"><div class="mode-icon">१</div><div class="mode-copy"><strong>Hindi numbers</strong><span>१ to १०</span></div><span class="chev">›</span></button>
+
 
 
       <button class="mode hindi" type="button" data-go="marathi" data-lang-home="1"><div class="mode-icon" style="background:#F5F3FF;color:#6D28D9">अ</div><div class="mode-copy"><strong>Marathi</strong><span>स्वर</span></div><span class="chev">›</span></button>
@@ -166,6 +168,7 @@
       <button class="mode" type="button" data-go="numbers"><div class="mode-icon" style="background:#E0E7FF;color:#3730A3">123</div><div class="mode-copy"><strong>Numbers</strong><span>1 to 10</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="colours"><div class="mode-icon" style="background:#FCE7F3;color:#BE185D">●</div><div class="mode-copy"><strong>Colours</strong><span>See &amp; say</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="shapes"><div class="mode-icon">△</div><div class="mode-copy"><strong>Shapes</strong><span>Circle, square…</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="words"><div class="mode-icon" style="background:#ECFDF5;color:#047857">Aa</div><div class="mode-copy"><strong>Words</strong><span>Days, animals, fruits</span></div><span class="chev">›</span></button>
 <button class="mode write" type="button" data-go="write"><div class="mode-icon">✎</div><div class="mode-copy"><strong>Write</strong><span>Trace letters</span></div><span class="chev">›</span></button>
       <button class="mode songs" type="button" data-go="songs"><div class="mode-icon">♪</div><div class="mode-copy"><strong>Songs</strong><span>Alphabet &amp; rhymes</span></div><span class="chev">›</span></button>
             <button class="mode games" type="button" data-go="quiz"><div class="mode-icon" style="background:#DBEAFE;color:#1D4ED8">?</div><div class="mode-copy"><strong>Quiz</strong><span>What letter starts…?</span></div><span class="chev">›</span></button>
@@ -279,6 +282,32 @@
       <button class="speak" type="button" id="shape-speak">Hear</button>
       <div id="shape-list" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px"></div>
     </div>
+  </section>
+
+  <section id="words" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Words</h2>
+      <select id="words-pack" style="border:1px solid var(--line);border-radius:12px;padding:8px;font:inherit;background:var(--bg-elev);color:var(--ink)">
+        <option value="days">Days</option>
+        <option value="animals">Animals</option>
+        <option value="fruits">Fruits</option>
+        <option value="family">Family</option>
+      </select>
+    </div>
+    <div class="letter-stage">
+      <p class="glyph" id="words-emoji" style="font-size:3rem">📅</p>
+      <p class="word" id="words-text" style="font-size:1.35rem;color:var(--ink)">Monday</p>
+      <div class="row">
+        <button class="speak ghost" type="button" id="words-prev">Prev</button>
+        <button class="speak" type="button" id="words-speak">Hear</button>
+        <button class="speak" type="button" id="words-next">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="hindi-nums" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Hindi · १–१०</h2></div>
+    <div class="letter-stage"><p class="glyph hi" id="hn-glyph">१</p><p class="word" id="hn-word">एक · one</p><button class="speak" type="button" id="hn-speak">सुनो</button></div>
+    <div class="alpha hi" id="hn-alpha" style="grid-template-columns:repeat(5,1fr)"></div>
   </section>
   <section id="write" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Write</h2></div>
@@ -402,7 +431,8 @@
         <input type="checkbox" id="theme-toggle" /> Dark mode
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v0.6 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v0.7 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px"><strong>Install:</strong> in Chrome, menu → Add to Home Screen for an app-like icon.</p>
       <div class="row" style="justify-content:flex-start">
         <button class="speak ghost" type="button" id="export-progress">Export</button>
         <button class="speak ghost" type="button" id="import-progress">Import</button>
@@ -475,6 +505,7 @@
       const fill=document.getElementById("goal-fill"); const lab=document.getElementById("goal-label");
       if(fill) fill.style.width=(v/goal*100)+"%";
       if(lab) lab.textContent=v+" / "+goal+" letters";
+      if(v>=goal && !state.goalToast){ state.goalToast=true; save(); toast('<span class="stars">★ ★ ★</span> Goal done!'); mascotWave("🏆"); }
     }
 
     function show(id) {
@@ -1139,6 +1170,37 @@
       const t=document.getElementById("theme-toggle"); if(t) t.checked=!!state.dark;
     }
     document.getElementById("theme-toggle")?.addEventListener("change",(e)=>{ state.dark=e.target.checked; save(); applyTheme(); });
+
+    const WORD_PACKS={
+      days:[["📅","Monday"],["📅","Tuesday"],["📅","Wednesday"],["📅","Thursday"],["📅","Friday"],["📅","Saturday"],["📅","Sunday"]],
+      animals:[["🐶","Dog"],["🐱","Cat"],["🐘","Elephant"],["🦁","Lion"],["🐯","Tiger"],["🐵","Monkey"],["🐄","Cow"],["🐦","Bird"]],
+      fruits:[["🥭","Mango"],["🍌","Banana"],["🍎","Apple"],["🍊","Orange"],["🍇","Grapes"],["🍉","Watermelon"],["🍍","Pineapple"],["🍓","Strawberry"]],
+      family:[["👩","Mother"],["👨","Father"],["👧","Sister"],["👦","Brother"],["👵","Grandmother"],["👴","Grandfather"],["👶","Baby"],["🏠","Home"]]
+    };
+    (function(){
+      let pack="days", i=0;
+      const em=document.getElementById("words-emoji"), tx=document.getElementById("words-text"), sel=document.getElementById("words-pack");
+      function show(){ const item=WORD_PACKS[pack][i]; em.textContent=item[0]; tx.textContent=item[1]; }
+      function next(d){ const arr=WORD_PACKS[pack]; i=(i+d+arr.length)%arr.length; show(); }
+      sel.addEventListener("change",()=>{ pack=sel.value; i=0; show(); });
+      document.getElementById("words-prev").addEventListener("click",()=>next(-1));
+      document.getElementById("words-next").addEventListener("click",()=>next(1));
+      document.getElementById("words-speak").addEventListener("click",()=>speakText(WORD_PACKS[pack][i][1]));
+      show();
+    })();
+
+    const HN=[["१","एक · one"],["२","दो · two"],["३","तीन · three"],["४","चार · four"],["५","पाँच · five"],["६","छह · six"],["७","सात · seven"],["८","आठ · eight"],["९","नौ · nine"],["१०","दस · ten"]];
+    (function(){
+      const g=document.getElementById("hn-glyph"), w=document.getElementById("hn-word"), a=document.getElementById("hn-alpha");
+      let i=0;
+      HN.forEach((item,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=item[0];
+        b.addEventListener("click",()=>{ i=idx; g.textContent=item[0]; w.textContent=item[1]; [...a.children].forEach((el,j)=>el.classList.toggle("active",j===idx)); });
+        a.appendChild(b);
+      });
+      document.getElementById("hn-speak").addEventListener("click",()=>speakText(HN[i][1].split("·")[0].trim()));
+      if(a.children[0]) a.children[0].classList.add("active");
+    })();
     applyTheme();
 
     const SHAPES=[

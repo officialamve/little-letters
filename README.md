@@ -1,22 +1,18 @@
-# Little Letters (Beta v0.4)
+# Little Letters (Beta v0.7)
 
-Calm, premium alphabet learning for kids — DIY, offline-friendly PWA.
+Calm, premium alphabet learning for kids — DIY PWA.
 
 ## Try it
-- [GitHub Pages](https://officialamve.github.io/little-letters/)
-- [Render](https://little-letters.onrender.com)
+- https://officialamve.github.io/little-letters/
+- https://little-letters.onrender.com
 
 ## Features
-- English A–Z · today’s 5 · a/A toggle · ★ learn toasts
-- Languages hub: Hindi, Tamil, Kannada, Telugu, Malayalam, Bengali, Gujarati, Punjabi, Marathi, Odia, Assamese
-- Write · print sheet · songs · hear-game · match · memory
-- Soft colourful home + reacting mascot · kid name
-- Songs with soft beat + lyric highlight
-- Today’s goal progress bar
-- Write “Looks good” feedback
-- Streaks · export/import progress · sound toggle · PWA
+- English A–Z · Write · Songs · Games · Quiz · Memory · Match
+- Numbers · Colours · Shapes · Words (days/animals/fruits/family)
+- Languages: Hindi (+numbers), Tamil, Kannada, Telugu, Malayalam, Bengali, Gujarati, Punjabi, Marathi, Odia, Assamese
+- Stickers · streaks · kid name · dark mode · export/import · PWA
 
 ## Local
-Open `index.html` in Chrome, or `npx --yes serve .`
+Open `index.html` or `npx --yes serve .`
 
-MIT · static HTML · Web Speech API · no backend
+MIT · no backend · Web Speech API
