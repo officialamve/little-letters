@@ -1,12 +1,13 @@
-# Little Letters — feature map (Beta v3.5)
+# Little Letters — feature map (Beta v3.6)
 
-**76 modes**
+**79 modes**
 
 - `actions`
 - `assamese`
 - `beforeafter`
 - `bengali`
 - `body`
+- `bugs`
 - `calm`
 - `cardmatch`
 - `clock`
@@ -32,6 +33,7 @@
 - `homewords`
 - `kannada`
 - `languages`
+- `lastletter`
 - `letters`
 - `letterseq`
 - `malayalam`
@@ -73,6 +75,7 @@
 - `tamil`
 - `telugu`
 - `transport`
+- `veggies`
 - `vowels`
 - `weather`
 - `words`
