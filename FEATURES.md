@@ -1,11 +1,12 @@
-# Little Letters — feature map (Beta v2.8)
+# Little Letters — feature map (Beta v2.9)
 
-**58 modes**
+**59 modes**
 
 - `assamese`
 - `bengali`
 - `body`
 - `calm`
+- `cardmatch`
 - `clock`
 - `clothes`
 - `colours`
@@ -60,6 +61,8 @@
 - `words`
 - `worldhub`
 - `write`
+
+Custom voice clips: drop MP3s in `voices/en/` — see `voices/README.md`.
 
 Live:
 - https://officialamve.github.io/little-letters/
