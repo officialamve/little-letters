@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v2.7)
+# Little Letters — feature map (Beta v2.8)
 
-**56 modes**
+**58 modes**
 
 - `assamese`
 - `bengali`
@@ -12,6 +12,7 @@
 - `compare`
 - `count-game`
 - `digraphs`
+- `family`
 - `feelings`
 - `flash`
 - `food`
@@ -30,6 +31,7 @@
 - `memory`
 - `missing`
 - `numbers`
+- `oddone`
 - `odia`
 - `opposites`
 - `ordinals`
