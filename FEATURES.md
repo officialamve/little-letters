@@ -1,14 +1,16 @@
-# Little Letters — feature map (Beta v2.0)
+# Little Letters — feature map (Beta v2.3)
 
-**45 modes**
+**50 modes**
 
 - `assamese`
 - `bengali`
 - `calm`
 - `clock`
 - `colours`
+- `compare`
 - `count-game`
 - `digraphs`
+- `feelings`
 - `flash`
 - `games`
 - `gujarati`
@@ -26,17 +28,20 @@
 - `numbers`
 - `odia`
 - `opposites`
+- `ordinals`
 - `patterns`
 - `playhub`
 - `practice`
 - `punjabi`
 - `quiz`
 - `race`
+- `rhyme`
 - `sanskrit`
 - `seasons`
 - `shapes`
 - `sheets`
 - `sight`
+- `skip`
 - `songs`
 - `spell`
 - `stickers`
@@ -51,5 +56,3 @@
 Live:
 - https://officialamve.github.io/little-letters/
 - https://little-letters.onrender.com
-
-Repo: https://github.com/officialamve/little-letters
