@@ -4,325 +4,147 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#1C1917" />
-  <meta name="description" content="Little Letters — calm, premium alphabet learning for kids" />
+  <meta name="description" content="Little Letters — calm premium learning for kids" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="manifest" href="manifest.json" />
   <title>Little Letters</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,500&family=Fraunces:opsz,wght@9..144,560&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,560&family=Noto+Sans+Devanagari:wght@500;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #F5F2EC;
-      --bg-elev: #FFFDF9;
-      --ink: #1C1917;
-      --ink-soft: #57534E;
-      --line: #E7E2D9;
-      --accent: #0F766E;
-      --accent-soft: #CCFBF1;
-      --warm: #C2410C;
-      --shadow: 0 1px 0 rgba(28, 25, 23, 0.04), 0 18px 40px rgba(28, 25, 23, 0.06);
-      --radius: 24px;
-      --font: "DM Sans", system-ui, sans-serif;
-      --display: "Fraunces", Georgia, serif;
+      --bg: #F5F2EC; --bg-elev: #FFFDF9; --ink: #1C1917; --ink-soft: #57534E;
+      --line: #E7E2D9; --accent: #0F766E; --accent-soft: #CCFBF1; --warm: #C2410C;
+      --shadow: 0 1px 0 rgba(28,25,23,.04), 0 18px 40px rgba(28,25,23,.06);
+      --radius: 24px; --font: "DM Sans", system-ui, sans-serif; --display: "Fraunces", Georgia, serif;
+      --nav: 64px;
     }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html, body {
-      margin: 0; min-height: 100%;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: var(--font);
-    }
-    body {
-      max-width: 440px;
-      margin: 0 auto;
-      padding: 28px 20px 48px;
-      min-height: 100dvh;
-    }
-    .view { display: none; animation: in 0.28s ease; }
+    html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); font-family: var(--font); }
+    body { max-width: 440px; margin: 0 auto; padding: 24px 20px calc(var(--nav) + 28px); min-height: 100dvh; }
+    .view { display: none; animation: in .28s ease; }
     .view.active { display: block; }
-    @keyframes in {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: none; }
-    }
-
-    /* Home */
-    .brand {
-      display: flex; align-items: center; gap: 14px;
-      margin-bottom: 36px;
-    }
-    .mark {
-      width: 48px; height: 48px; border-radius: 16px;
-      background: var(--ink);
-      color: #FFFDF9;
-      display: grid; place-items: center;
-      font-family: var(--display);
-      font-size: 1.35rem; font-weight: 560;
-    }
-    .brand h1 {
-      margin: 0;
-      font-family: var(--display);
-      font-size: 1.45rem; font-weight: 560;
-      letter-spacing: -0.03em;
-    }
-    .brand p {
-      margin: 2px 0 0;
-      font-size: 0.85rem;
-      color: var(--ink-soft);
-    }
-    .hero {
-      margin-bottom: 28px;
-    }
-    .hero h2 {
-      margin: 0 0 8px;
-      font-family: var(--display);
-      font-size: 2rem; font-weight: 560;
-      letter-spacing: -0.04em; line-height: 1.15;
-    }
-    .hero p {
-      margin: 0;
-      color: var(--ink-soft);
-      font-size: 0.98rem; line-height: 1.45;
-      max-width: 28ch;
-    }
-    .modes {
-      display: flex; flex-direction: column; gap: 10px;
-    }
-    .mode {
-      width: 100%;
-      border: 1px solid var(--line);
-      background: var(--bg-elev);
-      border-radius: var(--radius);
-      padding: 18px 18px 18px 16px;
-      display: flex; align-items: center; gap: 16px;
-      text-align: left; cursor: pointer;
-      box-shadow: var(--shadow);
-      transition: transform 0.12s ease, border-color 0.12s ease;
-    }
-    .mode:active { transform: scale(0.985); }
-    .mode:focus-visible {
-      outline: 2px solid var(--accent); outline-offset: 3px;
-    }
-    .mode-icon {
-      width: 52px; height: 52px; border-radius: 16px;
-      background: var(--accent-soft); color: var(--accent);
-      display: grid; place-items: center;
-      font-family: var(--display);
-      font-size: 1.35rem; flex-shrink: 0;
-    }
+    @keyframes in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .mark { width: 48px; height: 48px; border-radius: 16px; background: var(--ink); color: #FFFDF9; display: grid; place-items: center; font-family: var(--display); font-size: 1.35rem; }
+    .brand h1 { margin: 0; font-family: var(--display); font-size: 1.45rem; letter-spacing: -.03em; }
+    .brand p { margin: 2px 0 0; font-size: .85rem; color: var(--ink-soft); }
+    .stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+    .stat { background: var(--bg-elev); border: 1px solid var(--line); border-radius: 18px; padding: 14px 12px; text-align: center; box-shadow: var(--shadow); }
+    .stat b { display: block; font-family: var(--display); font-size: 1.4rem; letter-spacing: -.03em; }
+    .stat span { font-size: .72rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .04em; }
+    .hero { margin-bottom: 22px; }
+    .hero h2 { margin: 0 0 8px; font-family: var(--display); font-size: 1.85rem; letter-spacing: -.04em; line-height: 1.15; }
+    .hero p { margin: 0; color: var(--ink-soft); font-size: .95rem; line-height: 1.45; max-width: 32ch; }
+    .modes { display: flex; flex-direction: column; gap: 10px; }
+    .mode { width: 100%; border: 1px solid var(--line); background: var(--bg-elev); border-radius: var(--radius); padding: 16px; display: flex; align-items: center; gap: 14px; text-align: left; cursor: pointer; box-shadow: var(--shadow); }
+    .mode:active { transform: scale(.985); }
+    .mode-icon { width: 52px; height: 52px; border-radius: 16px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; font-family: var(--display); font-size: 1.25rem; flex-shrink: 0; }
     .mode.write .mode-icon { background: #FFEDD5; color: var(--warm); }
     .mode.songs .mode-icon { background: #EDE9FE; color: #6D28D9; }
     .mode.games .mode-icon { background: #DBEAFE; color: #1D4ED8; }
-    .mode-copy { flex: 1; min-width: 0; }
-    .mode-copy strong {
-      display: block; font-size: 1.05rem; font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-    .mode-copy span {
-      display: block; margin-top: 2px;
-      font-size: 0.84rem; color: var(--ink-soft);
-    }
-    .chev {
-      color: #A8A29E; font-size: 1.1rem; padding-right: 4px;
-    }
-    .note {
-      margin-top: 28px;
-      padding-top: 20px;
-      border-top: 1px solid var(--line);
-      font-size: 0.8rem;
-      color: var(--ink-soft);
-      line-height: 1.45;
-    }
-
-    /* Inner screens */
-    .top {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 22px;
-    }
-    .back {
-      border: 1px solid var(--line);
-      background: var(--bg-elev);
-      width: 42px; height: 42px; border-radius: 14px;
-      cursor: pointer; font-size: 1.1rem; color: var(--ink);
-    }
-    .top h2 {
-      margin: 0;
-      font-family: var(--display);
-      font-size: 1.35rem; font-weight: 560;
-      letter-spacing: -0.03em;
-    }
-    .panel {
-      background: var(--bg-elev);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 28px 20px;
-      box-shadow: var(--shadow);
-      text-align: center;
-    }
-    .panel .muted {
-      color: var(--ink-soft); font-size: 0.92rem; line-height: 1.45;
-      margin: 0;
-    }
-
-    /* Letters */
-    .letter-stage {
-      background: var(--bg-elev);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 32px 20px 24px;
-      box-shadow: var(--shadow);
-      text-align: center;
-      margin-bottom: 18px;
-    }
-    .glyph {
-      font-family: var(--display);
-      font-size: clamp(5.5rem, 28vw, 7rem);
-      font-weight: 560;
-      letter-spacing: -0.06em;
-      line-height: 1;
-      margin: 0;
-      color: var(--ink);
-    }
-    .word {
-      margin: 8px 0 20px;
-      font-size: 1.05rem;
-      color: var(--ink-soft);
-      font-weight: 500;
-    }
-    .speak {
-      border: none;
-      background: var(--ink);
-      color: #FFFDF9;
-      border-radius: 999px;
-      padding: 14px 28px;
-      font: inherit;
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
-    }
-    .speak:active { opacity: 0.9; }
-    .alpha {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 8px;
-    }
-    .alpha button {
-      aspect-ratio: 1;
-      border: 1px solid var(--line);
-      background: var(--bg-elev);
-      border-radius: 14px;
-      font-family: var(--display);
-      font-size: 1rem; font-weight: 560;
-      color: var(--ink); cursor: pointer;
-    }
-    .alpha button.active {
-      background: var(--ink);
-      color: #FFFDF9;
-      border-color: var(--ink);
-    }
-    .alpha button:focus-visible {
-      outline: 2px solid var(--accent); outline-offset: 2px;
-    }
-
-    .soon-title {
-      font-family: var(--display);
-      font-size: 1.5rem; margin: 0 0 8px;
-      letter-spacing: -0.03em;
-    }
+    .mode.hindi .mode-icon { background: #FEF3C7; color: #B45309; font-family: "Noto Sans Devanagari", sans-serif; }
+    .mode-copy { flex: 1; } .mode-copy strong { display: block; font-size: 1.05rem; } .mode-copy span { font-size: .84rem; color: var(--ink-soft); }
+    .chev { color: #A8A29E; }
+    .top { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+    .back, .chip { border: 1px solid var(--line); background: var(--bg-elev); border-radius: 14px; cursor: pointer; color: var(--ink); font: inherit; }
+    .back { width: 42px; height: 42px; font-size: 1.1rem; }
+    .top h2 { margin: 0; font-family: var(--display); font-size: 1.35rem; letter-spacing: -.03em; flex: 1; }
+    .chip { padding: 8px 12px; font-size: .8rem; font-weight: 600; }
+    .chip.on { background: var(--ink); color: #FFFDF9; border-color: var(--ink); }
+    .letter-stage, .panel { background: var(--bg-elev); border: 1px solid var(--line); border-radius: 28px; padding: 28px 20px 22px; box-shadow: var(--shadow); text-align: center; margin-bottom: 16px; }
+    .glyph { font-family: var(--display); font-size: clamp(5rem, 26vw, 6.5rem); font-weight: 560; letter-spacing: -.06em; line-height: 1; margin: 0; }
+    .glyph.hi { font-family: "Noto Sans Devanagari", sans-serif; font-size: clamp(4.2rem, 22vw, 5.5rem); }
+    .word { margin: 8px 0 18px; font-size: 1.05rem; color: var(--ink-soft); font-weight: 500; }
+    .speak { border: none; background: var(--ink); color: #FFFDF9; border-radius: 999px; padding: 14px 26px; font: inherit; font-weight: 600; cursor: pointer; }
+    .speak.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+    .row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .alpha { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+    .alpha.hi { grid-template-columns: repeat(5, 1fr); }
+    .alpha button { aspect-ratio: 1; border: 1px solid var(--line); background: var(--bg-elev); border-radius: 14px; font-family: var(--display); font-size: .95rem; color: var(--ink); cursor: pointer; }
+    .alpha.hi button { font-family: "Noto Sans Devanagari", sans-serif; font-size: 1.05rem; }
+    .alpha button.active { background: var(--ink); color: #FFFDF9; border-color: var(--ink); }
+    .alpha button.learned { box-shadow: inset 0 0 0 2px var(--accent); }
+    .soon-title { font-family: var(--display); font-size: 1.4rem; margin: 0 0 8px; }
+    .muted { color: var(--ink-soft); font-size: .92rem; line-height: 1.45; margin: 0; }
+    .song-list { display: flex; flex-direction: column; gap: 10px; }
+    .song { border: 1px solid var(--line); background: var(--bg-elev); border-radius: 20px; padding: 16px; text-align: left; cursor: pointer; box-shadow: var(--shadow); display: flex; gap: 14px; align-items: center; width: 100%; font: inherit; color: inherit; }
+    .song .ico { width: 48px; height: 48px; border-radius: 14px; background: #EDE9FE; color: #6D28D9; display: grid; place-items: center; font-size: 1.2rem; }
+    .song strong { display: block; } .song span { font-size: .82rem; color: var(--ink-soft); }
+    .nav { position: fixed; left: 50%; transform: translateX(-50%); bottom: 0; width: min(440px, 100%); height: calc(var(--nav) + env(safe-area-inset-bottom, 0px)); padding-bottom: env(safe-area-inset-bottom, 0px); background: rgba(255,253,249,.92); backdrop-filter: blur(12px); border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(5, 1fr); z-index: 20; }
+    .nav button { border: none; background: transparent; font: inherit; font-size: .68rem; color: var(--ink-soft); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; cursor: pointer; }
+    .nav button.on { color: var(--ink); font-weight: 700; }
+    .nav button .n { font-size: 1.1rem; line-height: 1; }
+    #lyrics { min-height: 3.2em; margin: 12px 0 0; font-size: 1.05rem; color: var(--ink); font-weight: 600; }
   </style>
 </head>
 <body>
-  <main id="home" class="view active" aria-label="Home">
+  <main id="home" class="view active">
     <div class="brand">
-      <div class="mark" aria-hidden="true">L</div>
-      <div>
-        <h1>Little Letters</h1>
-        <p>Learn · Write · Sing · Play</p>
-      </div>
+      <div class="mark">L</div>
+      <div><h1>Little Letters</h1><p>Learn · Write · Sing · Play</p></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="stat-letters">0</b><span>Letters</span></div>
+      <div class="stat"><b id="stat-streak">0</b><span>Streak</span></div>
+      <div class="stat"><b id="stat-games">0</b><span>Games</span></div>
     </div>
     <div class="hero">
-      <h2>Calm learning for little minds</h2>
-      <p>Premium, simple practice — letters first, then writing, songs, and games.</p>
+      <h2>Today’s path</h2>
+      <p>Pick a mode. Progress saves on this device — no login needed.</p>
     </div>
     <div class="modes">
-      <button class="mode letters" type="button" data-go="letters">
-        <div class="mode-icon">Aa</div>
-        <div class="mode-copy">
-          <strong>Letters</strong>
-          <span>See, hear, remember</span>
-        </div>
-        <span class="chev" aria-hidden="true">›</span>
-      </button>
-      <button class="mode write" type="button" data-go="write">
-        <div class="mode-icon">✎</div>
-        <div class="mode-copy">
-          <strong>Write</strong>
-          <span>Trace with your finger</span>
-        </div>
-        <span class="chev" aria-hidden="true">›</span>
-      </button>
-      <button class="mode songs" type="button" data-go="songs">
-        <div class="mode-icon">♪</div>
-        <div class="mode-copy">
-          <strong>Songs</strong>
-          <span>Rhymes &amp; alphabet tunes</span>
-        </div>
-        <span class="chev" aria-hidden="true">›</span>
-      </button>
-      <button class="mode games" type="button" data-go="games">
-        <div class="mode-icon">◇</div>
-        <div class="mode-copy">
-          <strong>Games</strong>
-          <span>Tap what you hear</span>
-        </div>
-        <span class="chev" aria-hidden="true">›</span>
-      </button>
+      <button class="mode" type="button" data-go="letters"><div class="mode-icon">Aa</div><div class="mode-copy"><strong>Letters</strong><span>English A–Z</span></div><span class="chev">›</span></button>
+      <button class="mode hindi" type="button" data-go="hindi"><div class="mode-icon">अ</div><div class="mode-copy"><strong>Hindi</strong><span>स्वर · first pack</span></div><span class="chev">›</span></button>
+      <button class="mode write" type="button" data-go="write"><div class="mode-icon">✎</div><div class="mode-copy"><strong>Write</strong><span>Trace letters</span></div><span class="chev">›</span></button>
+      <button class="mode songs" type="button" data-go="songs"><div class="mode-icon">♪</div><div class="mode-copy"><strong>Songs</strong><span>Alphabet &amp; rhymes</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="games"><div class="mode-icon">◇</div><div class="mode-copy"><strong>Games</strong><span>Tap what you hear</span></div><span class="chev">›</span></button>
     </div>
-    <p class="note">English first. Hindi and more Indian languages come as packs — day by day.</p>
   </main>
 
-  <section id="letters" class="view" aria-label="Letters">
-    <div class="top">
-      <button class="back" type="button" data-home aria-label="Back">←</button>
-      <h2>Letters</h2>
-    </div>
-    <div class="letter-stage">
-      <p class="glyph" id="glyph">A</p>
-      <p class="word" id="word">Apple</p>
-      <button class="speak" type="button" id="speak">Hear letter</button>
-    </div>
-    <div class="alpha" id="alpha" role="listbox" aria-label="Alphabet"></div>
+  <section id="letters" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Letters</h2><button class="chip" type="button" id="mark-learned">Got it</button></div>
+    <div class="letter-stage"><p class="glyph" id="glyph">A</p><p class="word" id="word">Apple</p><button class="speak" type="button" id="speak">Hear letter</button></div>
+    <div class="alpha" id="alpha"></div>
   </section>
 
-  <section id="write" class="view" aria-label="Write">
-    <div class="top">
-      <button class="back" type="button" data-home aria-label="Back">←</button>
-      <h2>Write</h2>
-    </div>
+  <section id="hindi" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Hindi · स्वर</h2></div>
+    <div class="letter-stage"><p class="glyph hi" id="hi-glyph">अ</p><p class="word" id="hi-word">a · अनार</p><button class="speak" type="button" id="hi-speak">सुनो</button></div>
+    <div class="alpha hi" id="hi-alpha"></div>
+  </section>
+
+  <section id="write" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Write</h2></div>
     <div class="letter-stage" style="padding-bottom:16px">
-      <p class="glyph" id="trace-letter" style="font-size:2.4rem;margin-bottom:8px">A</p>
-      <canvas id="trace" width="320" height="320" style="width:100%;max-width:320px;height:auto;touch-action:none;border-radius:20px;background:#FAFAF8;border:1px solid var(--line)"></canvas>
-      <div style="display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap">
-        <button class="speak" type="button" id="trace-clear" style="background:transparent;color:var(--ink);border:1px solid var(--line)">Clear</button>
-        <button class="speak" type="button" id="trace-next">Next letter</button>
+      <p class="glyph" id="trace-letter" style="font-size:2.2rem;margin-bottom:8px">A</p>
+      <canvas id="trace" width="320" height="320" style="width:100%;max-width:320px;touch-action:none;border-radius:20px;background:#FAFAF8;border:1px solid var(--line)"></canvas>
+      <div class="row" style="margin-top:16px">
+        <button class="speak ghost" type="button" id="trace-clear">Clear</button>
+        <button class="speak" type="button" id="trace-next">Next</button>
       </div>
     </div>
   </section>
 
-  <section id="songs" class="view" aria-label="Songs">
-    <div class="top">
-      <button class="back" type="button" data-home aria-label="Back">←</button>
-      <h2>Songs</h2>
+  <section id="songs" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Songs</h2></div>
+    <div class="letter-stage">
+      <p class="soon-title" id="song-title">Pick a song</p>
+      <p id="lyrics" class="muted">Voice uses your device speaker — free, no downloads.</p>
+      <div class="row" style="margin-top:16px">
+        <button class="speak ghost" type="button" id="song-stop">Stop</button>
+        <button class="speak" type="button" id="song-play">Play</button>
+      </div>
     </div>
-    <div class="panel">
-      <p class="soon-title">Songs soon</p>
-      <p class="muted">Alphabet tune and rhymes — Day 6. You can add audio from your books later.</p>
+    <div class="song-list">
+      <button class="song" type="button" data-song="abc"><div class="ico">A</div><div><strong>ABC song</strong><span>A to Z, slow &amp; clear</span></div></button>
+      <button class="song" type="button" data-song="vowels"><div class="ico">AE</div><div><strong>Vowels</strong><span>A E I O U</span></div></button>
+      <button class="song" type="button" data-song="mango"><div class="ico">M</div><div><strong>Mango rhyme</strong><span>Simple India-friendly words</span></div></button>
     </div>
   </section>
 
-  <section id="games" class="view" aria-label="Games">
-    <div class="top">
-      <button class="back" type="button" data-home aria-label="Back">←</button>
-      <h2>Games</h2>
-    </div>
+  <section id="games" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Games</h2></div>
     <div class="letter-stage">
       <p class="muted" style="margin:0 0 12px">Tap the letter you hear</p>
       <button class="speak" type="button" id="game-hear">Hear again</button>
@@ -331,192 +153,213 @@
     </div>
   </section>
 
-  <script>
-    const WORDS = {
-      A: "Apple", B: "Ball", C: "Cat", D: "Dog", E: "Elephant",
-      F: "Fish", G: "Grapes", H: "Hat", I: "Ice cream", J: "Jug",
-      K: "Kite", L: "Lion", M: "Mango", N: "Nest", O: "Orange",
-      P: "Parrot", Q: "Queen", R: "Rainbow", S: "Sun", T: "Tiger",
-      U: "Umbrella", V: "Van", W: "Watch", X: "Xylophone", Y: "Yak", Z: "Zebra"
-    };
+  <section id="parent" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
+    <div class="panel" style="text-align:left">
+      <p class="soon-title">On this device</p>
+      <p class="muted" style="margin-bottom:14px">Progress stays in the browser. Reset anytime. Add your own book words later.</p>
+      <div class="row" style="justify-content:flex-start">
+        <button class="speak ghost" type="button" id="reset-progress">Reset progress</button>
+      </div>
+    </div>
+  </section>
 
+  <nav class="nav" aria-label="Main">
+    <button type="button" class="on" data-nav="home"><span class="n">⌂</span>Home</button>
+    <button type="button" data-nav="letters"><span class="n">Aa</span>Letters</button>
+    <button type="button" data-nav="write"><span class="n">✎</span>Write</button>
+    <button type="button" data-nav="songs"><span class="n">♪</span>Songs</button>
+    <button type="button" data-nav="games"><span class="n">◇</span>Play</button>
+  </nav>
+
+  <script>
+    const WORDS = {A:"Apple",B:"Ball",C:"Cat",D:"Dog",E:"Elephant",F:"Fish",G:"Grapes",H:"Hat",I:"Ice cream",J:"Jug",K:"Kite",L:"Lion",M:"Mango",N:"Nest",O:"Orange",P:"Parrot",Q:"Queen",R:"Rainbow",S:"Sun",T:"Tiger",U:"Umbrella",V:"Van",W:"Watch",X:"Xylophone",Y:"Yak",Z:"Zebra"};
+    const HINDI = [
+      {ch:"अ", roman:"a", word:"अनार"}, {ch:"आ", roman:"aa", word:"आम"}, {ch:"इ", roman:"i", word:"इमली"},
+      {ch:"ई", roman:"ee", word:"ईख"}, {ch:"उ", roman:"u", word:"उल्लू"}, {ch:"ऊ", roman:"oo", word:"ऊन"},
+      {ch:"ए", roman:"e", word:"एड़ियाँ"}, {ch:"ऐ", roman:"ai", word:"ऐनक"}, {ch:"ओ", roman:"o", word:"ओखली"},
+      {ch:"औ", roman:"au", word:"औरत"}, {ch:"अं", roman:"am", word:"अंगूर"}, {ch:"अः", roman:"ah", word:"अः"}
+    ];
+    const STORE = "little-letters-v1";
+    const state = load();
     const views = [...document.querySelectorAll(".view")];
     const glyph = document.getElementById("glyph");
-    const word = document.getElementById("word");
+    const wordEl = document.getElementById("word");
     const alpha = document.getElementById("alpha");
     let current = "A";
+    let songId = "abc";
+    let songTimer = null;
+
+    function load() {
+      try { return Object.assign({learned:{}, streak:0, lastDay:"", games:0}, JSON.parse(localStorage.getItem(STORE)||"{}")); }
+      catch { return {learned:{}, streak:0, lastDay:"", games:0}; }
+    }
+    function save() { localStorage.setItem(STORE, JSON.stringify(state)); refreshStats(); }
+    function today() { return new Date().toISOString().slice(0,10); }
+    function touchStreak() {
+      const t = today();
+      if (state.lastDay === t) return;
+      const y = new Date(); y.setDate(y.getDate()-1);
+      const ys = y.toISOString().slice(0,10);
+      state.streak = state.lastDay === ys ? (state.streak||0)+1 : 1;
+      state.lastDay = t;
+      save();
+    }
+    function refreshStats() {
+      document.getElementById("stat-letters").textContent = Object.keys(state.learned||{}).length;
+      document.getElementById("stat-streak").textContent = state.streak||0;
+      document.getElementById("stat-games").textContent = state.games||0;
+      [...alpha.children].forEach((el) => el.classList.toggle("learned", !!state.learned[el.textContent]));
+    }
 
     function show(id) {
       views.forEach((v) => v.classList.toggle("active", v.id === id));
+      document.querySelectorAll(".nav button").forEach((b) => b.classList.toggle("on", b.dataset.nav === id || (id==="home"&&b.dataset.nav==="home")));
+      if (id === "write") requestAnimationFrame(sizeCanvas);
+      if (id === "games") setTimeout(newRound, 150);
+      touchStreak();
     }
+    document.querySelectorAll("[data-go]").forEach((b) => b.addEventListener("click", () => show(b.dataset.go)));
+    document.querySelectorAll("[data-home]").forEach((b) => b.addEventListener("click", () => show("home")));
+    document.querySelectorAll("[data-nav]").forEach((b) => b.addEventListener("click", () => show(b.dataset.nav === "play" ? "games" : b.dataset.nav)));
 
-    document.querySelectorAll("[data-go]").forEach((btn) => {
-      btn.addEventListener("click", () => show(btn.dataset.go));
-    });
-    document.querySelectorAll("[data-home]").forEach((btn) => {
-      btn.addEventListener("click", () => show("home"));
-    });
+    function speakText(text, rate=0.9) {
+      if (!window.speechSynthesis) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.rate = rate; u.pitch = 1.05;
+      window.speechSynthesis.speak(u);
+    }
 
     Object.keys(WORDS).forEach((letter) => {
       const b = document.createElement("button");
-      b.type = "button";
-      b.textContent = letter;
-      b.setAttribute("role", "option");
+      b.type = "button"; b.textContent = letter;
       b.addEventListener("click", () => select(letter));
       alpha.appendChild(b);
     });
-
     function select(letter) {
-      current = letter;
-      glyph.textContent = letter;
-      word.textContent = WORDS[letter];
-      [...alpha.children].forEach((el) => {
-        el.classList.toggle("active", el.textContent === letter);
-      });
+      current = letter; glyph.textContent = letter; wordEl.textContent = WORDS[letter];
+      [...alpha.children].forEach((el) => el.classList.toggle("active", el.textContent === letter));
+      refreshStats();
     }
-
-    function speak() {
-      if (!window.speechSynthesis) return;
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(
-        current + ". " + WORDS[current]
-      );
-      u.rate = 0.9;
-      u.pitch = 1.05;
-      window.speechSynthesis.speak(u);
-    }
-
-    document.getElementById("speak").addEventListener("click", speak);
+    document.getElementById("speak").addEventListener("click", () => speakText(current + ". " + WORDS[current]));
+    document.getElementById("mark-learned").addEventListener("click", () => {
+      state.learned[current] = true; save();
+    });
     select("A");
 
-    // Tap what you hear
-    const gameChoices = document.getElementById("game-choices");
-    const gameFeedback = document.getElementById("game-feedback");
-    let gameAnswer = "A";
-
-    function speakLetter(letter) {
-      if (!window.speechSynthesis) return;
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(letter);
-      u.rate = 0.85;
-      window.speechSynthesis.speak(u);
+    // Hindi
+    const hiGlyph = document.getElementById("hi-glyph");
+    const hiWord = document.getElementById("hi-word");
+    const hiAlpha = document.getElementById("hi-alpha");
+    let hiIdx = 0;
+    HINDI.forEach((item, i) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.textContent = item.ch;
+      b.addEventListener("click", () => selectHi(i));
+      hiAlpha.appendChild(b);
+    });
+    function selectHi(i) {
+      hiIdx = i; const item = HINDI[i];
+      hiGlyph.textContent = item.ch;
+      hiWord.textContent = item.roman + " · " + item.word;
+      [...hiAlpha.children].forEach((el, j) => el.classList.toggle("active", j === i));
     }
+    document.getElementById("hi-speak").addEventListener("click", () => {
+      const item = HINDI[hiIdx];
+      speakText(item.ch + ". " + item.word);
+    });
+    selectHi(0);
 
-    function newRound() {
-      const all = Object.keys(WORDS);
-      gameAnswer = all[Math.floor(Math.random() * all.length)];
-      const opts = new Set([gameAnswer]);
-      while (opts.size < 3) opts.add(all[Math.floor(Math.random() * all.length)]);
-      const list = [...opts].sort(() => Math.random() - 0.5);
-      gameChoices.innerHTML = "";
-      gameFeedback.textContent = "";
-      list.forEach((L) => {
-        const b = document.createElement("button");
-        b.type = "button";
-        b.textContent = L;
-        b.style.minHeight = "64px";
-        b.style.fontSize = "1.35rem";
-        b.addEventListener("click", () => {
-          if (L === gameAnswer) {
-            gameFeedback.textContent = "Nice — " + L + " is for " + WORDS[L];
-            setTimeout(newRound, 900);
-          } else {
-            gameFeedback.textContent = "Try again";
-          }
-        });
-        gameChoices.appendChild(b);
-      });
-      speakLetter(gameAnswer);
-    }
-
-    document.getElementById("game-hear").addEventListener("click", () => speakLetter(gameAnswer));
-    document.querySelector('[data-go="games"]').addEventListener("click", () => setTimeout(newRound, 200));
-
-    // Tracing
+    // Trace
     const canvas = document.getElementById("trace");
     const ctx = canvas.getContext("2d");
     const traceLetter = document.getElementById("trace-letter");
-    let drawing = false;
-    let traceIdx = 0;
+    let drawing = false, traceIdx = 0;
     const letters = Object.keys(WORDS);
-
     function sizeCanvas() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(devicePixelRatio||1, 2);
       const css = Math.min(320, canvas.parentElement.clientWidth - 8);
-      canvas.style.width = css + "px";
-      canvas.style.height = css + "px";
-      canvas.width = Math.floor(css * dpr);
-      canvas.height = Math.floor(css * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      drawGuide();
+      canvas.style.width = css+"px"; canvas.style.height = css+"px";
+      canvas.width = Math.floor(css*dpr); canvas.height = Math.floor(css*dpr);
+      ctx.setTransform(dpr,0,0,dpr,0,0); drawGuide();
     }
-
     function drawGuide() {
-      const w = canvas.clientWidth;
-      const h = canvas.clientHeight;
-      ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = "#FAFAF8";
-      ctx.fillRect(0, 0, w, h);
-      ctx.strokeStyle = "#E7E2D9";
-      ctx.lineWidth = 1;
-      ctx.setLineDash([6, 8]);
-      ctx.beginPath();
-      ctx.moveTo(24, h / 2);
-      ctx.lineTo(w - 24, h / 2);
-      ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.fillStyle = "rgba(28,25,23,0.08)";
-      ctx.font = "560 " + Math.floor(w * 0.55) + "px Fraunces, Georgia, serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(letters[traceIdx], w / 2, h / 2 + 4);
-      ctx.strokeStyle = "#1C1917";
-      ctx.lineWidth = 5;
-      ctx.lineCap = "round";
-      ctx.lineJoin = "round";
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      ctx.clearRect(0,0,w,h); ctx.fillStyle="#FAFAF8"; ctx.fillRect(0,0,w,h);
+      ctx.strokeStyle="#E7E2D9"; ctx.lineWidth=1; ctx.setLineDash([6,8]);
+      ctx.beginPath(); ctx.moveTo(24,h/2); ctx.lineTo(w-24,h/2); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle="rgba(28,25,23,.08)"; ctx.font="560 "+Math.floor(w*.55)+"px Fraunces, Georgia, serif";
+      ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText(letters[traceIdx], w/2, h/2+4);
+      ctx.strokeStyle="#1C1917"; ctx.lineWidth=5; ctx.lineCap="round"; ctx.lineJoin="round";
     }
-
-    function pos(e) {
-      const r = canvas.getBoundingClientRect();
-      const t = e.touches ? e.touches[0] : e;
-      return { x: t.clientX - r.left, y: t.clientY - r.top };
-    }
-
-    function start(e) {
-      e.preventDefault();
-      drawing = true;
-      const p = pos(e);
-      ctx.beginPath();
-      ctx.moveTo(p.x, p.y);
-    }
-    function move(e) {
-      if (!drawing) return;
-      e.preventDefault();
-      const p = pos(e);
-      ctx.lineTo(p.x, p.y);
-      ctx.stroke();
-    }
-    function end() { drawing = false; }
-
-    canvas.addEventListener("mousedown", start);
-    canvas.addEventListener("mousemove", move);
-    window.addEventListener("mouseup", end);
-    canvas.addEventListener("touchstart", start, { passive: false });
-    canvas.addEventListener("touchmove", move, { passive: false });
-    canvas.addEventListener("touchend", end);
-
+    function pos(e){ const r=canvas.getBoundingClientRect(); const t=e.touches?e.touches[0]:e; return {x:t.clientX-r.left,y:t.clientY-r.top}; }
+    function start(e){ e.preventDefault(); drawing=true; const p=pos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); }
+    function move(e){ if(!drawing)return; e.preventDefault(); const p=pos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); }
+    function end(){ drawing=false; }
+    canvas.addEventListener("mousedown", start); canvas.addEventListener("mousemove", move); window.addEventListener("mouseup", end);
+    canvas.addEventListener("touchstart", start, {passive:false}); canvas.addEventListener("touchmove", move, {passive:false}); canvas.addEventListener("touchend", end);
     document.getElementById("trace-clear").addEventListener("click", drawGuide);
-    document.getElementById("trace-next").addEventListener("click", () => {
-      traceIdx = (traceIdx + 1) % letters.length;
-      traceLetter.textContent = letters[traceIdx];
-      drawGuide();
+    document.getElementById("trace-next").addEventListener("click", () => { traceIdx=(traceIdx+1)%letters.length; traceLetter.textContent=letters[traceIdx]; drawGuide(); });
+
+    // Songs (spoken rhyme — free)
+    const SONGS = {
+      abc: { title: "ABC song", lines: "A B C D E F G. H I J K L M N O P. Q R S. T U V. W X. Y and Z. Now I know my A B C." },
+      vowels: { title: "Vowels", lines: "A E I O U. A E I O U. These are vowels. A E I O U." },
+      mango: { title: "Mango rhyme", lines: "M is for Mango. S is for Sun. T is for Tiger. Learning is fun." }
+    };
+    let activeSong = SONGS.abc;
+    document.querySelectorAll("[data-song]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        songId = btn.dataset.song; activeSong = SONGS[songId];
+        document.getElementById("song-title").textContent = activeSong.title;
+        document.getElementById("lyrics").textContent = activeSong.lines;
+      });
+    });
+    document.getElementById("song-play").addEventListener("click", () => {
+      speakText(activeSong.lines, 0.85); touchStreak();
+    });
+    document.getElementById("song-stop").addEventListener("click", () => window.speechSynthesis && speechSynthesis.cancel());
+
+    // Game
+    const gameChoices = document.getElementById("game-choices");
+    const gameFeedback = document.getElementById("game-feedback");
+    let gameAnswer = "A";
+    function newRound() {
+      const all = Object.keys(WORDS);
+      gameAnswer = all[Math.floor(Math.random()*all.length)];
+      const opts = new Set([gameAnswer]);
+      while (opts.size < 3) opts.add(all[Math.floor(Math.random()*all.length)]);
+      gameChoices.innerHTML = ""; gameFeedback.textContent = "";
+      [...opts].sort(()=>Math.random()-.5).forEach((L) => {
+        const b = document.createElement("button"); b.type="button"; b.textContent=L;
+        b.style.minHeight="64px"; b.style.fontSize="1.35rem";
+        b.addEventListener("click", () => {
+          if (L===gameAnswer) {
+            gameFeedback.textContent = "Nice — "+L+" is for "+WORDS[L];
+            state.games = (state.games||0)+1; state.learned[L]=true; save();
+            setTimeout(newRound, 850);
+          } else gameFeedback.textContent = "Try again";
+        });
+        gameChoices.appendChild(b);
+      });
+      speakText(gameAnswer, 0.85);
+    }
+    document.getElementById("game-hear").addEventListener("click", () => speakText(gameAnswer, 0.85));
+
+    document.getElementById("reset-progress").addEventListener("click", () => {
+      if (confirm("Reset all progress on this device?")) {
+        Object.assign(state, {learned:{}, streak:0, lastDay:"", games:0}); save();
+      }
     });
 
-    const writeBtn = document.querySelector('[data-go="write"]');
-    writeBtn.addEventListener("click", () => requestAnimationFrame(sizeCanvas));
-    window.addEventListener("resize", () => {
-      if (document.getElementById("write").classList.contains("active")) sizeCanvas();
-    });
+    // long-press brand for parent? add nav via double tap on stats
+    document.querySelector(".stats").addEventListener("dblclick", () => show("parent"));
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(()=>{});
+    }
+    refreshStats(); touchStreak();
   </script>
 </body>
 </html>

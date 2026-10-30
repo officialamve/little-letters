@@ -1,0 +1,13 @@
+{
+  "name": "Little Letters",
+  "short_name": "Letters",
+  "description": "Calm premium alphabet learning for kids",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F5F2EC",
+  "theme_color": "#1C1917",
+  "lang": "en-IN",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

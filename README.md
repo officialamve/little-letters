@@ -1,23 +1,25 @@
 # Little Letters
 
-Calm, premium alphabet learning for kids.
+Calm, premium alphabet learning for kids — DIY, offline-friendly.
 
-- **Letters** — A–Z with hear button (browser speech)
-- **Write / Songs / Games** — coming day by day
-- English first; Indian language packs later
+## Features
+- **Letters** — English A–Z with hear + “Got it” progress
+- **Hindi** — स्वर starter pack with speech
+- **Write** — finger tracing with guide letter
+- **Songs** — ABC / vowels / mango rhyme via device speech (free)
+- **Games** — tap what you hear
+- **Streak & stats** — saved on device
+- **PWA** — installable; works offline after first open
 
 ## Open
-
-Open `index.html` in Chrome, or serve the folder:
+Open `index.html` in Chrome, or:
 
 ```bash
 npx --yes serve .
 ```
 
-## DIY / cost
-
-Static HTML. No backend. Free fonts. Speech via Web Speech API.
+## Stack
+Static HTML/CSS/JS. Web Speech API. localStorage. No backend.
 
 ## License
-
 MIT
