@@ -143,7 +143,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v1.4 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v1.5 · free DIY build</p>
       </div>
     </div>
     <input id="home-search" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -185,6 +185,8 @@
       <button class="mode" type="button" data-go="shapes" data-world-home="1"><div class="mode-icon">△</div><div class="mode-copy"><strong>Shapes</strong><span>Circle, square…</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="words" data-world-home="1"><div class="mode-icon" style="background:#ECFDF5;color:#047857">Aa</div><div class="mode-copy"><strong>Words</strong><span>Days, animals, fruits</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="calm" data-world-home="1"><div class="mode-icon" style="background:#CCFBF1;color:#0F766E">◯</div><div class="mode-copy"><strong>Calm</strong><span>3 soft breaths</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="stories" data-world-home="1"><div class="mode-icon" style="background:#FFEDD5;color:#C2410C">📖</div><div class="mode-copy"><strong>Stories</strong><span>Short read-alouds</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="sight" data-world-home="1"><div class="mode-icon" style="background:#F3E8FF;color:#7E22CE">the</div><div class="mode-copy"><strong>Sight words</strong><span>the, and, you…</span></div><span class="chev">›</span></button>
 <button class="mode write" type="button" data-go="write"><div class="mode-icon">✎</div><div class="mode-copy"><strong>Write</strong><span>Trace letters</span></div><span class="chev">›</span></button>
       <button class="mode songs" type="button" data-go="songs"><div class="mode-icon">♪</div><div class="mode-copy"><strong>Songs</strong><span>Alphabet &amp; rhymes</span></div><span class="chev">›</span></button>
@@ -521,6 +523,19 @@
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Explore</h2></div>
     <div class="modes" id="world-list"></div>
   </section>
+
+  <section id="stories" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Stories</h2></div>
+    <div class="letter-stage" style="text-align:left">
+      <p class="soon-title" id="story-title" style="text-align:center">Mango day</p>
+      <p id="story-body" class="muted" style="font-size:1.05rem;line-height:1.55;color:var(--ink)">Maya saw a mango on the tree. It was big and yellow. She said, “M is for mango!”</p>
+      <div class="row" style="margin-top:16px;justify-content:center">
+        <button class="speak ghost" type="button" id="story-prev">Prev</button>
+        <button class="speak" type="button" id="story-read">Read aloud</button>
+        <button class="speak" type="button" id="story-next">Next</button>
+      </div>
+    </div>
+  </section>
   <section id="parent" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
@@ -536,7 +551,7 @@
         <input type="checkbox" id="theme-toggle" /> Dark mode
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v1.4 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v1.5 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
       <p class="muted" style="margin-bottom:14px"><strong>Install:</strong> in Chrome, menu → Add to Home Screen for an app-like icon.</p>
       <div class="row" style="justify-content:flex-start">
         <button class="speak ghost" type="button" id="share-progress">Share text</button>
@@ -1516,6 +1531,32 @@
         list.appendChild(clone);
       });
     })();
+
+    const STORIES=[
+      {t:"Mango day", b:"Maya saw a mango on the tree. It was big and yellow. She said, M is for mango!"},
+      {t:"Cat and ball", b:"A cat saw a red ball. The cat tapped the ball. B is for ball. C is for cat."},
+      {t:"Rain in India", b:"Clouds came. Rain fell. Children danced. R is for rain. Happy day!"},
+      {t:"Lion roar", b:"The lion woke up. He gave a big roar. L is for lion. The birds flew away."},
+      {t:"Bus to school", b:"The yellow bus came. Kids said hello. B is for bus. Time for school!"}
+    ];
+    let storyI=0;
+    function showStory(){ const s=STORIES[storyI]; document.getElementById("story-title").textContent=s.t; document.getElementById("story-body").textContent=s.b; }
+    document.getElementById("story-prev").addEventListener("click",()=>{ storyI=(storyI-1+STORIES.length)%STORIES.length; showStory(); });
+    document.getElementById("story-next").addEventListener("click",()=>{ storyI=(storyI+1)%STORIES.length; showStory(); });
+    document.getElementById("story-read").addEventListener("click",()=>speakText(STORIES[storyI].b,0.92));
+    showStory();
+
+    function fillHub(listId, attr){
+      const list=document.getElementById(listId); if(!list) return;
+      list.innerHTML="";
+      document.querySelectorAll("#home button.mode["+attr+"]").forEach((btn)=>{
+        const clone=btn.cloneNode(true);
+        clone.removeAttribute(attr);
+        clone.style.display="flex";
+        clone.addEventListener("click",()=>show(clone.dataset.go));
+        list.appendChild(clone);
+      });
+    }
     applyTheme();
 
     const SHAPES=[
