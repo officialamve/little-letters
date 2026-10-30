@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v4.7)
+# Little Letters — feature map (Beta v4.8)
 
-**108 modes**
+**111 modes**
 
 - `actions`
 - `assamese`
@@ -42,6 +42,7 @@
 - `kitchen`
 - `languages`
 - `lastletter`
+- `letterhunt`
 - `letters`
 - `letterseq`
 - `makeword`
@@ -53,6 +54,7 @@
 - `memory`
 - `middlesound`
 - `missing`
+- `money`
 - `months`
 - `music`
 - `nature`
@@ -65,6 +67,7 @@
 - `odia`
 - `opposites`
 - `ordinals`
+- `party`
 - `patterns`
 - `pets`
 - `places`

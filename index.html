@@ -144,7 +144,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.7 · free DIY build · 108 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v4.8 · free DIY build · 111 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -186,6 +186,8 @@
       <button class="mode" type="button" data-go="numbers" data-world-home="1"><div class="mode-icon" style="background:#E0E7FF;color:#3730A3">123</div><div class="mode-copy"><strong>Numbers</strong><span>1 to 10</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="ordinals" data-world-home="1"><div class="mode-icon">1st</div><div class="mode-copy"><strong>Ordinals</strong><span>1st · 2nd · 3rd</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="count20" data-world-home="1"><div class="mode-icon">20</div><div class="mode-copy"><strong>1 to 20</strong><span>Count further</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="money" data-world-home="1"><div class="mode-icon">₹</div><div class="mode-copy"><strong>Money</strong><span>Rupee · coin · note</span></div><span class="chev">›</span></button>
+
 
 
       <button class="mode" type="button" data-go="colours" data-world-home="1"><div class="mode-icon" style="background:#FCE7F3;color:#BE185D">●</div><div class="mode-copy"><strong>Colours</strong><span>See &amp; say</span></div><span class="chev">›</span></button>
@@ -265,6 +267,8 @@
 
       <button class="mode" type="button" data-go="actions" data-world-home="1"><div class="mode-icon">🏃</div><div class="mode-copy"><strong>Actions</strong><span>Run · jump · sing</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="festivals" data-world-home="1"><div class="mode-icon">🪔</div><div class="mode-copy"><strong>Festivals</strong><span>Diwali · Holi · Eid</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="party" data-world-home="1"><div class="mode-icon">🎂</div><div class="mode-copy"><strong>Party</strong><span>Cake · gift · balloon</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="sports" data-world-home="1"><div class="mode-icon">🏏</div><div class="mode-copy"><strong>Sports</strong><span>Cricket · football · yoga</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="toys" data-world-home="1"><div class="mode-icon">🧸</div><div class="mode-copy"><strong>Toys</strong><span>Teddy · ball · blocks</span></div><span class="chev">›</span></button>
 
@@ -287,6 +291,8 @@
 <button class="mode games" type="button" data-go="games" data-play-home="1"><div class="mode-icon">◇</div><div class="mode-copy"><strong>Games</strong><span>Tap what you hear</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="hearpick" data-play-home="1"><div class="mode-icon">👂</div><div class="mode-copy"><strong>Hear & pick</strong><span>Listen, then tap</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="samepic" data-play-home="1"><div class="mode-icon">🔍</div><div class="mode-copy"><strong>Find the same</strong><span>Match the picture</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="letterhunt" data-play-home="1"><div class="mode-icon">🔎A</div><div class="mode-copy"><strong>Letter hunt</strong><span>Find A in the word</span></div><span class="chev">›</span></button>
+
 
 
       <button class="mode games" type="button" data-go="math" data-play-home="1"><div class="mode-icon">1+2</div><div class="mode-copy"><strong>Add up</strong><span>Sums to 10</span></div><span class="chev">›</span></button>
@@ -1404,6 +1410,35 @@
       <p class="word" id="hy-name" style="font-size:1.4rem;color:var(--ink)">Wash hands</p>
       <button class="speak" type="button" id="hy-speak">Hear</button>
       <div id="hy-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;max-width:300px;margin-left:auto;margin-right:auto"></div>
+    </div>
+  </section>
+
+  <section id="money" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Money</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="mon-emoji" style="font-size:4rem">₹</p>
+      <p class="word" id="mon-name" style="font-size:1.4rem;color:var(--ink)">Rupee</p>
+      <button class="speak" type="button" id="mon-speak">Hear</button>
+      <div id="mon-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;max-width:280px;margin-left:auto;margin-right:auto"></div>
+    </div>
+  </section>
+
+  <section id="letterhunt" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Letter hunt</h2></div>
+    <div class="letter-stage">
+      <p class="muted" id="lh-q">Find the letter A</p>
+      <div id="lh-letters" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px;max-width:300px;margin-left:auto;margin-right:auto"></div>
+      <p id="lh-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="party" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Party</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="pty-emoji" style="font-size:4rem">🎂</p>
+      <p class="word" id="pty-name" style="font-size:1.4rem;color:var(--ink)">Cake</p>
+      <button class="speak" type="button" id="pty-speak">Hear</button>
+      <div id="pty-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
     </div>
   </section>
   <section id="parent" class="view">
@@ -3652,6 +3687,54 @@
         list.appendChild(b);
       });
       document.getElementById("hy-speak").addEventListener("click",()=>speakText(HY[i][0]));
+      set(0);
+    })();
+
+    const MON=[["Rupee","₹"],["Coin","🪙"],["Note","💵"],["Piggy bank","🐷"],["Shop","🛒"],["Price","🏷️"],["Save","💰"],["Give","🤝"]];
+    (function(){
+      let i=0; const em=document.getElementById("mon-emoji"), nm=document.getElementById("mon-name"), list=document.getElementById("mon-list");
+      function set(idx){ i=idx; em.textContent=MON[i][1]; nm.textContent=MON[i][0]; }
+      MON.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[0];
+        b.style.cssText="min-height:52px;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:.95rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("mon-speak").addEventListener("click",()=>speakText(MON[i][0]));
+      set(0);
+    })();
+
+    const LH=["APPLE","BALL","CAT","DOG","FISH","MOON","STAR","TREE","BOOK","RAIN"];
+    function newLH(){
+      const word=LH[Math.floor(Math.random()*LH.length)];
+      const target=word[Math.floor(Math.random()*word.length)];
+      document.getElementById("lh-q").textContent="Find the letter "+target;
+      document.getElementById("lh-feedback").textContent="";
+      const box=document.getElementById("lh-letters"); box.innerHTML="";
+      word.split("").forEach(ch=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=ch;
+        b.style.cssText="width:48px;height:48px;border-radius:12px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.25rem;cursor:pointer";
+        b.addEventListener("click",()=>{
+          if(ch===target){ document.getElementById("lh-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(target); setTimeout(newLH,700); }
+          else document.getElementById("lh-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText("find "+target);
+    }
+    document.querySelector('[data-go="letterhunt"]')?.addEventListener("click",()=>setTimeout(newLH,100));
+
+    const PARTY=[["Cake","🎂"],["Gift","🎁"],["Balloon","🎈"],["Candle","🕯️"],["Hat","🥳"],["Song","🎤"],["Friend","👫"],["Wish","🌟"]];
+    (function(){
+      let i=0; const em=document.getElementById("pty-emoji"), nm=document.getElementById("pty-name"), list=document.getElementById("pty-list");
+      function set(idx){ i=idx; em.textContent=PARTY[i][1]; nm.textContent=PARTY[i][0]; }
+      PARTY.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("pty-speak").addEventListener("click",()=>speakText(PARTY[i][0]));
       set(0);
     })();
     applyTheme();

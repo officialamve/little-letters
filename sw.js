@@ -1,4 +1,4 @@
-const CACHE = "little-letters-v47";
+const CACHE = "little-letters-v48";
 const ASSETS = ["./", "./index.html", "./manifest.json", "./icon.svg"];
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));

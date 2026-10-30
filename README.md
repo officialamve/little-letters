@@ -1,4 +1,4 @@
-# Little Letters (Beta v4.7)
+# Little Letters (Beta v4.8)
 
 Calm, premium early-learning PWA for kids — DIY, free, offline-friendly.
 
