@@ -148,7 +148,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.7 · free DIY build · 152 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v6.8 · free DIY build · 154 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -250,6 +250,8 @@
       <button class="mode games" type="button" data-go="quiz" data-play-home="1"><div class="mode-icon" style="background:#DBEAFE;color:#1D4ED8">?</div><div class="mode-copy"><strong>Quiz</strong><span>What letter starts…?</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="race" data-play-home="1"><div class="mode-icon" style="background:#FEE2E2;color:#B91C1C">⏱</div><div class="mode-copy"><strong>Speed ABC</strong><span>A to Z race</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="count-game" data-play-home="1"><div class="mode-icon">•••</div><div class="mode-copy"><strong>Count</strong><span>How many dots?</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="candles" data-play-home="1"><div class="mode-icon">🕯️</div><div class="mode-copy"><strong>Count candles</strong><span>How many on the cake?</span></div><span class="chev">›</span></button>
+
       <button class="mode games" type="button" data-go="opposites" data-play-home="1"><div class="mode-icon">⇅</div><div class="mode-copy"><strong>Opposites</strong><span>Hot ↔ Cold</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="directions" data-world-home="1"><div class="mode-icon">⬆️</div><div class="mode-copy"><strong>Directions</strong><span>Up · down · left · right</span></div><span class="chev">›</span></button>
 
@@ -272,6 +274,8 @@
       <button class="mode" type="button" data-go="family" data-world-home="1"><div class="mode-icon">👨‍👩‍👧</div><div class="mode-copy"><strong>Family</strong><span>Mama · papa · baby</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="school" data-world-home="1"><div class="mode-icon">✏️</div><div class="mode-copy"><strong>School</strong><span>Pencil · bag · book</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="library" data-world-home="1"><div class="mode-icon">📚</div><div class="mode-copy"><strong>Library</strong><span>Book · quiet · shelf</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="museum" data-world-home="1"><div class="mode-icon">🏛️</div><div class="mode-copy"><strong>Museum</strong><span>Art · fossil · statue</span></div><span class="chev">›</span></button>
+
 
       <button class="mode games" type="button" data-go="packbag" data-play-home="1"><div class="mode-icon">🎒</div><div class="mode-copy"><strong>Pack the bag</strong><span>What goes to school?</span></div><span class="chev">›</span></button>
 
@@ -1937,6 +1941,26 @@
       <p class="muted">Which word has double letters?</p>
       <div class="alpha" id="dbl-choices" style="grid-template-columns:repeat(2,1fr);max-width:300px;margin:16px auto 0;gap:12px"></div>
       <p id="dbl-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="candles" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Count candles</h2></div>
+    <div class="letter-stage">
+      <p class="muted">How many candles?</p>
+      <p class="glyph" id="can-show" style="font-size:2.5rem;letter-spacing:4px">🕯️🕯️🕯️</p>
+      <div class="alpha" id="can-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
+      <p id="can-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="museum" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Museum</h2></div>
+    <div class="letter-stage">
+      <p class="glyph" id="mus-emoji" style="font-size:4rem">🏛️</p>
+      <p class="word" id="mus-name" style="font-size:1.4rem;color:var(--ink)">Museum</p>
+      <button class="speak" type="button" id="mus-speak">Hear</button>
+      <div id="mus-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px"></div>
     </div>
   </section>
   <section id="parent" class="view">
@@ -4951,6 +4975,40 @@
       speakText("double letters");
     }
     document.querySelector('[data-go="double"]')?.addEventListener("click",()=>setTimeout(newDbl,100));
+
+    function newCan(){
+      const n=1+Math.floor(Math.random()*8);
+      document.getElementById("can-show").textContent="🕯️".repeat(n);
+      document.getElementById("can-feedback").textContent="";
+      const opts=new Set([n]);
+      while(opts.size<3) opts.add(1+Math.floor(Math.random()*9));
+      const box=document.getElementById("can-choices"); box.innerHTML="";
+      [...opts].sort((a,b)=>a-b).forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=String(v);
+        b.style.minHeight="64px"; b.style.fontSize="1.5rem";
+        b.addEventListener("click",()=>{
+          if(v===n){ document.getElementById("can-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(String(n)); setTimeout(newCan,700); }
+          else document.getElementById("can-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText("how many");
+    }
+    document.querySelector('[data-go="candles"]')?.addEventListener("click",()=>setTimeout(newCan,100));
+
+    const MUS=[["Museum","🏛️"],["Art","🖼️"],["Fossil","🦴"],["Statue","🗿"],["Map","🗺️"],["Quiet","🤫"],["Guide","🧭"],["Ticket","🎫"]];
+    (function(){
+      let i=0; const em=document.getElementById("mus-emoji"), nm=document.getElementById("mus-name"), list=document.getElementById("mus-list");
+      function set(idx){ i=idx; em.textContent=MUS[i][1]; nm.textContent=MUS[i][0]; }
+      MUS.forEach((f,idx)=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=f[1];
+        b.style.cssText="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--bg-elev);font-size:1.6rem;cursor:pointer";
+        b.addEventListener("click",()=>{ set(idx); speakText(f[0]); });
+        list.appendChild(b);
+      });
+      document.getElementById("mus-speak").addEventListener("click",()=>speakText(MUS[i][0]));
+      set(0);
+    })();
     applyTheme();
 
     const SHAPES=[

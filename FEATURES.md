@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v6.7)
+# Little Letters — feature map (Beta v6.8)
 
-**152 modes**
+**154 modes**
 
 - `abcorder`
 - `actions`
@@ -16,6 +16,7 @@
 - `bugs`
 - `build`
 - `calm`
+- `candles`
 - `cardmatch`
 - `cases`
 - `clock`
@@ -82,6 +83,7 @@
 - `missnum`
 - `money`
 - `months`
+- `museum`
 - `music`
 - `nature`
 - `numbers`
