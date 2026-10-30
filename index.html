@@ -323,9 +323,11 @@
       <button class="back" type="button" data-home aria-label="Back">←</button>
       <h2>Games</h2>
     </div>
-    <div class="panel">
-      <p class="soon-title">Games next</p>
-      <p class="muted">“Tap what you hear” arrives on Day 5, built on these letter sounds.</p>
+    <div class="letter-stage">
+      <p class="muted" style="margin:0 0 12px">Tap the letter you hear</p>
+      <button class="speak" type="button" id="game-hear">Hear again</button>
+      <p id="game-feedback" class="word" style="min-height:1.4em;margin-top:16px"></p>
+      <div class="alpha" id="game-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
     </div>
   </section>
 
@@ -386,6 +388,49 @@
 
     document.getElementById("speak").addEventListener("click", speak);
     select("A");
+
+    // Tap what you hear
+    const gameChoices = document.getElementById("game-choices");
+    const gameFeedback = document.getElementById("game-feedback");
+    let gameAnswer = "A";
+
+    function speakLetter(letter) {
+      if (!window.speechSynthesis) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(letter);
+      u.rate = 0.85;
+      window.speechSynthesis.speak(u);
+    }
+
+    function newRound() {
+      const all = Object.keys(WORDS);
+      gameAnswer = all[Math.floor(Math.random() * all.length)];
+      const opts = new Set([gameAnswer]);
+      while (opts.size < 3) opts.add(all[Math.floor(Math.random() * all.length)]);
+      const list = [...opts].sort(() => Math.random() - 0.5);
+      gameChoices.innerHTML = "";
+      gameFeedback.textContent = "";
+      list.forEach((L) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = L;
+        b.style.minHeight = "64px";
+        b.style.fontSize = "1.35rem";
+        b.addEventListener("click", () => {
+          if (L === gameAnswer) {
+            gameFeedback.textContent = "Nice — " + L + " is for " + WORDS[L];
+            setTimeout(newRound, 900);
+          } else {
+            gameFeedback.textContent = "Try again";
+          }
+        });
+        gameChoices.appendChild(b);
+      });
+      speakLetter(gameAnswer);
+    }
+
+    document.getElementById("game-hear").addEventListener("click", () => speakLetter(gameAnswer));
+    document.querySelector('[data-go="games"]').addEventListener("click", () => setTimeout(newRound, 200));
 
     // Tracing
     const canvas = document.getElementById("trace");
