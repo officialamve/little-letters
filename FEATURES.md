@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v2.4)
+# Little Letters — feature map (Beta v2.5)
 
-**51 modes**
+**53 modes**
 
 - `assamese`
 - `bengali`
@@ -20,6 +20,7 @@
 - `kannada`
 - `languages`
 - `letters`
+- `letterseq`
 - `malayalam`
 - `marathi`
 - `match`
@@ -50,6 +51,7 @@
 - `subtract`
 - `tamil`
 - `telugu`
+- `weather`
 - `words`
 - `worldhub`
 - `write`
