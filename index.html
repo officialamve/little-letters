@@ -72,6 +72,8 @@
     .goal-top { display:flex; justify-content:space-between; font-size:.78rem; color:var(--ink-soft); margin-bottom:6px; }
     .goal-bar { height:10px; background:rgba(28,25,23,.08); border-radius:999px; overflow:hidden; }
     .goal-bar > i { display:block; height:100%; width:0%; background:linear-gradient(90deg,#0F766E,#2EC4B6); border-radius:999px; transition:width .35s ease; }
+    .sticker { aspect-ratio:1; border-radius:18px; border:1px solid var(--line); background:var(--bg-elev); display:grid; place-items:center; font-size:1.6rem; opacity:.35; filter:grayscale(1); }
+    .sticker.on { opacity:1; filter:none; box-shadow:var(--shadow); }
     .top { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
     .back, .chip { border: 1px solid var(--line); background: var(--bg-elev); border-radius: 14px; cursor: pointer; color: var(--ink); font: inherit; }
     .back { width: 42px; height: 42px; font-size: 1.1rem; }
@@ -129,7 +131,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v0.4 · free DIY build</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v0.5 · free DIY build</p>
       </div>
     </div>
     <div class="modes">
@@ -155,9 +157,11 @@
       <button class="mode hindi" type="button" data-go="kannada" data-lang-home="1"><div class="mode-icon" style="background:#EEF2FF;color:#4338CA">ಅ</div><div class="mode-copy"><strong>Kannada</strong><span>ಸ್ವರಗಳು</span></div><span class="chev">›</span></button>
 
             <button class="mode hindi" type="button" data-go="languages"><div class="mode-icon">文</div><div class="mode-copy"><strong>Languages</strong><span>Hindi · Tamil · more</span></div><span class="chev">›</span></button>
+      <button class="mode" type="button" data-go="stickers"><div class="mode-icon" style="background:#FEF3C7;color:#B45309">★</div><div class="mode-copy"><strong>Stickers</strong><span>Rewards you earned</span></div><span class="chev">›</span></button>
 <button class="mode write" type="button" data-go="write"><div class="mode-icon">✎</div><div class="mode-copy"><strong>Write</strong><span>Trace letters</span></div><span class="chev">›</span></button>
       <button class="mode songs" type="button" data-go="songs"><div class="mode-icon">♪</div><div class="mode-copy"><strong>Songs</strong><span>Alphabet &amp; rhymes</span></div><span class="chev">›</span></button>
-      <button class="mode games" type="button" data-go="games"><div class="mode-icon">◇</div><div class="mode-copy"><strong>Games</strong><span>Tap what you hear</span></div><span class="chev">›</span></button>
+            <button class="mode games" type="button" data-go="quiz"><div class="mode-icon" style="background:#DBEAFE;color:#1D4ED8">?</div><div class="mode-copy"><strong>Quiz</strong><span>What letter starts…?</span></div><span class="chev">›</span></button>
+<button class="mode games" type="button" data-go="games"><div class="mode-icon">◇</div><div class="mode-copy"><strong>Games</strong><span>Tap what you hear</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="match"><div class="mode-icon" style="background:#FCE7F3;color:#BE185D">Aa</div><div class="mode-copy"><strong>Match</strong><span>Letter → word</span></div><span class="chev">›</span></button>
       <button class="mode games" type="button" data-go="memory"><div class="mode-icon">◉</div><div class="mode-copy"><strong>Memory</strong><span>Remember 3 letters</span></div><span class="chev">›</span></button>
       <button class="mode write" type="button" data-go="sheets"><div class="mode-icon">🖨️</div><div class="mode-copy"><strong>Print sheet</strong><span>Offline tracing paper</span></div><span class="chev">›</span></button>
@@ -328,6 +332,27 @@
       <p id="mem-feedback" class="word" style="min-height:1.4em"></p>
     </div>
   </section>
+
+  <section id="stickers" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Stickers</h2></div>
+    <div class="panel" style="text-align:left">
+      <p class="soon-title">Your collection</p>
+      <p class="muted" style="margin-bottom:14px">Earn stickers by learning letters and winning games.</p>
+      <div id="sticker-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px"></div>
+    </div>
+  </section>
+
+  <section id="quiz" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Quiz</h2></div>
+    <div class="letter-stage">
+      <p class="muted" id="quiz-q" style="margin:0 0 8px">What letter starts this word?</p>
+      <p class="glyph" id="quiz-emoji" style="font-size:3rem">🍎</p>
+      <p class="word" id="quiz-word">Apple</p>
+      <div class="alpha" id="quiz-choices" style="grid-template-columns:repeat(3,1fr);max-width:280px;margin:16px auto 0;gap:12px"></div>
+      <p id="quiz-feedback" class="word" style="min-height:1.4em"></p>
+      <p class="muted" id="quiz-score">Score 0</p>
+    </div>
+  </section>
   <section id="parent" class="view">
     <div class="top"><button class="back" type="button" data-home>←</button><h2>Parent</h2></div>
     <div class="panel" style="text-align:left">
@@ -340,7 +365,7 @@
         <input type="checkbox" id="sound-toggle" /> Sound on
       </label>
       <p class="soon-title" style="margin-top:18px">About this beta</p>
-      <p class="muted" style="margin-bottom:14px">Little Letters v0.4 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
+      <p class="muted" style="margin-bottom:14px">Little Letters v0.5 — English + Indian language starters. Speech uses your device. Not a full playschool replacement.</p>
       <div class="row" style="justify-content:flex-start">
         <button class="speak ghost" type="button" id="export-progress">Export</button>
         <button class="speak ghost" type="button" id="import-progress">Import</button>
@@ -514,7 +539,7 @@
       const L=letters[traceIdx];
       if(strokePts<25){ toast("Try tracing a bit more"); return; }
       const was=!!state.learned[L]; state.learned[L]=true; save();
-      if(!was) celebrate(L); else toast("Nice tracing!");
+      earn("pencil"); if(!was) celebrate(L); else toast("Nice tracing!");
       const m=document.getElementById("mascot"); if(m){ m.textContent="😺"; m.classList.remove("wave"); void m.offsetWidth; m.classList.add("wave"); }
       strokePts=0; traceIdx=(traceIdx+1)%letters.length; traceLetter.textContent=letters[traceIdx]; drawGuide();
     });
@@ -793,7 +818,7 @@
             if(memStep>=memSeq.length){
               memListening=false;
               document.getElementById("mem-feedback").textContent="Great memory!";
-              state.games=(state.games||0)+1; save();
+              state.games=(state.games||0)+1; save(); earn("brain");
               speakText("Great job");
             }
           } else {
@@ -887,6 +912,7 @@
     function celebrate(letter){
       toast('<span class="stars">★ ★ ★</span> &nbsp; Learned '+letter+'!');
       mascotWave('🥳');
+      checkStickerMilestones();
       speakText("Yay! "+letter);
     }
 
@@ -971,6 +997,78 @@
       state.kidName=document.getElementById("kid-name").value.trim().slice(0,24); save(); refreshGreeting(); toast(state.kidName?("Saved · Hi, "+state.kidName+"!"):"Name cleared");
     });
     document.getElementById("kid-name").addEventListener("keydown", (e)=>{ if(e.key==="Enter"){ e.target.blur(); }});
+
+    const STICKERS = [{"id": "star", "emoji": "⭐", "hint": "Learn 1 letter"}, {"id": "fox", "emoji": "🦊", "hint": "Open the app"}, {"id": "abc", "emoji": "🔤", "hint": "Learn 5 letters"}, {"id": "song", "emoji": "🎵", "hint": "Play a song"}, {"id": "pencil", "emoji": "✏️", "hint": "Finish a trace"}, {"id": "brain", "emoji": "🧠", "hint": "Win memory"}, {"id": "fire", "emoji": "🔥", "hint": "3-day streak"}, {"id": "trophy", "emoji": "🏆", "hint": "Learn 15 letters"}, {"id": "india", "emoji": "🇮🇳", "hint": "Open Languages"}, {"id": "quiz", "emoji": "🎯", "hint": "Score 5 in quiz"}, {"id": "rainbow", "emoji": "🌈", "hint": "Learn 10 letters"}, {"id": "heart", "emoji": "💖", "hint": "Set your name"}];
+    if(!state.stickers) state.stickers={};
+    if(!state.quizBest) state.quizBest=0;
+    function earn(id){
+      if(state.stickers[id]) return;
+      state.stickers[id]=true; save();
+      const s=STICKERS.find(x=>x.id===id);
+      toast((s?s.emoji+" ":"★ ")+"Sticker unlocked!");
+      renderStickers();
+    }
+    function renderStickers(){
+      const g=document.getElementById("sticker-grid"); if(!g) return;
+      g.innerHTML="";
+      STICKERS.forEach(s=>{
+        const d=document.createElement("div");
+        d.className="sticker"+(state.stickers[s.id]?" on":"");
+        d.title=s.hint; d.textContent=s.emoji;
+        g.appendChild(d);
+      });
+    }
+    function checkStickerMilestones(){
+      const n=Object.keys(state.learned||{}).length;
+      if(n>=1) earn("star");
+      if(n>=5) earn("abc");
+      if(n>=10) earn("rainbow");
+      if(n>=15) earn("trophy");
+      if((state.streak||0)>=3) earn("fire");
+      if((state.kidName||"").trim()) earn("heart");
+      earn("fox");
+    }
+    let quizScore=0;
+    function newQuiz(){
+      const all=Object.keys(WORDS);
+      const L=all[Math.floor(Math.random()*all.length)];
+      document.getElementById("quiz-emoji").textContent=EMOJI[L]||"🔤";
+      document.getElementById("quiz-word").textContent=WORDS[L];
+      document.getElementById("quiz-feedback").textContent="";
+      document.getElementById("quiz-score").textContent="Score "+quizScore+(state.quizBest?(" · best "+state.quizBest):"");
+      const opts=new Set([L]);
+      while(opts.size<3) opts.add(all[Math.floor(Math.random()*all.length)]);
+      const box=document.getElementById("quiz-choices"); box.innerHTML="";
+      [...opts].sort(()=>Math.random()-0.5).forEach(ch=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=ch;
+        b.style.minHeight="64px"; b.style.fontSize="1.35rem";
+        b.addEventListener("click",()=>{
+          if(ch===L){
+            quizScore++; state.games=(state.games||0)+1; state.learned[L]=true;
+            if(quizScore> (state.quizBest||0)) state.quizBest=quizScore;
+            save(); checkStickerMilestones();
+            if(quizScore>=5) earn("quiz");
+            document.getElementById("quiz-feedback").textContent="Yes!";
+            speakText(L+" for "+WORDS[L]);
+            setTimeout(newQuiz,700);
+          } else {
+            document.getElementById("quiz-feedback").textContent="Try again";
+            quizScore=Math.max(0,quizScore-1);
+            document.getElementById("quiz-score").textContent="Score "+quizScore;
+          }
+        });
+        box.appendChild(b);
+      });
+      speakText("What letter starts "+WORDS[L]+"?");
+    }
+    document.querySelector('[data-go="quiz"]')?.addEventListener("click",()=>{ quizScore=0; setTimeout(newQuiz,120); });
+    document.querySelector('[data-go="stickers"]')?.addEventListener("click",()=>renderStickers());
+    document.querySelector('[data-go="languages"]')?.addEventListener("click",()=>earn("india"));
+    document.querySelector('[data-go="songs"]')?.addEventListener("click",()=>earn("song"));
+    const _celebrate=celebrate;
+    // patch trace-done earn pencil - already have celebrate
+
+    checkStickerMilestones(); renderStickers();
     refreshGreeting();
     refreshStats(); touchStreak();
   </script>
