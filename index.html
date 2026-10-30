@@ -148,7 +148,7 @@
           <div class="goal-top"><span>Today’s goal</span><span id="goal-label">0 / 5</span></div>
           <div class="goal-bar"><i id="goal-fill"></i></div>
         </div>
-        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.5 · free DIY build · 127 modes</p>
+        <p class="muted" style="margin-top:12px;font-size:.78rem">Beta v5.6 · free DIY build · 129 modes</p>
       </div>
     </div>
     <input id="home-search" data-modes="1" type="search" placeholder="Search modes…" style="width:100%;margin-bottom:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);font:inherit;background:var(--bg-elev);color:var(--ink)" />
@@ -203,6 +203,8 @@
       <button class="mode" type="button" data-go="feelings" data-world-home="1"><div class="mode-icon">😊</div><div class="mode-copy"><strong>Feelings</strong><span>Happy · sad · calm</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="manners" data-world-home="1"><div class="mode-icon">🙏</div><div class="mode-copy"><strong>Manners</strong><span>Please · thank you</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="safety" data-world-home="1"><div class="mode-icon">🚦</div><div class="mode-copy"><strong>Stay safe</strong><span>Red light · seat belt</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="traffic" data-play-home="1"><div class="mode-icon">🚦</div><div class="mode-copy"><strong>Traffic light</strong><span>Red stop · green go</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="hygiene" data-world-home="1"><div class="mode-icon">🧼</div><div class="mode-copy"><strong>Clean habits</strong><span>Wash · brush · bathe</span></div><span class="chev">›</span></button>
 
 
@@ -255,6 +257,8 @@
       <button class="mode" type="button" data-go="transport" data-world-home="1"><div class="mode-icon">🚗</div><div class="mode-copy"><strong>Vehicles</strong><span>Car · bus · train</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="family" data-world-home="1"><div class="mode-icon">👨‍👩‍👧</div><div class="mode-copy"><strong>Family</strong><span>Mama · papa · baby</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="school" data-world-home="1"><div class="mode-icon">✏️</div><div class="mode-copy"><strong>School</strong><span>Pencil · bag · book</span></div><span class="chev">›</span></button>
+      <button class="mode games" type="button" data-go="packbag" data-play-home="1"><div class="mode-icon">🎒</div><div class="mode-copy"><strong>Pack the bag</strong><span>What goes to school?</span></div><span class="chev">›</span></button>
+
       <button class="mode" type="button" data-go="homewords" data-world-home="1"><div class="mode-icon">🏠</div><div class="mode-copy"><strong>At home</strong><span>Bed · door · chair</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="kitchen" data-world-home="1"><div class="mode-icon">🥄</div><div class="mode-copy"><strong>Kitchen</strong><span>Spoon · plate · cup</span></div><span class="chev">›</span></button>
       <button class="mode" type="button" data-go="tools" data-world-home="1"><div class="mode-icon">🔨</div><div class="mode-copy"><strong>Tools</strong><span>Hammer · brush · scissors</span></div><span class="chev">›</span></button>
@@ -1633,6 +1637,24 @@
       <p class="word" id="rd-name" style="font-size:1.4rem;color:var(--ink)">Read a book</p>
       <button class="speak" type="button" id="rd-speak">Hear</button>
       <div id="rd-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;max-width:300px;margin-left:auto;margin-right:auto"></div>
+    </div>
+  </section>
+
+  <section id="traffic" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Traffic light</h2></div>
+    <div class="letter-stage">
+      <p class="muted" id="trf-q">Red light means…</p>
+      <div class="alpha" id="trf-choices" style="grid-template-columns:repeat(2,1fr);max-width:300px;margin:16px auto 0;gap:12px"></div>
+      <p id="trf-feedback" class="word"></p>
+    </div>
+  </section>
+
+  <section id="packbag" class="view">
+    <div class="top"><button class="back" type="button" data-home>←</button><h2>Pack the bag</h2></div>
+    <div class="letter-stage">
+      <p class="muted" id="pb-q">For school, pack…</p>
+      <div class="alpha" id="pb-choices" style="grid-template-columns:repeat(2,1fr);max-width:300px;margin:16px auto 0;gap:12px"></div>
+      <p id="pb-feedback" class="word"></p>
     </div>
   </section>
   <section id="parent" class="view">
@@ -4209,6 +4231,55 @@
       document.getElementById("rd-speak").addEventListener("click",()=>speakText(RD[i][0]));
       set(0);
     })();
+
+    const TRF=[
+      {q:"Red light means…", ans:"Stop", opts:["Stop","Go"]},
+      {q:"Green light means…", ans:"Go", opts:["Go","Stop"]},
+      {q:"Yellow light means…", ans:"Wait", opts:["Wait","Run"]},
+      {q:"We cross at the…", ans:"Zebra crossing", opts:["Zebra crossing","Middle of road"]}
+    ];
+    function newTrf(){
+      const g=TRF[Math.floor(Math.random()*TRF.length)];
+      document.getElementById("trf-q").textContent=g.q;
+      document.getElementById("trf-feedback").textContent="";
+      const box=document.getElementById("trf-choices"); box.innerHTML="";
+      [...g.opts].sort(()=>Math.random()-.5).forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=v;
+        b.style.minHeight="64px"; b.style.fontSize="1rem";
+        b.addEventListener("click",()=>{
+          if(v===g.ans){ document.getElementById("trf-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(v); setTimeout(newTrf,800); }
+          else document.getElementById("trf-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText(g.q);
+    }
+    document.querySelector('[data-go="traffic"]')?.addEventListener("click",()=>setTimeout(newTrf,100));
+
+    const PB=[
+      {q:"For school, pack…", ans:"Book", opts:["Book","Pillow"]},
+      {q:"For drawing, pack…", ans:"Crayon", opts:["Crayon","Spoon"]},
+      {q:"For lunch, pack…", ans:"Tiffin", opts:["Tiffin","TV"]},
+      {q:"For rain, pack…", ans:"Raincoat", opts:["Raincoat","Balloon"]},
+      {q:"For writing, pack…", ans:"Pencil", opts:["Pencil","Banana"]}
+    ];
+    function newPB(){
+      const g=PB[Math.floor(Math.random()*PB.length)];
+      document.getElementById("pb-q").textContent=g.q;
+      document.getElementById("pb-feedback").textContent="";
+      const box=document.getElementById("pb-choices"); box.innerHTML="";
+      [...g.opts].sort(()=>Math.random()-.5).forEach(v=>{
+        const b=document.createElement("button"); b.type="button"; b.textContent=v;
+        b.style.minHeight="64px";
+        b.addEventListener("click",()=>{
+          if(v===g.ans){ document.getElementById("pb-feedback").textContent="Yes!"; state.games=(state.games||0)+1; save(); speakText(v); setTimeout(newPB,800); }
+          else document.getElementById("pb-feedback").textContent="Try again";
+        });
+        box.appendChild(b);
+      });
+      speakText(g.q);
+    }
+    document.querySelector('[data-go="packbag"]')?.addEventListener("click",()=>setTimeout(newPB,100));
     applyTheme();
 
     const SHAPES=[

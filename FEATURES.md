@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v5.5)
+# Little Letters — feature map (Beta v5.6)
 
-**127 modes**
+**129 modes**
 
 - `actions`
 - `assamese`
@@ -78,6 +78,7 @@
 - `opposites`
 - `ordinals`
 - `outdoor`
+- `packbag`
 - `party`
 - `patterns`
 - `pets`
@@ -117,6 +118,7 @@
 - `tod`
 - `tools`
 - `toys`
+- `traffic`
 - `transport`
 - `truefalse`
 - `veggies`
