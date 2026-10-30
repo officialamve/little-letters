@@ -1,6 +1,6 @@
-# Little Letters — feature map (Beta v5.1)
+# Little Letters — feature map (Beta v5.2)
 
-**119 modes**
+**121 modes**
 
 - `actions`
 - `assamese`
@@ -23,6 +23,8 @@
 - `days`
 - `digraphs`
 - `directions`
+- `doctor`
+- `evenodd`
 - `family`
 - `farm`
 - `feelings`
